@@ -1,0 +1,47 @@
+# vim: ft=zsh
+# TMUX + ZSH for WORLD DOMINATION
+
+# IS ZSH in TMUX ?
+IS_TMUX=$(env | grep -i tmux | wc -c)
+
+# Generate random terminal number
+if [ -z ${RND_TERM} ]; then
+	RND_TERM=${RANDOM}
+fi
+
+# TMUX aliases
+alias tm='tmux '
+alias tml='tmux ls '
+alias tmk='tmux kill-session '
+alias tmc='for ss in `tmux ls|grep "^t[0-9]\+:"|grep -v attached|cut -d: -f1`; do tmux kill-session -t "$ss"; done'
+
+# TMUX session "smart" creator
+unalias tx 2> /dev/null
+tx() {
+	which tmux > /dev/null
+	if [[ $? == "0" ]]; then
+		# Clean unsed terminal sessions
+		for ss in `tmux ls|grep "^t[0-9]\+:"|grep -v attached|cut -d: -f1`; do
+			tmux kill-session -t "$ss";
+		done
+
+		tmux new -s ${USER}@${HOST} 2> /dev/null
+		if [[ $? != "0" ]]; then
+			tmux attach -t t${RND_TERM} 2> /dev/null
+			if [[ $? != "0" ]]; then
+				tmux new-window
+				tmux new -s t${RND_TERM} -t ${USER}@${HOST}
+			fi
+		fi
+	fi
+}
+
+# TMUX startup and other magic
+if [[ $IS_TMUX == "0" ]]; then
+	export TERM=xterm-256color
+	if [[ "$USER@$HOST" == "saro@syrio" ]]; then
+		tx
+	fi
+else
+	export TERM=screen-256color
+fi

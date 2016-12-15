@@ -1,0 +1,13 @@
+export STEAM_RUNTIME=0
+xrandr --dpi 120
+export GDK_DPI_SCALE=1.25
+
+gpg-connect-agent /bye&
+export SSH_AUTH_SOCK=/run/user/$UID/gnupg/S.gpg-agent.ssh
+
+${HOME}/.i3/float_config.sh
+cat ${HOME}/.i3/config \
+    /tmp/conf_flo > /tmp/i3conf
+
+#dbus-launch --exit-with-session i3 -c /tmp/i3conf
+i3 -c /tmp/i3conf

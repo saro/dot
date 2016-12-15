@@ -1,0 +1,58 @@
+#!/bin/bash
+
+cache="/tmp/dmenu_cache"
+history_file="/home/saro/dmenu_hist"
+running="/tmp/dmenu_running"
+
+if [[ ! -e ${history_file} ]] ; then
+	touch ${history_file}
+fi
+
+
+if [[ "/home/saro/.gtk-bookmarks" -nt $cache || ! -e /tmp/dmenu_cache  || "/usr/share/applications" -nt $cache ]] ; then 
+
+	echo "" > $cache
+	for i in $(cat ~/.gtk-bookmarks); do
+		echo "${i##*/}_dir" >> $cache
+	done;
+
+	for i in $(ls /usr/share/applications/*.desktop); do
+		basename $i .desktop >> $cache
+	done
+
+	for i in $(ls /usr/local/share/applications/*.desktop); do
+		basename $i .desktop >> $cache
+	done
+fi
+
+cat ${history_file} > $running
+cat $cache >> $running
+
+result=$(dmenu -b -i "$@" -fn 'Droid Sans Mono-12'< $running)
+
+err=0
+if [[ $result != "" ]] ; then
+	itsdir=".*_dir$"
+	if [[ $result =~ $itsdir ]] ; then
+		echo " DIR: $(cat ~/.gtk-bookmarks| awk {'print $1'}|grep ".*/${result%_dir}$"| head -n1)"
+		thunar "$(cat ~/.gtk-bookmarks| awk {'print $1'}|grep ".*/${result%_dir}$"| head -n1)"
+	else
+		if [[ ! -e  /usr/share/applications/${result}.desktop ]] ; then
+			err = 1
+		fi
+		desktopfile=$(cat /usr/share/applications/${result}.desktop)
+		if [[ $desktopfile == "" ]] ; then
+			desktopfile=$(cat /usr/local/share/applications/${result}.desktop)
+		fi
+		ex=$(echo "$desktopfile"|grep "Exec="|sed 's/^.*Exec=//'|head -n1|sed 's/%.*//')
+		echo " EXEC: $ex"
+		${ex}&
+	fi
+
+	if [[ $err -eq 0 ]]; then
+		hist=$(cat ${history_file})
+		echo "${result}
+$hist" | awk '!x[$0]++' > ${history_file}
+	fi
+fi
+

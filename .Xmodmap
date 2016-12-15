@@ -1,0 +1,10 @@
+keycode 108 = Multi_key
+keycode 107 = Menu NoSymbol Menu
+keycode 115 = Insert
+keycode 118 = End
+
+keycode 66 = Caps_Lock
+remove Lock = Caps_Lock
+keycode 37 = Control_L
+keycode 66 = Control_L
+add Control = Control_L

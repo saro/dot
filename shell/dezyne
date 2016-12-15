@@ -1,0 +1,24 @@
+# vim: ft=zsh
+# *** Dezyne Part ***
+alias dzn='~/.npm/bin/dzn'
+alias dzv='~/.npm/bin/dzn verify '
+alias dzb='~/.npm/bin/dzn browse '
+alias dzr='~/.npm/bin/dzn run '
+alias dzw='~/.npm/bin/dzn view '
+alias dzc='~/.npm/bin/dzn code '
+
+# dztest Model Model.dzn
+dzt() {
+	~/.npm/bin/dzn verify "$2"
+	export MYDEZYNE_MODEL="$1"
+	export MYDEZYNE_FILE="$2"
+}
+
+# event name (isw.turnOn) or b
+dzs() {
+	if [[ "$1" == "b" ]] ; then
+		~/.npm/bin/dzn run -m "$MYDEZYNE_MODEL" -b "$MYDEZYNE_FILE"
+	else
+		~/.npm/bin/dzn run -m "$MYDEZYNE_MODEL" -f "$1" "$MYDEZYNE_FILE"
+	fi
+}

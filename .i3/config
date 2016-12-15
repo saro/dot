@@ -1,0 +1,281 @@
+# SARO's i3wm config.
+#
+# i3 config file (v4)
+
+font pango:Droid Sans Mono Slashed for Powerline 11
+
+# DIRECTIONS
+set $up k
+set $down j
+set $left h
+set $right l
+
+# Set workspace names and icons
+set $ws1 1 
+set $ws2 2 
+set $ws3 3 
+set $ws4 4 
+set $ws5 5 
+set $ws6 6 
+set $ws7 7 
+set $ws8 8 
+set $ws9 9 
+set $ws0 0 
+
+# use Mouse+Mod1 to drag floating windows to their wanted position
+floating_modifier Mod1
+
+# start a terminal
+bindsym Mod1+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym Mod1+Shift+q kill
+bindsym Mod1+F4 kill
+
+# start dmenu in Saro's flavour
+bindsym Ctrl+space exec $HOME/script/dmenu_saro
+
+# change focus
+bindsym Mod1+$left focus left
+bindsym Mod1+$down focus down
+bindsym Mod1+$up focus up
+bindsym Mod1+$right focus right
+
+bindsym Mod1+Tab focus right
+bindsym Mod1+Shift+Tab focus left
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Left focus left
+bindsym Mod1+Down focus down
+bindsym Mod1+Up focus up
+bindsym Mod1+Right focus right
+
+# move focused window
+bindsym Mod1+Shift+$left move left
+bindsym Mod1+Shift+$down move down
+bindsym Mod1+Shift+$up move up
+bindsym Mod1+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Shift+Left move left
+bindsym Mod1+Shift+Down move down
+bindsym Mod1+Shift+Up move up
+bindsym Mod1+Shift+Right move right
+
+# TODO: split in horizontal orientation
+#bindsym Mod1+h split h
+
+# TODO: split in vertical orientation
+#bindsym Mod1+v split v
+
+# enter fullscreen mode for the focused container
+bindsym Mod1+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym Mod1+s layout stacking
+bindsym Mod1+w layout tabbed
+bindsym Mod1+e layout toggle split
+
+# toggle tiling / floating
+bindsym Mod1+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# bindsym Mod1+space focus mode_toggle
+bindsym Mod1+b focus mode_toggle
+
+# TODO: focus the parent container
+#bindsym Mod1+a focus parent
+
+# TODO: focus the child container
+#bindsym Mod1+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym Mod1+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod1+minus scratchpad show
+
+# switch to workspace
+bindsym Mod1+1 workspace $ws1; [window_role="conversation"] move to scratchpad
+bindsym Mod1+2 workspace $ws2; [window_role="conversation"] move to scratchpad
+bindsym Mod1+3 workspace $ws3; [window_role="conversation"] move to scratchpad
+bindsym Mod1+4 workspace $ws4; [window_role="conversation"] move to scratchpad
+bindsym Mod1+5 workspace $ws5; [window_role="conversation"] move to scratchpad
+bindsym Mod1+6 workspace $ws6; [window_role="conversation"] move to scratchpad
+bindsym Mod1+7 workspace $ws7; [window_role="conversation"] move to scratchpad
+bindsym Mod1+8 workspace $ws8; [window_role="conversation"] move to scratchpad
+bindsym Mod1+9 workspace $ws9; [window_role="conversation"] move to scratchpad
+bindsym Mod1+0 workspace $ws0; [window_role="conversation"] move to scratchpad
+
+# move focused container to workspace
+bindsym Mod1+Shift+1 move container to workspace $ws1
+bindsym Mod1+Shift+2 move container to workspace $ws2
+bindsym Mod1+Shift+3 move container to workspace $ws3
+bindsym Mod1+Shift+4 move container to workspace $ws4
+bindsym Mod1+Shift+5 move container to workspace $ws5
+bindsym Mod1+Shift+6 move container to workspace $ws6
+bindsym Mod1+Shift+7 move container to workspace $ws7
+bindsym Mod1+Shift+8 move container to workspace $ws8
+bindsym Mod1+Shift+9 move container to workspace $ws9
+bindsym Mod1+Shift+0 move container to workspace $ws0
+
+# Restart i3 with the floating parts set for the correct resolution
+bindsym Mod1+Shift+r exec $HOME/.i3/i3_restart.sh
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+	bindsym $left       resize shrink width 10 px or 10 ppt
+	bindsym $down       resize grow height 10 px or 10 ppt
+	bindsym $up         resize shrink height 10 px or 10 ppt
+	bindsym $right      resize grow width 10 px or 10 ppt
+
+# Speedup resize
+	bindsym Shift+$left       resize shrink width 70 px or 70 ppt
+	bindsym Shift+$down       resize grow height 70 px or 70 ppt
+	bindsym Shift+$up         resize shrink height 70 px or 70 ppt
+	bindsym Shift+$right      resize grow width 70 px or 70 ppt
+
+# same bindings, but for the arrow keys
+	bindsym Left        resize shrink width 10 px or 10 ppt
+	bindsym Down        resize grow height 10 px or 10 ppt
+	bindsym Up          resize shrink height 10 px or 10 ppt
+	bindsym Right       resize grow width 10 px or 10 ppt
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# Move that window
+bindsym Mod1+m mode "move" focus floating
+mode "move" {
+    bindsym Mod1+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym $left      move left
+    bindsym $down      move down
+    bindsym $up        move up
+    bindsym $right     move right
+
+    bindsym Shift+$left      move left 70 px
+    bindsym Shift+$down      move down 70 px
+    bindsym Shift+$up        move up 70 px
+    bindsym Shift+$right     move right 70 px
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Display Settings
+set $mode_display Display (d) docked, (t) together, (u) undocked, (l) duplicate
+
+mode "$mode_display" {
+    bindsym d exec --no-startup-id $HOME/script/docked.sh, mode "default"
+    bindsym t exec --no-startup-id $HOME/script/together.sh, mode "default"
+    bindsym u exec --no-startup-id $HOME/script/undocked.sh, mode "default"
+    bindsym l exec --no-startup-id $HOME/script/duplicate.sh, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Exit Menu
+set $mode_system System (l) lock, (e) logout, (x) suspend, (r) reboot, (s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock -c 000000 -n, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym x exec --no-startup-id i3lock -c 000000 && systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym Mod1+r mode "resize"
+bindsym XF86PowerOff mode "$mode_system"
+bindsym XF86Explorer mode "$mode_system"
+bindsym Ctrl+F12 mode "$mode_system"
+bindsym Ctrl+F11 mode "$mode_system"
+bindsym F7 mode "$mode_display"
+
+# Multimedia Keys
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+
+# Volume Keys
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+; pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-; pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioMute exec "amixer sset Master toggle; pkill -RTMIN+10 i3blocks"
+
+# Lock Screen
+bindsym Ctrl+Mod1+l exec i3lock -c 000000 -n
+
+# Touchpad bind for touchpad
+bindsym XF86Tools exec $HOME/script/touch_toggle.sh
+
+# Backlight for Syrio
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+
+# ScreenShot
+bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.jpg
+
+# Bind former CTRL ??
+bindsym Mod1+space exec $HOME/script/middle_button.sh
+
+# Assigning applications
+assign [class="Firefox"] $ws1
+assign [class="Thunderbird"] $ws4
+assign [class="pavucontrol"] $ws3
+# assign [instance="weechat"] $ws3
+assign [window_role="buddy_list"] $ws5
+for_window [class="Spotify"] move to workspace $ws5
+
+# They can see us...
+# See float_config.sh for ttttt terminal settings
+
+# Pidgin is back... and it's looking for your soul
+# See float_config.sh for Pidgin conversation settings
+
+# Disable focus following mouse movement
+focus_follows_mouse no
+
+# Workspace start tabbed
+workspace_layout tabbed
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	position top
+	#strip_workspace_numbers yes
+	status_command i3blocks
+	colors {
+		separator #1f70aa
+	}
+}
+
+# Autostart
+
+# Add support for multi_key or better... I have seen symbols that you humans...
+exec xmodmap $HOME/.Xmodmap
+exec xss-lock --ignore-sleep -- i3lock -n -c 000000&
+exec dunst&
+# Guess what?? Weeeeechat :D
+# exec terminator -l Weechat -c "weechat"
+
+# These floating windows are not started using the float_config.sh  script.
+# Pidgin...
+# exec pidgin
+# Tatan tatata... Sarah Connor
+# exec terminator -c ttttt

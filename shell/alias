@@ -1,0 +1,105 @@
+# vim: ft=zsh
+
+# *** General Aliases ***
+alias l='ls --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -lh'
+alias lla='ls -lah'
+alias la='ls -ah'
+alias lt='ls -lha /tmp'
+
+alias g='grep --color=auto'
+alias gi='grep -i'
+alias grep='grep --color=auto'
+alias ghist='history | grep '
+alias galias='cat ~/.zshrc|grep alias|grep -i'
+
+alias df='df -Th'
+
+alias nopa="curl -sF 'sprunge=<-' http://sprunge.us 2>&1 |xclip -selection clipboard -out"
+alias k9='kill -9'
+
+alias s='sudo '
+alias sudo='sudo '
+
+alias dmesgt='dmesg | tail'
+
+alias pgg='ping -c1 www.google.it'
+alias pg8='ping -c1 8.8.8.8'
+alias pgw='ping saro.space'
+
+alias cl='clear'
+alias clera='clear'
+alias cls='clear'
+alias rz='. ~/.zshrc'
+alias rb='. ~/.bashrc'
+
+alias vp="vim -c 'set nomod nolist nonu noma' -c 'nm q <Esc>:q<CR>' -c 'colorscheme jellybeans' - "
+alias gvp="gvim -c 'set nomod nolist nonu noma' -c 'nm q <Esc>:q<CR>' -c 'colorscheme jellybeans' - "
+
+alias jc='journalctl '
+
+alias gv='gvim '
+alias v='vim '
+
+alias pca='pacaur '
+alias c='cd '
+alias ee='exit'
+
+alias gpg=' gpg'
+alias tb=' tomb'
+alias tomb=' tomb'
+
+alias gs='git status -s'
+alias css='cscope -bqR'
+
+
+# *** Directories aliases ***
+alias dwn='~/downloads/'
+alias doc='~/documenti/'
+alias vbx='~/vbox/'
+
+# *** BitWise Aliases ***
+alias btw='~/bitwise/btw/'
+alias btr='~/bitwise/btw/repo/Cluster3/terminal'
+alias btg='~/bitwise/btw/repo/terminal_git/terminal'
+alias btt='~/bitwise/btw/tmp'
+
+# *** VPS related Alias
+alias getbak='scp -P 2244 saro@saro.space:/home/saro/backup/bak "bak_$(date +"%Y%m%d")"'
+
+# *** sudo aliases ***
+if [ $UID -eq 0 ]; then
+	alias mt='mount '
+	alias umt='umount '
+	alias sc='systemctl '
+	alias sysc='systemctl '
+	alias netctl='netctl '
+	alias pc='pacman '
+	alias sv='vim '
+	alias sip='ip '
+else
+	alias mt='sudo mount '
+	alias umt='sudo umount '
+	alias sc='sudo systemctl '
+	alias sysc='sudo systemctl '
+	alias netctl='sudo netctl '
+	alias pc='sudo pacman '
+	alias sv='sudo vim '
+	alias sip='sudo ip '
+fi
+
+# *** BT alias ***
+alias btload="sudo modprobe bluetooth && sudo modprobe btusb && sudo systemctl start bluetooth.service"
+alias btc="bluetoothctl"
+alias btoff="echo -e 'power off\nquit'|bluetoothctl"
+alias bton="echo -e 'power on\nquit'|bluetoothctl"
+alias btjabra="echo -e 'power on\ndisconnect\nconnect 1C:48:F9:9D:BE:04\nquit'|bluetoothctl"
+alias btlogi="echo -e 'power on\ndisconnect\nconnect 88:C6:26:6F:50:09\nquit'|bluetoothctl"
+
+# *** Spotify ***
+alias spn="~/script/sp next"
+alias spp="~/script/sp prev"
+alias sps="~/script/sp play"
+alias spc="~/script/sp current"
+alias sp="~/script/sp"

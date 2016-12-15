@@ -1,0 +1,108 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler,
+  inactive_color_offset = 0.74
+  suppress_multiple_term_dialog = True
+  tab_position = bottom
+  window_state = maximise
+[keybindings]
+  broadcast_all = None
+  broadcast_group = None
+  broadcast_off = None
+  close_term = <Shift><Alt>w
+  close_window = None
+  cycle_next = None
+  cycle_prev = None
+  edit_window_title = None
+  full_screen = None
+  go_down = None
+  go_left = None
+  go_next = None
+  go_prev = None
+  go_right = None
+  go_up = None
+  group_all = None
+  group_tab = None
+  help = None
+  hide_window = None
+  insert_number = None
+  insert_padded = None
+  layout_launcher = None
+  move_tab_left = None
+  move_tab_right = None
+  new_tab = None
+  new_terminator = None
+  new_window = None
+  next_tab = None
+  prev_tab = None
+  reset = None
+  reset_clear = <Primary><Shift>r
+  resize_down = None
+  resize_left = None
+  resize_right = None
+  resize_up = None
+  rotate_ccw = None
+  rotate_cw = None
+  scaled_zoom = <Alt>z
+  search = None
+  split_horiz = None
+  split_vert = None
+  toggle_scrollbar = None
+  toggle_zoom = None
+  ungroup_all = None
+  ungroup_tab = None
+  zoom_in = None
+  zoom_normal = None
+  zoom_out = None
+[layouts]
+  [[default]]
+    [[[child1]]]
+      command = ""
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+  [[Weechat]]
+    [[[child0]]]
+      order = 0
+      parent = ""
+      position = 0:41
+      size = 1362, 725
+      type = Window
+    [[[terminal1]]]
+      command = weechat
+      order = 0
+      parent = child0
+      profile = default
+      type = Terminal
+  [[pulsemixer]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 8f1fba9a-58a1-46fc-a934-addfb6a718f9
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 0:55
+      size = 1914, 1022
+      title = saro@syrio: ~
+      type = Window
+    [[[terminal1]]]
+      command = TERM=xterm-256color pulsemixer
+      order = 0
+      parent = child0
+      profile = default
+      type = Terminal
+      uuid = 8f1fba9a-58a1-46fc-a934-addfb6a718f9
+[plugins]
+[profiles]
+  [[default]]
+    background_image = None
+    cursor_color = "#bc6a00"
+    cursor_color_fg = False
+    font = Droid Sans Mono Slashed for Powerline 11
+    foreground_color = "#ffffff"
+    scrollback_infinite = True
+    show_titlebar = False
+    use_system_font = False

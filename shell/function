@@ -1,0 +1,32 @@
+# vim: ft=zsh
+# *** FUNCTIONS ***
+unalias ct 2> /dev/null
+ct() {
+	cp "$@" /tmp
+}
+
+unalias psg 2> /dev/null
+psg() {
+	ps ax|grep -v "grep"|grep -i -E $1
+}
+
+unalias gg 2> /dev/null
+gg() {
+	grep "$1" * -Inri
+}
+
+unalias ggv 2> /dev/null
+vgg() {
+	gvim -c "silent grep! -Inri \"$1\" * " -c 'copen 30' -c 'nm <leader>Q :qa<CR>'
+}
+
+unalias fn 2> /dev/null
+fn() {
+	echo "`pwd`/`ls $1`"
+}
+
+unalias tg 2> /dev/null
+tg() {
+	ctags -R * &
+	cscope -bqR &
+}
