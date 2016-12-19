@@ -37,7 +37,7 @@ fi
 # Create antigen file in home if init scripts are enabled
 if [ "$initScript" == 1 ] ; then
 	echo "Creating antigen.zsh"
-	curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh > "${homeDir}/antigen.zsh"
+	curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh -o "${homeDir}/antigen.zsh"
 fi
 
 # Create list of files in repo
