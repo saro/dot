@@ -1,6 +1,6 @@
 [global_config]
   enabled_plugins = LaunchpadCodeURLHandler,
-  inactive_color_offset = 0.74
+  inactive_color_offset = 1.0
   suppress_multiple_term_dialog = True
   tab_position = bottom
   window_state = maximise
