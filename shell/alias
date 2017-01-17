@@ -16,7 +16,7 @@ alias galias='cat ~/.zshrc|grep alias|grep -i'
 
 alias df='df -Th'
 
-alias nopa="curl -sF 'sprunge=<-' http://sprunge.us 2>&1 |xclip -selection clipboard -out"
+alias nopa="curl -sF 'sprunge=<-' http://sprunge.us 2>&1"
 alias k9='kill -9'
 
 alias s='sudo '
@@ -27,6 +27,7 @@ alias dmesgt='dmesg | tail'
 alias pgg='ping -c1 www.google.it'
 alias pg8='ping -c1 8.8.8.8'
 alias pgw='ping saro.space'
+alias p='ping '
 
 alias cl='clear'
 alias clera='clear'
@@ -49,6 +50,7 @@ alias ee='exit'
 alias gpg=' gpg'
 alias tb=' tomb'
 alias tomb=' tomb'
+alias pss='pass -c '
 
 alias gs='git status -s'
 alias css='cscope -bqR'
@@ -59,11 +61,8 @@ alias dwn='~/downloads/'
 alias doc='~/documenti/'
 alias vbx='~/vbox/'
 
-# *** BitWise Aliases ***
-alias btw='~/bitwise/btw/'
-alias btr='~/bitwise/btw/repo/Cluster3/terminal'
-alias btg='~/bitwise/btw/repo/terminal_git/terminal'
-alias btt='~/bitwise/btw/tmp'
+# *** Profitap Aliases ***
+alias pf='~/profitap/pf/'
 
 # *** VPS related Alias
 alias getbak='scp -P 2244 saro@saro.space:/home/saro/backup/bak "bak_$(date +"%Y%m%d")"'
@@ -78,6 +77,7 @@ if [ $UID -eq 0 ]; then
 	alias pc='pacman '
 	alias sv='vim '
 	alias sip='ip '
+	alias dk='docker '
 else
 	alias mt='sudo mount '
 	alias umt='sudo umount '
@@ -87,6 +87,7 @@ else
 	alias pc='sudo pacman '
 	alias sv='sudo vim '
 	alias sip='sudo ip '
+	alias dk='sudo docker '
 fi
 
 # *** BT alias ***
