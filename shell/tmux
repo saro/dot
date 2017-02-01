@@ -29,7 +29,6 @@ tx() {
 		if [[ $? != "0" ]]; then
 			tmux attach -t t${RND_TERM} 2> /dev/null
 			if [[ $? != "0" ]]; then
-				tmux new-window
 				tmux new -s t${RND_TERM} -t ${USER}@${HOST}
 			fi
 		fi
@@ -39,9 +38,6 @@ tx() {
 # TMUX startup and other magic
 if [[ $IS_TMUX == "0" ]]; then
 	export TERM=xterm-256color
-	if [[ "$USER@$HOST" == "saro@syrio" ]]; then
-		tx
-	fi
 else
 	export TERM=screen-256color
 fi

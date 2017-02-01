@@ -76,6 +76,25 @@
       parent = child0
       profile = default
       type = Terminal
+  [[float]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 175df618-154f-49e2-8154-6d61c897826b
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 0:56
+      size = 2554, 835
+      title = /bin/zsh
+      type = Window
+    [[[terminal1]]]
+      command = TERM=xterm-256color /bin/zsh -c 'source ~/shell/tmux && tx'
+      order = 0
+      parent = child0
+      profile = default
+      type = Terminal
+      uuid = 175df618-154f-49e2-8154-6d61c897826b
   [[pulsemixer]]
     [[[child0]]]
       fullscreen = False
