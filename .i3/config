@@ -190,9 +190,9 @@ mode "$mode_display" {
 set $mode_system System (l) lock, (e) logout, (x) suspend, (r) reboot, (s) shutdown
 
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock -c 000000 -n, mode "default"
+    bindsym l exec --no-startup-id loginctl lock-session, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym x exec --no-startup-id i3lock -c 000000 && systemctl suspend, mode "default"
+    bindsym x exec --no-startup-id loginctl lock-session && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym s exec --no-startup-id systemctl poweroff, mode "default"
 
@@ -219,7 +219,7 @@ bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-; pkill -RTMIN+10 i3blo
 bindsym XF86AudioMute exec "amixer sset Master toggle; pkill -RTMIN+10 i3blocks"
 
 # Lock Screen
-bindsym Ctrl+Mod1+l exec i3lock -c 000000 -n
+bindsym Ctrl+Mod1+l exec loginctl lock-session
 
 # Touchpad bind for touchpad
 bindsym XF86Tools exec $HOME/script/touch_toggle.sh
@@ -233,6 +233,9 @@ bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.jpg
 
 # Bind former CTRL ??
 bindsym Mod1+space exec $HOME/script/middle_button.sh
+
+# Bind passmenu
+bindsym Ctrl+o exec passmenu -b -i -fn 'Droid Sans Mono-12' && notify-send 'PASS COPIED'
 
 # Assigning applications
 assign [class="Firefox"] $ws1
@@ -269,7 +272,7 @@ bar {
 
 # Add support for multi_key or better... I have seen symbols that you humans...
 exec xmodmap $HOME/.Xmodmap
-exec xss-lock --ignore-sleep -- i3lock -n -c 000000&
+exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; gpg-connect-agent /bye)& i3lock -n -c 000000'&
 exec dunst&
 # Guess what?? Weeeeechat :D
 # exec terminator -l Weechat -c "weechat"
