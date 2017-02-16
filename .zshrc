@@ -27,8 +27,8 @@ setopt HIST_IGNORE_SPACE
 antigen theme saro/MijnKardan themes/mijnkardan
 
 # Fix TMUX Window title with oh my zsh
-if [[ -e "$ZSH/lib/termsupport.zsh" ]] ; then
-	source "$ZSH/lib/termsupport.zsh"
+if [[ -e shell/termsupport.zsh ]] ; then
+	source shell/termsupport.zsh
 fi
 
 # *** Source shell files ***
@@ -37,6 +37,11 @@ source ~/shell/export
 source ~/shell/function
 source ~/shell/dezyne
 source ~/shell/tmux
+
+# *** Source local configuration file ***
+if [[ -e ~/shell/local ]] ; then
+	source ~/shell/local
+fi
 
 #setopt appendhistory autocd
 bindkey -v

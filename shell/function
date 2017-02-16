@@ -30,3 +30,13 @@ tg() {
 	ctags -R * &
 	cscope -bqR &
 }
+
+unalias sk 2> /dev/null
+sk() {
+	ssh $@ -t -Y "source ~/shell/tmux && tx"
+}
+
+unalias ssk 2> /dev/null
+ssk() {
+	ssh $@ -t -Y " su - -c 'source ~/shell/tmux && tx'"
+}

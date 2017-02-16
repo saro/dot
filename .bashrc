@@ -9,6 +9,11 @@ source ~/shell/function
 source ~/shell/dezyne
 source ~/shell/tmux
 
+# *** Source local configuration file ***
+if [[ -e ~/shell/local ]] ; then
+	source ~/shell/local
+fi
+
 PROMPT_COMMAND=set_git_prompt
 
 function parse_git_branch {
