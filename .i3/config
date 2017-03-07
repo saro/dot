@@ -173,13 +173,14 @@ mode "move" {
 }
 
 # Display Settings
-set $mode_display Display (d) docked, (t) together, (u) undocked, (l) duplicate
+set $mode_display Display (d) docked, (t) together, (u) undocked, (l) duplicate, (e) external
 
 mode "$mode_display" {
     bindsym d exec --no-startup-id $HOME/script/docked.sh, mode "default"
     bindsym t exec --no-startup-id $HOME/script/together.sh, mode "default"
     bindsym u exec --no-startup-id $HOME/script/undocked.sh, mode "default"
     bindsym l exec --no-startup-id $HOME/script/duplicate.sh, mode "default"
+    bindsym e exec --no-startup-id $HOME/script/home_extern.sh, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
