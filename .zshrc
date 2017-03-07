@@ -1,14 +1,4 @@
-source "${HOME}/antigen.zsh"
-antigen use oh-my-zsh
-
-# Plugins
-antigen bundle git
-antigen bundle themes
-antigen bundle saro/MijnKardan
-
-#antigen theme robbyrussell
-
-antigen-apply
+# ZSHRC - Saro
 
 autoload -Uz compinit promptinit colors
 compinit
@@ -23,14 +13,6 @@ SAVEHIST=1000
 setopt hist_ignore_all_dups
 setopt HIST_IGNORE_SPACE
 
-#theme kardan
-antigen theme saro/MijnKardan themes/mijnkardan
-
-# Fix TMUX Window title with oh my zsh
-if [[ -e shell/termsupport.zsh ]] ; then
-	source shell/termsupport.zsh
-fi
-
 # *** Source shell files ***
 source ~/shell/alias
 source ~/shell/export
@@ -41,6 +23,21 @@ source ~/shell/tmux
 # *** Source local configuration file ***
 if [[ -e ~/shell/local ]] ; then
 	source ~/shell/local
+fi
+
+# Fix TMUX Window title
+if [[ -e ~/shell/termsupport.zsh ]] ; then
+	source shell/termsupport.zsh
+fi
+
+# Git sweeties for zsh
+if [[ -e ~/shell/git.zsh ]] ; then
+	source shell/git.zsh
+fi
+
+# Use MijnKardan Theme
+if [[ -e ~/shell/mijnkardan.zsh-theme ]] ; then
+	source shell/mijnkardan.zsh-theme
 fi
 
 #setopt appendhistory autocd

@@ -29,6 +29,8 @@ alias pg8='ping -c1 8.8.8.8'
 alias pgw='ping saro.space'
 alias p='ping '
 
+alias w1='watch -n1 '
+
 alias cl='clear'
 alias clera='clear'
 alias cls='clear'
@@ -52,9 +54,7 @@ alias tb=' tomb'
 alias tomb=' tomb'
 alias pss='pass -c '
 
-alias gs='git status -s'
 alias css='cscope -bqR'
-
 
 # *** Directories aliases ***
 alias dwn='~/downloads/'
@@ -104,3 +104,39 @@ alias spp="~/script/sp prev"
 alias sps="~/script/sp play"
 alias spc="~/script/sp current"
 alias sp="~/script/sp"
+
+# Git Aliases
+alias g='git'
+
+alias ga='git add'
+alias gaa='git add --all'
+
+alias gb='git branch'
+alias gba='git branch -a'
+alias gbd='git branch -d'
+alias gbr='git branch --remote'
+
+alias gbis='git bisect'
+
+alias gc='git commit -v'
+alias gc!='git commit -v --amend'
+alias gca='git commit -v -a'
+alias gca!='git commit -v -a --amend'
+
+alias glo='git log --oneline --decorate'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+alias gco='git checkout '
+
+alias gcl='git clone --recursive'
+
+alias gd='git diff'
+
+alias gf='git fetch'
+alias gfa='git fetch --all '
+alias gfo='git fetch origin'
+
+alias gp='git push '
+
+alias gsb='git status -sb'
+alias gs='git status -s'
