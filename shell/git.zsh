@@ -29,39 +29,3 @@ function parse_git_dirty() {
   fi
 }
 
-# Git Aliases
-
-alias g='git'
-
-alias ga='git add'
-alias gaa='git add --all'
-
-alias gb='git branch'
-alias gba='git branch -a'
-alias gbd='git branch -d'
-alias gbr='git branch --remote'
-
-alias gbis='git bisect'
-
-alias gc='git commit -v'
-alias gc!='git commit -v --amend'
-alias gca='git commit -v -a'
-alias gca!='git commit -v -a --amend'
-
-alias glo='git log --oneline --decorate'
-alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-
-alias gco='git checkout '
-
-alias gcl='git clone --recursive'
-
-alias gd='git diff'
-
-alias gf='git fetch'
-alias gfa='git fetch --all '
-alias gfo='git fetch origin'
-
-alias gp='git push '
-
-alias gsb='git status -sb'
-alias gss='git status -s'

@@ -27,17 +27,17 @@ fi
 
 # Fix TMUX Window title
 if [[ -e ~/shell/termsupport.zsh ]] ; then
-	source shell/termsupport.zsh
+	source ~/shell/termsupport.zsh
 fi
 
 # Git sweeties for zsh
 if [[ -e ~/shell/git.zsh ]] ; then
-	source shell/git.zsh
+	source ~/shell/git.zsh
 fi
 
 # Use MijnKardan Theme
 if [[ -e ~/shell/mijnkardan.zsh-theme ]] ; then
-	source shell/mijnkardan.zsh-theme
+	source ~/shell/mijnkardan.zsh-theme
 fi
 
 #setopt appendhistory autocd
