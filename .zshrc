@@ -59,6 +59,8 @@ bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 bindkey '^k' up-line-or-beginning-search
 bindkey '^j' down-line-or-beginning-search
+bindkey -M vicmd '^k' up-line-or-beginning-search
+bindkey -M vicmd '^j' down-line-or-beginning-search
 
 # *** Yank in the clipboard ***
 x-yank() {
@@ -102,6 +104,9 @@ bindkey 'jj' vi-cmd-mode
 # *** Vim mode movements
 bindkey -M vicmd 'H' vi-beginning-of-line
 bindkey -M vicmd 'L' vi-end-of-line
+
+# ** Fix backspace
+bindkey -v '^?' backward-delete-char
 
 # Vim mode
 # timeout to allow the fast ESC with jj
