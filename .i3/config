@@ -242,7 +242,7 @@ bindsym Ctrl+o exec passmenu -b -i -fn 'Droid Sans Mono-12' && notify-send 'PASS
 assign [class="Firefox"] $ws1
 assign [class="Thunderbird"] $ws4
 assign [class="pavucontrol"] $ws3
-# assign [instance="weechat"] $ws3
+assign [instance="weechat"] $ws5
 assign [window_role="buddy_list"] $ws5
 for_window [class="Spotify"] move to workspace $ws5
 
@@ -276,7 +276,7 @@ exec xmodmap $HOME/.Xmodmap
 exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; gpg-connect-agent /bye)& i3lock -n -c 000000'&
 exec dunst&
 # Guess what?? Weeeeechat :D
-# exec terminator -l Weechat -c "weechat"
+exec terminator -l Weechat -c "weechat" &
 
 # These floating windows are not started using the float_config.sh  script.
 # Pidgin...

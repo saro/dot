@@ -24,13 +24,14 @@ for_window [instance="pulsemixer"] scratchpad show
 exec terminator -l pulsemixer -c "pulsemixer"
 
 # Set piding (width = 27%; height 70%; pos_x = 73%; pos_y = 20%)
-for_window [window_role="conversation"] move to scratchpad
-bindsym Ctrl+backslash [window_role="conversation"] scratchpad show
-bindsym Mod1+F1 [window_role="conversation"] scratchpad show
-bindsym Mod1+F2 [window_role="conversation"] scratchpad show
-for_window [window_role="conversation"] move position $((${DISPLAY_W} * 73 / 100)) $((${DISPLAY_H} * 20 / 100))
-for_window [window_role="conversation"] resize set $((${DISPLAY_W} * 27 / 100)) $((${DISPLAY_H} * 70 / 100))
-for_window [window_role="conversation"] scratchpad show
-exec pidgin" > /tmp/conf_flo
+# for_window [window_role="conversation"] move to scratchpad
+# bindsym Ctrl+backslash [window_role="conversation"] scratchpad show
+# bindsym Mod1+F1 [window_role="conversation"] scratchpad show
+# bindsym Mod1+F2 [window_role="conversation"] scratchpad show
+# for_window [window_role="conversation"] move position $((${DISPLAY_W} * 73 / 100)) $((${DISPLAY_H} * 20 / 100))
+# for_window [window_role="conversation"] resize set $((${DISPLAY_W} * 27 / 100)) $((${DISPLAY_H} * 70 / 100))
+# for_window [window_role="conversation"] scratchpad show
+# exec pidgin
+" > /tmp/conf_flo
 
 
