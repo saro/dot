@@ -113,7 +113,7 @@ nnoremap <leader>l :set hlsearch! hlsearch?<CR>
 nnoremap <leader>f :CCTreeTraceForward<CR><CR>
 nnoremap <leader>r :CCTreeTraceReverse<CR><CR>
 
-nnoremap <leader>h :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * .*<CR>:copen<CR>
+nnoremap <leader>h :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * <CR>:copen<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap <leader>s :AsyncStop<CR>
 
@@ -170,6 +170,9 @@ vmap <C-h> <Esc>:bprevious!<CR>
 nmap <C-l> <Esc>:bnext!<CR>
 nmap <C-h> <Esc>:bprevious!<CR>
 
+" *** Search in selection mode ***
+vnoremap // y/<C-R>"<CR>
+
 map <F1> <nop>
 map <F2> <nop>
 
@@ -190,7 +193,7 @@ ca src source ~/.vimrc
 " *** Custom function ***
 function! GrepAsync (str)
 	let tmp = a:str
-    exec 'AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj '.tmp.' * .*'
+    exec 'AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj '.tmp.' * '
 	copen
 endfunction
 
@@ -353,10 +356,9 @@ autocmd FileType netrw unmap <buffer> qF
 autocmd FileType netrw unmap <buffer> qf
 autocmd FileType netrw unmap <buffer> qb
 autocmd FileType netrw nnoremap <buffer> q :q<CR><C-l>
-autocmd FileType netrw nnoremap <buffer> <F3> :q<CR><C-l>
 let g:netrw_altv=1
 let g:netrw_banner = 0
-let g:netrw_liststyle=3
+let g:netrw_liststyle=0
 let g:netrw_winsize = -25
 let g:netrw_browse_split = 4
 let g:netrw_bufsettings = 'noma nomod nobl nonu nowrap ro'

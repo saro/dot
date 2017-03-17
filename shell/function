@@ -38,5 +38,5 @@ sk() {
 
 unalias ssk 2> /dev/null
 ssk() {
-	ssh $@ -t -Y " su -c 'source ~/shell/tmux && tx'"
+	ssh $@ -t -Y " su -c 'source ~/shell/tmux && cd && tx'"
 }
