@@ -69,8 +69,8 @@ alias getbak='scp -P 2244 saro@saro.space:/home/saro/backup/bak "bak_$(date +"%Y
 
 # *** sudo aliases ***
 if [ $UID -eq 0 ]; then
-	alias mt='mount '
-	alias umt='umount '
+	alias m='mount '
+	alias um='umount '
 	alias sc='systemctl '
 	alias sysc='systemctl '
 	alias netctl='netctl '
@@ -79,8 +79,8 @@ if [ $UID -eq 0 ]; then
 	alias sip='ip '
 	alias dk='docker '
 else
-	alias mt='sudo mount '
-	alias umt='sudo umount '
+	alias m='sudo mount '
+	alias um='sudo umount '
 	alias sc='sudo systemctl '
 	alias sysc='sudo systemctl '
 	alias netctl='sudo netctl '
@@ -106,8 +106,6 @@ alias spc="~/script/sp current"
 alias sp="~/script/sp"
 
 # Git Aliases
-alias g='git'
-
 alias ga='git add'
 alias gaa='git add --all'
 
