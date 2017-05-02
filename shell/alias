@@ -49,9 +49,8 @@ alias pca='pacaur '
 alias c='cd '
 alias ee='exit'
 
-alias gpg=' gpg'
-alias tb=' tomb'
-alias tomb=' tomb'
+alias gpg='gpg'
+alias tb='tomb'
 alias pss='pass -c '
 
 alias css='cscope -bqR'
@@ -121,8 +120,8 @@ alias gc!='git commit -v --amend'
 alias gca='git commit -v -a'
 alias gca!='git commit -v -a --amend'
 
-alias glo='git log --oneline --decorate'
-alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gl='git log --oneline --decorate'
+alias glo="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 alias gco='git checkout '
 
