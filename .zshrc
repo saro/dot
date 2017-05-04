@@ -60,9 +60,12 @@ alias 9='cd -9'
 bindkey -v
 ## End of lines configured by zsh-newuser-install
 ## The following lines were added by compinstall
-zstyle ":completion:*:commands" rehash 1
 
+# Zsh Completion options
+zstyle ":completion:*:commands" rehash 1
 zstyle ':completion:::*:default' menu no select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' hosts off
 
 # History search
 autoload -Uz up-line-or-beginning-search
@@ -138,8 +141,6 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# Case insesitive completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 # Terminal notes --> I should create an alias out of these
 #
