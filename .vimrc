@@ -108,6 +108,8 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 nnoremap <Leader>gD <C-w>h<C-w>c
 
+nnoremap <leader>L <Esc>:redraw!<CR>
+nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 nnoremap <leader>z 1z=<CR>
 nnoremap <leader>l :set hlsearch! hlsearch?<CR>
 nnoremap <leader>f :CCTreeTraceForward<CR><CR>
@@ -115,10 +117,10 @@ nnoremap <leader>r :CCTreeTraceReverse<CR><CR>
 
 nnoremap <leader>h :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * <CR>:copen<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
-nnoremap <leader>s :AsyncStop<CR>
+nnoremap <leader>as :AsyncStop<CR>
+nnoremap <leader>am :AsyncRun -program=make<CR>
 
 nnoremap <leader>t :Tagbar<CR>
-
 nnoremap <leader>c :CCTreeWindowToggle<CR>
 
 nnoremap <leader>] <C-]>
@@ -177,18 +179,14 @@ map <F1> <nop>
 map <F2> <nop>
 
 map <F3> <Esc>:Lex<CR>
-map <F5> <Esc>:redraw!<CR>
-
-nnoremap <F6> <Esc>:set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
-inoremap <F6> <Esc>:set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>i
 
 " *** Alias *** "
-"ca tn tabnew
-ca gg AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj
-ca mm Mark
-ca sudo w !sudo tee > /dev/null %
-ca ss AsyncStop
-ca src source ~/.vimrc
+" ca tn tabnew
+" ca gg AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj
+" ca mm Mark
+" ca sudo w !sudo tee > /dev/null %
+" ca ss AsyncStop
+" ca src source ~/.vimrc
 
 " *** Custom function ***
 function! GrepAsync (str)
@@ -284,7 +282,8 @@ let g:lightline = {
       \ },
 \ }
 
-" *** Asyncrun con configuration ***
+" *** AsyncRun configuration ***
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " let g:asyncrun_trim = 1
 
 " *** Configuration for Gutentags ***
