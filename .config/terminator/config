@@ -89,7 +89,7 @@
       title = /bin/zsh
       type = Window
     [[[terminal1]]]
-      command = TERM=xterm-256color /bin/zsh -c 'source ~/shell/tmux && tx'
+      command = "TERM=xterm-256color /bin/zsh -c 'source ~/shell/tmux && tx'"
       order = 0
       parent = child0
       profile = default
