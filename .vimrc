@@ -108,14 +108,18 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 nnoremap <Leader>gD <C-w>h<C-w>c
 
-nnoremap <leader>L <Esc>:redraw!<CR>
 nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 nnoremap <leader>z 1z=<CR>
-nnoremap <leader>l :set hlsearch! hlsearch?<CR>
+nnoremap <leader>y :set hlsearch! hlsearch?<CR>
 nnoremap <leader>f :CCTreeTraceForward<CR><CR>
 nnoremap <leader>r :CCTreeTraceReverse<CR><CR>
 
-nnoremap <leader>h :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * <CR>:copen<CR>
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+nnoremap <leader>n :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * <CR>:copen<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap <leader>as :AsyncStop<CR>
 nnoremap <leader>am :AsyncRun -program=make<CR>
@@ -130,8 +134,9 @@ nnoremap <leader>b :buffers<CR>:buffer<Space>
 nnoremap <leader># :b #<CR>
 nnoremap <leader>d :BD<CR>
 
+nnoremap <leader>xx :q<CR>
 nnoremap <leader>Q :q<CR>
-
+nnoremap <leader>L <Esc>:redraw!<CR>
 nnoremap <leader>D :Dox<CR>
 
 nnoremap <leader>/ :let @/ = ""<CR>
@@ -139,6 +144,9 @@ nnoremap <leader>/ :let @/ = ""<CR>
 " *** Windows Resizing ***
 nnoremap < :vertical resize +5<CR>
 nnoremap > :vertical resize -5<CR>
+
+" *** disable visual mode ***
+nnoremap <S-q> <nop>
 
 " *** Moving tricks ??? *** "
 map <C-k> <PageUp>
@@ -241,6 +249,10 @@ silent ! echo 'unmap <leader>hs' >> ~/.vim/after/plugin/after.vim
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 autocmd FileType tagbar nnoremap <buffer> <C-l> <nop>
 autocmd FileType tagbar nnoremap <buffer> <C-h> <nop>
+autocmd FileType tagbar nnoremap <buffer> <leader>h <C-w>h
+autocmd FileType tagbar nnoremap <buffer> <leader>j <C-w>j
+autocmd FileType tagbar nnoremap <buffer> <leader>k <C-w>k
+autocmd FileType tagbar nnoremap <buffer> <leader>l <C-w>l
 
 
 " *** QuickFix always in the bottom *** "
