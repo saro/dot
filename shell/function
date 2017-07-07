@@ -7,7 +7,7 @@ ct() {
 
 unalias psg 2> /dev/null
 psg() {
-	ps ax|grep -v "grep"|grep -i -E $1
+	ps ax|grep -v "\<grep\>"|grep -i -E $1
 }
 
 unalias gg 2> /dev/null
@@ -39,4 +39,9 @@ sk() {
 unalias ssk 2> /dev/null
 ssk() {
 	ssh $@ -t -Y " su -c 'source ~/shell/tmux && cd && tx'"
+}
+
+unalias sskd 2> /dev/null
+sskd() {
+	ssh $@ -D 6666 -t -Y " su -c 'source ~/shell/tmux && cd && tx'"
 }

@@ -1,5 +1,4 @@
 [user]
-	email = contarino.rosario@gmail.com
 	name = Rosario Contarino
 [sendemail]
 	smtpserver = /usr/bin/msmtp

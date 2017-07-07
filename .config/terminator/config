@@ -33,6 +33,7 @@
   new_terminator = None
   new_window = None
   next_tab = None
+  paste = <Primary>p
   prev_tab = None
   reset = None
   reset_clear = <Primary><Shift>r

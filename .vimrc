@@ -249,6 +249,7 @@ silent ! echo 'unmap <leader>hs' >> ~/.vim/after/plugin/after.vim
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 autocmd FileType tagbar nnoremap <buffer> <C-l> <nop>
 autocmd FileType tagbar nnoremap <buffer> <C-h> <nop>
+autocmd FileType tagbar nnoremap <buffer> <Space> <nop>
 autocmd FileType tagbar nnoremap <buffer> <leader>h <C-w>h
 autocmd FileType tagbar nnoremap <buffer> <leader>j <C-w>j
 autocmd FileType tagbar nnoremap <buffer> <leader>k <C-w>k

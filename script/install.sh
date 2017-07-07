@@ -83,6 +83,7 @@ done
 # Instal Plug-Vim
 if [ "$initScript" == 1 ] ; then
 	echo "Installing VIM-PLUG"
+	mkdir -p "${homeDir}/.vim/autoload/"
 	curl -fLo "${homeDir}/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	vim  +PlugInstall +qa
 fi
