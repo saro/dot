@@ -53,6 +53,11 @@ set smartcase
 set ignorecase
 set wrapscan
 
+" *** Autocompletion case sensitive ***
+au InsertEnter * set noignorecase
+au InsertLeave * set ignorecase
+au InsertLeave * set smartcase
+
 " *** Style Option ***
 set smartindent
 set showtabline=2
@@ -118,6 +123,7 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
+nnoremap <leader>w :vertical resize 150<CR>
 
 nnoremap <leader>n :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * <CR>:copen<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
@@ -238,7 +244,8 @@ autocmd BufEnter COMMIT_EDITMSG setlocal spell
 
 
 " *** GitGutter Configuration ***
-let g:gitgutter_async = 0
+let g:gitgutter_async = 1
+let g:gitgutter_realtime = 1
 silent ! echo 'unmap <leader>hp' >> ~/.vim/after/plugin/after.vim
 silent ! echo 'unmap <leader>hr' >> ~/.vim/after/plugin/after.vim
 silent ! echo 'unmap <leader>hu' >> ~/.vim/after/plugin/after.vim
@@ -378,6 +385,7 @@ let g:netrw_bufsettings = 'noma nomod nobl nonu nowrap ro'
 " *** FILE TYPES SETTINGS ***
 " *** MARKDOWN ***
 autocmd FileType markdown setlocal expandtab
+autocmd FileType markdown setlocal tw=0
 let g:markdown_fenced_languages = ['c', 'bash=sh']
 let g:markdown_syntax_conceal = 0
 

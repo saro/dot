@@ -63,7 +63,7 @@ if [[ $result != "" ]] ; then
 		if [[ $err != "1" ]]; then
 			ex=$(grep "Exec=" "$desktopfile"|sed 's/^.*Exec=//'|head -n1|sed 's/%.*//')
 			echo "DESKTOP: $desktopfile  EXEC: $ex"
-			${ex}&
+			sh -c "${ex}&"
 		else
 			echo "ERROR"
 			exit 1

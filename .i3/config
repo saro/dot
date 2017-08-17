@@ -273,8 +273,9 @@ bar {
 
 # Add support for multi_key or better... I have seen symbols that you humans...
 exec xmodmap $HOME/.Xmodmap
-exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; gpg-connect-agent /bye)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
+exec xss-lock --ignore-sleep -- /bin/bash -c '(gpgconf --kill gpg-agent; gpg-connect-agent /bye)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
 exec dunst&
+exec unclutter&
 # Guess what?? Weeeeechat :D
 exec terminator -l Weechat -c "weechat" &
 
