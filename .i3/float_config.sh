@@ -32,6 +32,12 @@ exec terminator -l pulsemixer -c "pulsemixer"
 # for_window [window_role="conversation"] resize set $((${DISPLAY_W} * 27 / 100)) $((${DISPLAY_H} * 70 / 100))
 # for_window [window_role="conversation"] scratchpad show
 # exec pidgin
+
+# Set qutebrowser editor gvim in position
+for_window [title="qutebrowser-editor-.*"] floating enable
+for_window [title="qutebrowser-editor-.*"] move position $((${DISPLAY_W} * 25 / 100)) $((${DISPLAY_H} * 55 / 100))
+for_window [title="qutebrowser-editor-.*"] resize set $((${DISPLAY_W} * 50 / 100)) $((${DISPLAY_H} * 40 / 100))
+
 " > /tmp/conf_flo
 
 

@@ -2,7 +2,7 @@ export STEAM_RUNTIME=0
 xrandr --dpi 120
 export GDK_DPI_SCALE=1.25
 
-gpg-connect-agent /bye&
+echo UPDATESTARTUPTTY | gpg-connect-agent
 export SSH_AUTH_SOCK=/run/user/$UID/gnupg/S.gpg-agent.ssh
 
 ${HOME}/.i3/float_config.sh

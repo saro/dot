@@ -29,7 +29,7 @@ floating_modifier Mod1
 bindsym Mod1+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym Mod1+Shift+q kill
+# bindsym Mod1+Shift+q kill
 bindsym Mod1+F4 kill
 
 # start dmenu in Saro's flavour
@@ -63,10 +63,10 @@ bindsym Mod1+Shift+Up move up
 bindsym Mod1+Shift+Right move right
 
 # TODO: split in horizontal orientation
-#bindsym Mod1+h split h
+# bindsym Mod1+h split S
 
 # TODO: split in vertical orientation
-#bindsym Mod1+v split v
+# bindsym Mod1+v split Q
 
 # enter fullscreen mode for the focused container
 bindsym Mod1+f fullscreen toggle
@@ -84,10 +84,10 @@ bindsym Mod1+Shift+space floating toggle
 bindsym Mod1+b focus mode_toggle
 
 # TODO: focus the parent container
-#bindsym Mod1+a focus parent
+# bindsym Mod1+A focus parent
 
 # TODO: focus the child container
-#bindsym Mod1+d focus child
+# bindsym Mod1+D focus child
 
 # move the currently focused window to the scratchpad
 bindsym Mod1+Shift+minus move scratchpad
@@ -180,7 +180,7 @@ mode "$mode_display" {
     bindsym t exec --no-startup-id $HOME/script/together.sh, mode "default"
     bindsym u exec --no-startup-id $HOME/script/undocked.sh, mode "default"
     bindsym l exec --no-startup-id $HOME/script/duplicate.sh, mode "default"
-    bindsym e exec --no-startup-id $HOME/script/home_extern.sh, mode "default"
+    # bindsym e exec --no-startup-id $HOME/script/home_extern.sh, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -230,7 +230,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 # ScreenShot
-bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.jpg
+bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Bind former CTRL ??
 bindsym Mod1+space exec $HOME/script/middle_button.sh
@@ -240,6 +240,7 @@ bindsym Ctrl+o exec passmenu -b -i -fn 'Droid Sans Mono-12' && notify-send 'PASS
 
 # Assigning applications
 assign [class="Firefox"] $ws1
+assign [class="qutebrowser"] $ws1
 assign [class="Thunderbird"] $ws4
 assign [class="pavucontrol"] $ws3
 assign [instance="weechat"] $ws5
@@ -273,7 +274,7 @@ bar {
 
 # Add support for multi_key or better... I have seen symbols that you humans...
 exec xmodmap $HOME/.Xmodmap
-exec xss-lock --ignore-sleep -- /bin/bash -c '(gpgconf --kill gpg-agent; gpg-connect-agent /bye)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
+exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATESTARTUPTTY | gpg-connect-agent)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
 exec dunst&
 exec unclutter&
 # Guess what?? Weeeeechat :D
