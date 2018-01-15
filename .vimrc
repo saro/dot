@@ -48,6 +48,8 @@ set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
 set showcmd " Show partial commands in status line and selected characters/lines in visual mode
 set scrolloff=1
 set sidescrolloff=4
+set complete=.,w,b,u,t
+let g:grep_params="--exclude=tags --exclude=cscope.out --exclude-dir=build"
 
 " *** Search Option ***
 set smartcase
@@ -127,7 +129,7 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>w :vertical resize 125<CR>
 
-nnoremap <leader>n :AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj "\b<C-R><C-W>\b" * <CR>:copen<CR>
+nnoremap <leader>n :call GrepAsync('"\b<cword>\b"')<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap <leader>as :AsyncStop<CR>
 nnoremap <leader>am :AsyncRun -program=make<CR>
@@ -143,7 +145,7 @@ nnoremap <leader>b :buffers<CR>:buffer<Space>
 nnoremap <leader># :b #<CR>
 nnoremap <leader>d :BD<CR>
 
-nnoremap <leader>xx :q<CR>
+nnoremap <leader>x :q<CR>
 nnoremap <leader>Y :set hlsearch! hlsearch?<CR>
 nnoremap <leader>Q :q<CR>
 nnoremap <leader>L <Esc>:redraw!<CR>
@@ -209,7 +211,7 @@ map <F3> <Esc>:Lex<CR>
 " *** Custom function ***
 function! GrepAsync (str)
 	let tmp = a:str
-    exec 'AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=build '.tmp.' * '
+    exec 'AsyncRun! grep -Inri '.g:grep_params.' '.tmp.' * '
 	copen
 endfunction
 
