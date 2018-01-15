@@ -5,20 +5,21 @@ include /etc/firejail/qutebrowser.local
 # Persistent global definitions
 include /etc/firejail/globals.local
 
-noblacklist ~/.cache/qutebrowser
-noblacklist ~/.config/qutebrowser
+noblacklist ${HOME}/.cache/qutebrowser
+noblacklist ${HOME}/.config/qutebrowser
+noblacklist ${HOME}/.local/share/qutebrowser
 
 include /etc/firejail/disable-common.inc
 include /etc/firejail/disable-devel.inc
 include /etc/firejail/disable-programs.inc
 
-mkdir ~/.cache/qutebrowser
-mkdir ~/.config/qutebrowser
-mkdir ~/.local/share/qutebrowser
+mkdir ${HOME}/.cache/qutebrowser
+mkdir ${HOME}/.config/qutebrowser
+mkdir ${HOME}/.local/share/qutebrowser
 whitelist ${DOWNLOADS}
-whitelist ~/.cache/qutebrowser
-whitelist ~/.config/qutebrowser
-whitelist ~/.local/share/qutebrowser
+whitelist ${HOME}/.cache/qutebrowser
+whitelist ${HOME}/.config/qutebrowser
+whitelist ${HOME}/.local/share/qutebrowser
 whitelist ~/.vimrc
 whitelist ~/.vim
 include /etc/firejail/whitelist-common.inc
@@ -30,5 +31,6 @@ nonewprivs
 noroot
 notv
 protocol unix,inet,inet6,netlink
-seccomp
-tracelog
+# blacklisting of chroot system calls breaks qt webengine
+seccomp.drop @clock,@cpu-emulation,@debug,@module,@obsolete,@raw-io,@reboot,@resources,@swap,acct,add_key,bpf,fanotify_init,io_cancel,io_destroy,io_getevents,io_setup,io_submit,ioprio_set,kcmp,keyctl,mount,name_to_handle_at,nfsservctl,ni_syscall,open_by_handle_at,personality,pivot_root,process_vm_readv,ptrace,remap_file_pages,request_key,setdomainname,sethostname,syslog,umount,umount2,userfaultfd,vhangup,vmsplice
+# tracelog
