@@ -2,3 +2,5 @@
 	name = Rosario Contarino
 [sendemail]
 	smtpserver = /usr/bin/msmtp
+[push]
+	default = current
