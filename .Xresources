@@ -1,0 +1,70 @@
+! XST Settings
+
+st.termname:     st-256color
+st.shell:        /bin/zsh
+st.font:              Droid Sans Mono Slashed for Powerline:pixelsize=16:antialias=true:autohint=true;
+st.borderpx:          5
+
+! Available cursor values: 2 4 6 7 = █ _ | ☃ ( 1 3 5 are blinking versions)
+st.cursorshape:       2
+st.cursorthickness:   2
+! 0: normal blinking, 1: leave cursor border and blink with cursors background
+st.cursorblinkstyle:  0
+! 0: cursor blinks with a constant interval; 1: blinking cycle resets on key input
+st.cursorblinkontype: 1
+st.bold_font:         1
+st.xfps:              120
+st.actionfps:         30
+
+! Kerning / character bounding-box height multiplier
+st.chscale:           1.0
+! Kerning / character bounding-box width multiplier
+st.cwscale:           1.0
+! blinking timeout for terminal and cursor blinking (0 disables)
+st.blinktimeout:      800
+! bell volume. Value between -100 and 100. (0 disables)
+st.bellvolume:        0
+! this is a char that is exposed like so: `printf '\033[z'`
+st.prompt_char:       $
+
+! opacity==255 means what terminal will be not transparent, 0 - fully transparent
+st.opacity:      255
+
+! Defaults taken from base16-twilight colorscheme.
+st.foreground:   #ffffff
+st.background:   #000000
+st.cursorfg:     #bc6a00
+
+! Thx @fmount
+! INFO SECTION CONTAINING ALL COLOR DEFINITIONS !
+!! Black + DarkGrey
+st.color0:  #000000
+st.color8:  #555753
+!
+!! DarkRed + Red
+st.color1:  #ff6565
+st.color9:  #ff8d8d
+!
+!! DarkGreen + Green
+st.color2:  #93d44f
+st.color10: #c8e7a8
+!
+!! DarkYellow + Yellow
+st.color3:  #eab93d
+st.color11: #ffc123
+!
+!! DarkBlue + Blue
+st.color4:  #204a87
+st.color12: #3465a4
+!
+!! DarkMagenta + Magenta
+st.color5:  #ce5c00
+st.color13: #f57900
+!
+!!DarkCyan + Cyan (both not tango)
+st.color6:  #89b6e2
+st.color14: #46a4ff
+!
+!! LightGrey + White
+st.color7:  #cccccc
+st.color15: #ffffff

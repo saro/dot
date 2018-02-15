@@ -26,7 +26,8 @@ set $ws0 0 
 floating_modifier Mod1
 
 # start a terminal
-bindsym Mod1+Return exec i3-sensible-terminal
+bindsym Mod1+Return exec st
+bindsym Mod1+Shift+Return exec st -n 'ttttt' -e sh -c 'TERM=xterm-256color source ~/shell/tmux && tx'
 
 # kill focused window
 # bindsym Mod1+Shift+q kill
@@ -263,7 +264,6 @@ workspace_layout tabbed
 # finds out, if available)
 bar {
 	position top
-	#strip_workspace_numbers yes
 	status_command i3blocks
 	colors {
 		separator #1f70aa
@@ -278,7 +278,8 @@ exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATE
 exec dunst&
 exec unclutter&
 # Guess what?? Weeeeechat :D
-exec terminator -l Weechat -c "weechat" &
+exec st -n "weechat" -e weechat&
+exec feh --bg-center $HOME/Desktop/arch_wp.png
 
 # These floating windows are not started using the float_config.sh  script.
 # Pidgin...
