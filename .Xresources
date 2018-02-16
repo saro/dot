@@ -1,9 +1,8 @@
 ! XST Settings
-
 st.termname:     st-256color
 st.shell:        /bin/zsh
-st.font:              Droid Sans Mono Slashed for Powerline:pixelsize=16:antialias=true:autohint=true;
-st.borderpx:          5
+st.font:         Droid Sans Mono Slashed for Powerline:pixelsize=16:antialias=true:autohint=true;
+st.borderpx:     5
 
 ! Available cursor values: 2 4 6 7 = █ _ | ☃ ( 1 3 5 are blinking versions)
 st.cursorshape:       2
@@ -34,37 +33,38 @@ st.opacity:      255
 st.foreground:   #ffffff
 st.background:   #000000
 st.cursorfg:     #bc6a00
+st.cursorbg:     #ffffff
 
 ! Thx @fmount
 ! INFO SECTION CONTAINING ALL COLOR DEFINITIONS !
 !! Black + DarkGrey
 st.color0:  #000000
 st.color8:  #555753
-!
+
 !! DarkRed + Red
-st.color1:  #ff6565
-st.color9:  #ff8d8d
-!
+st.color1:  #cc0000
+st.color9:  #ff6565
+
 !! DarkGreen + Green
-st.color2:  #93d44f
-st.color10: #c8e7a8
-!
+st.color2:  #4e9a06
+st.color10: #92f429
+
 !! DarkYellow + Yellow
-st.color3:  #eab93d
-st.color11: #ffc123
-!
+st.color3:  #c4a000
+st.color11: #eab93d
+
 !! DarkBlue + Blue
-st.color4:  #204a87
+st.color4:  #3465a4
 st.color12: #3465a4
-!
+
 !! DarkMagenta + Magenta
-st.color5:  #ce5c00
-st.color13: #f57900
-!
+st.color5:  #75507b
+st.color13: #ce5c00
+
 !!DarkCyan + Cyan (both not tango)
-st.color6:  #89b6e2
-st.color14: #46a4ff
-!
+st.color6:  #06989a
+st.color14: #00cdcd
+
 !! LightGrey + White
-st.color7:  #cccccc
+st.color7:  #d3d7cf
 st.color15: #ffffff
