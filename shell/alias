@@ -77,6 +77,8 @@ if [ $UID -eq 0 ]; then
 	alias sv='vim '
 	alias sip='ip '
 	alias dk='docker '
+	alias dk_rm_cont='docker rm $(docker ps -a -q)'
+	alias dk_rm_img='docker rmi $(docker images -q -f dangling=true)'
 else
 	alias m='sudo mount '
 	alias um='sudo umount '
@@ -87,6 +89,8 @@ else
 	alias sv='sudo vim '
 	alias sip='sudo ip '
 	alias dk='sudo docker '
+	alias dk_rm_cont='sudo docker rm $(docker ps -a -q)'
+	alias dk_rm_img='sudo docker rmi $(docker images -q -f dangling=true)'
 fi
 
 # *** BT alias ***
@@ -134,6 +138,8 @@ alias gfa='git fetch --all '
 alias gfo='git fetch origin'
 
 alias gp='git push '
+alias gpl='git pull '
 
 alias gsb='git status -sb'
 alias gs='git status -s'
+alias gss='git status'

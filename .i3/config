@@ -2,7 +2,8 @@
 #
 # i3 config file (v4)
 
-font pango:Droid Sans Mono Slashed for Powerline 11
+# font pango:Droid Sans Mono Slashed for Powerline 11
+font pango:Share Tech Mono 11
 
 # DIRECTIONS
 set $up k
@@ -11,16 +12,16 @@ set $left h
 set $right l
 
 # Set workspace names and icons
-set $ws1 1 
-set $ws2 2 
-set $ws3 3 
-set $ws4 4 
-set $ws5 5 
-set $ws6 6 
-set $ws7 7 
-set $ws8 8 
-set $ws9 9 
-set $ws0 0 
+set $brow Q 
+set $mail E 
+set $weec W 
+set $ws1 > 1
+set $ws2 > 2
+set $ws3 > 3
+set $ws4 > 4
+set $ws5 > 5
+set $ws9 >> 9
+set $ws0 >> 0
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
@@ -70,12 +71,13 @@ bindsym Mod1+Shift+Right move right
 # bindsym Mod1+v split Q
 
 # enter fullscreen mode for the focused container
-bindsym Mod1+f fullscreen toggle
+bindsym Mod1+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym Mod1+s layout stacking
-bindsym Mod1+w layout tabbed
-bindsym Mod1+e layout toggle split
+bindsym Mod1+f layout tabbed
+bindsym Mod1+c layout splith
+bindsym Mod1+Shift+c layout splitv
 
 # toggle tiling / floating
 bindsym Mod1+Shift+space floating toggle
@@ -98,26 +100,32 @@ bindsym Mod1+Shift+minus move scratchpad
 bindsym Mod1+minus scratchpad show
 
 # switch to workspace
+bindsym Mod1+q workspace $brow; [window_role="conversation"] move to scratchpad
+bindsym Mod1+w workspace $weec; [window_role="conversation"] move to scratchpad
+bindsym Mod1+e workspace $mail; [window_role="conversation"] move to scratchpad
 bindsym Mod1+1 workspace $ws1; [window_role="conversation"] move to scratchpad
 bindsym Mod1+2 workspace $ws2; [window_role="conversation"] move to scratchpad
 bindsym Mod1+3 workspace $ws3; [window_role="conversation"] move to scratchpad
 bindsym Mod1+4 workspace $ws4; [window_role="conversation"] move to scratchpad
 bindsym Mod1+5 workspace $ws5; [window_role="conversation"] move to scratchpad
-bindsym Mod1+6 workspace $ws6; [window_role="conversation"] move to scratchpad
-bindsym Mod1+7 workspace $ws7; [window_role="conversation"] move to scratchpad
-bindsym Mod1+8 workspace $ws8; [window_role="conversation"] move to scratchpad
+# bindsym Mod1+6 workspace $ws6; [window_role="conversation"] move to scratchpad
+# bindsym Mod1+7 workspace $ws7; [window_role="conversation"] move to scratchpad
+# bindsym Mod1+8 workspace $ws8; [window_role="conversation"] move to scratchpad
 bindsym Mod1+9 workspace $ws9; [window_role="conversation"] move to scratchpad
 bindsym Mod1+0 workspace $ws0; [window_role="conversation"] move to scratchpad
 
 # move focused container to workspace
+bindsym Mod1+Shift+q move container to workspace $brow
+bindsym Mod1+Shift+w move container to workspace $weec
+bindsym Mod1+Shift+e move container to workspace $mail
 bindsym Mod1+Shift+1 move container to workspace $ws1
 bindsym Mod1+Shift+2 move container to workspace $ws2
 bindsym Mod1+Shift+3 move container to workspace $ws3
 bindsym Mod1+Shift+4 move container to workspace $ws4
 bindsym Mod1+Shift+5 move container to workspace $ws5
-bindsym Mod1+Shift+6 move container to workspace $ws6
-bindsym Mod1+Shift+7 move container to workspace $ws7
-bindsym Mod1+Shift+8 move container to workspace $ws8
+# bindsym Mod1+Shift+6 move container to workspace $ws6
+# bindsym Mod1+Shift+7 move container to workspace $ws7
+# bindsym Mod1+Shift+8 move container to workspace $ws8
 bindsym Mod1+Shift+9 move container to workspace $ws9
 bindsym Mod1+Shift+0 move container to workspace $ws0
 
@@ -237,16 +245,16 @@ bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
 bindsym Mod1+space exec $HOME/script/middle_button.sh
 
 # Bind passmenu
-bindsym Ctrl+o exec passmenu -b -i -fn 'Droid Sans Mono-12' && notify-send 'PASS COPIED'
+bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
 
 # Assigning applications
-assign [class="Firefox"] $ws1
-assign [class="qutebrowser"] $ws1
-assign [class="Thunderbird"] $ws4
-assign [class="pavucontrol"] $ws3
-assign [instance="weechat"] $ws5
-assign [window_role="buddy_list"] $ws5
-for_window [class="Spotify"] move to workspace $ws5
+assign [class="Firefox"] $brow
+assign [class="qutebrowser"] $brow
+assign [class="Thunderbird"] $mail
+assign [class="pavucontrol"] $weec
+assign [instance="weechat"] $weec
+assign [window_role="buddy_list"] $weec
+for_window [class="Spotify"] move to workspace $weec
 
 # They can see us...
 # See float_config.sh for ttttt terminal settings

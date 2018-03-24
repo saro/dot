@@ -39,7 +39,7 @@ fi
 cat "${history_file}" > $running
 cat $cache >> $running
 
-result=$(dmenu -b -i "$@" -fn 'Droid Sans Mono-12'< $running)
+result=$(dmenu -b -i "$@" -fn 'Share Tech Mono-12'< $running)
 
 err=0
 desktopfile=""

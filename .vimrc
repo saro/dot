@@ -19,6 +19,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/gv.vim'
+Plug 'milad14000/vim_p4'
 
 call plug#end()
 
@@ -27,7 +28,8 @@ set encoding=utf-8
 set number
 syntax on
 set selectmode=mouse
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+" set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+set guifont=Share\ Tech\ Mono\ 10
 colorscheme jelleybeans
 set cursorline
 set background=dark
@@ -113,9 +115,10 @@ vnoremap  ; :
 " *** Leader Mapping *** "
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
-nnoremap <Leader>gd :GdiffInTab<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gc :Git checkout -b 
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 nnoremap <Leader>gD <C-w>h<C-w>c
 
