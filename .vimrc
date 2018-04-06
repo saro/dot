@@ -257,11 +257,11 @@ autocmd BufEnter COMMIT_EDITMSG setlocal spell
 
 
 " *** GitGutter Configuration ***
-let g:gitgutter_async = 1
-let g:gitgutter_realtime = 1
-silent ! echo 'unmap <leader>hp' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>hu' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>hs' >> ~/.vim/after/plugin/after.vim
+" let g:gitgutter_async = 1
+" let g:gitgutter_realtime = 1
+let g:gitgutter_map_keys = 0
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 
 
 " *** TagBar configuration *** "
