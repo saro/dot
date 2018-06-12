@@ -117,7 +117,7 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gp :copen<CR><C-w>p:Gpush<CR>
 nnoremap <Leader>gc :Git checkout -b 
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 nnoremap <Leader>gD <C-w>h<C-w>c
@@ -201,8 +201,10 @@ vmap <C-h> <Esc>:bprevious!<CR>
 nmap <C-l> <Esc>:bnext!<CR>
 nmap <C-h> <Esc>:bprevious!<CR>
 
-" *** Search in selection mode ***
+" *** Search and Replace in selection mode ***
 vnoremap // y/<C-R>"<CR>
+vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <leader>R "hy:%s/<C-r>h//g<left><left>
 
 map <F1> <nop>
 map <F2> <nop>
@@ -330,7 +332,6 @@ let g:gutentags_enabled_user_func = 'CheckEnabledDirs'
 let g:gutentags_create_tags = 0
 
 function! CheckEnabledDirs(file)
-	let file_path = fnamemodify(a:file, ':p:h')
 	" Set this value to 1 to enable the tags creation "
 	if g:gutentags_create_tags == 1
 		return 1
@@ -348,6 +349,9 @@ nmap <C-A-F12>c <Plug>MarkRegex
 nmap <C-A-F12>d <Plug>MarkClear
 nmap <C-A-F12>e <Plug>MarkSearchCurrentNext
 nmap <C-A-F12>f <Plug>MarkSearchAnyPrev
+nmap <C-A-F12>g <Plug>MarkRegex
+xmap <C-A-F12>g <Plug>MarkRegex
+nmap <C-A-F12>h <Plug>MarkClear
 
 
 " *** BuffKill unmap undesired keys combination ***
@@ -391,6 +395,18 @@ let g:netrw_winsize = -25
 let g:netrw_browse_split = 4
 let g:netrw_bufsettings = 'noma nomod nobl nonu nowrap ro'
 
+" *** Handcrafted functions ***
+function! SetMaxLength(enable, length, id)
+	if a:enable == 1
+		" exec 'match ErrorMsg /.\%>10v\+/'
+		exec "let " . a:id . " = matchadd('ErrorMsg', '.\\%>" . a:length . "v')"
+	endif
+endfunction
+
+function! RemoveMaxLength(id)
+	exec "call matchdelete(" . a:id .")"
+endfunction
+
 " *** FILE TYPES SETTINGS ***
 " *** MARKDOWN ***
 autocmd FileType markdown setlocal expandtab
@@ -400,13 +416,21 @@ let g:markdown_syntax_conceal = 0
 
 " *** C ***
 autocmd FileType c setlocal tw=80
-autocmd FileType c match ErrorMsg '\s\+$'
-autocmd FileType c match ErrorMsg '\%>80v.\+'
+autocmd FileType c call matchadd("ErrorMsg", '\s\+$')
+let g:maxlength_c_enable=0
+let g:maxlength_c_id=0
+autocmd FileType c call SetMaxLength(g:maxlength_c_enable, 80, "g:maxlength_c_id")
 
 " *** C++ ***
-autocmd FileType cpp setlocal tw=80
-autocmd FileType cpp match ErrorMsg '\s\+$'
-autocmd FileType cpp match ErrorMsg '\%>120v.\+'
+autocmd FileType cpp setlocal tw=120
+autocmd FileType cpp call matchadd("ErrorMsg", '\s\+$')
+let g:maxlength_cpp_enable=0
+let g:maxlenght_cpp_id=0
+autocmd FileType cpp call SetMaxLength(g:maxlength_cpp_enable, 120, "g:maxlength_cpp_id")
+
+" *** HTML ***
+autocmd FileType html setlocal tw=0
+autocmd FileType html setlocal cursorcolumn
 
 " *** VIM FILES ***
 autocmd FileType vim setlocal fileformat=unix
