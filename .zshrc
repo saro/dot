@@ -82,28 +82,28 @@ bindkey -M vicmd '^k' up-line-or-beginning-search
 bindkey -M vicmd '^j' down-line-or-beginning-search
 
 # *** Yank in the clipboard ***
-x-yank() {
-    zle copy-region-as-kill
-    print -rn -- $CUTBUFFER | xclip -in -selection clipboard
-}
-zle -N x-yank
+# x-yank() {
+#     zle copy-region-as-kill
+#     print -rn -- $CUTBUFFER | xclip -in -selection clipboard
+# }
+# zle -N x-yank
 
-x-cut() {
-    zle kill-region
-    print -rn -- $CUTBUFFER | xclip -in -selection clipboard
-}
-zle -N x-cut
+# x-cut() {
+#     zle kill-region
+#     print -rn -- $CUTBUFFER | xclip -in -selection clipboard
+# }
+# zle -N x-cut
 
-x-paste() {
-    CUTBUFFER=$(xclip -selection clipboard -o)
-    zle yank
-}
-zle -N x-paste
+# x-paste() {
+#     CUTBUFFER=$(xclip -selection clipboard -o)
+#     zle yank
+# }
+# zle -N x-paste
 
-bindkey -M vicmd 'y' x-yank
-bindkey -M vicmd 'Y' x-cut
-bindkey -M vicmd 'p' x-paste
-bindkey '^p' x-paste
+# bindkey -M vicmd 'y' x-yank
+# bindkey -M vicmd 'Y' x-cut
+# bindkey -M vicmd 'p' x-paste
+# bindkey '^p' x-paste
 
 # Home key variants
 bindkey '\eOH' vi-beginning-of-line
