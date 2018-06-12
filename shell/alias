@@ -45,7 +45,7 @@ alias jc='journalctl '
 alias gv='gvim '
 alias v='vim '
 
-alias pca='pacaur '
+alias pca='yay '
 alias c='cd '
 alias ee='exit'
 
@@ -62,9 +62,6 @@ alias vbx='~/vbox/'
 
 # *** Profitap Aliases ***
 alias pf='~/profitap/pf/'
-
-# *** VPS related Alias
-alias getbak='scp -P 2244 saro@saro.space:/home/saro/backup/bak "bak_$(date +"%Y%m%d")"'
 
 # *** sudo aliases ***
 if [ $UID -eq 0 ]; then
@@ -89,8 +86,8 @@ else
 	alias sv='sudo vim '
 	alias sip='sudo ip '
 	alias dk='sudo docker '
-	alias dk_rm_cont='sudo docker rm $(docker ps -a -q)'
-	alias dk_rm_img='sudo docker rmi $(docker images -q -f dangling=true)'
+	alias dk_rm_cont='sudo docker rm $(sudo docker ps -a -q)'
+	alias dk_rm_img='sudo docker rmi $(sudo docker images -q -f dangling=true)'
 fi
 
 # *** BT alias ***
@@ -125,7 +122,7 @@ alias gca='git commit -v -a'
 alias gca!='git commit -v -a --amend'
 
 alias gl='git log --oneline --decorate'
-alias glo="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gll="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 alias gco='git checkout '
 
@@ -138,8 +135,12 @@ alias gfa='git fetch --all '
 alias gfo='git fetch origin'
 
 alias gp='git push '
+alias gpt='git push --tags'
 alias gpl='git pull '
 
 alias gsb='git status -sb'
 alias gs='git status -s'
-alias gss='git status'
+alias gS='git status'
+
+alias gt='git tag '
+alias gtrel='git tag "r$(date +"%Y%m%d%H%M")"'
