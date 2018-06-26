@@ -8,39 +8,66 @@
 
 
 # set -x
-# trap read debug
 
-repoDir=$PWD
-# If the script is run from the "script" folder we change the pwd automagically
-if [ "${repoDir##*/}" == "script" ] ; then
-	echo "Script running from script folder. I'm a merciful script and I will help you this time"
-	repoDir="${repoDir%/script}"
-fi
+fatal() { printf "\\\\033[0;31mERROR:\\033[0m %s\\n" "$*" >&2; exit 1; }
+warn() { printf "\\033[0;33mWARN:\\033[0m %s\\n" "$*"; }
+debug() { [[ -n $DEBUG ]] && printf "DEBUG: %s \\n" "$*"; }
+
+# Move <filename> to its OLD#_<filename>
+do_move_old()
+{
+	local idx=0
+	if [[ -n "$1" ]]; then local file_name="$1"; else fatal "MISSING FILENAME"; fi
+	if [[ -n "$2" ]]; then local home_path="$2"; else fatal "MISSING HOME PATH"; fi
+
+	# If exists move the one in OLD<n>_<filename>
+	if [ -L "$home_path/$file_name" ]; then
+		rm "$home_path/$file_name"
+	elif [ -e "$home_path/$file_name" ] ; then
+		#echo "> $file_name exists in $HOME, move the old one"
+
+		# If OLD<n>_<file_namename> exists move it to OLD<n++>_<file_namename>
+		while [ -e "$home_path/OLD${idx}_$file_name" ] ; do
+			idx=$((idx + 1))
+		done
+
+		mv "$home_path/$file_name" "$home_path/OLD${idx}_$file_name"
+	fi
+}
 
 # Set repository folder from argument
-if [ "$1" != "" ] ; then
-	repoDir=$1
+if [[ -n "$1" ]]; then
+	repo_dir=$1
+else
+	repo_dir=$(pwd)
+	# If the script is run from the "script" folder we change the pwd automagically
+	if [ "${repo_dir##*/}" == "script" ] ; then
+		warn "Script running from script folder. I'm a merciful script and I will help you this time"
+		repo_dir="${repo_dir%/script}"
+	fi
 fi
 
 # Set home folder
-homeDir=$HOME
-if [ "$2" != "" ] ; then
-	homeDir=$2
+if [[ -n $2 ]]; then
+	home_dir=$2
+else
+	home_dir="${HOME}"
 fi
 
 # Set init script flag
-initScript=1
-if [ "$3" != "" ] ; then
-	initScript=$3
+if [[ -n $3 ]]; then
+	init_script=$3
+else
+	init_script=1
 fi
 
 # Create list of files in repo
-files=$(ls -A "$repoDir")
+files=$(ls -A "$repo_dir")
 
 # For each file:
 for file in $files ; do
 	echo -n "PROCESSING: $file"
-	ignore_list=(".git" "install.sh" "dotupdate.sh" "archlinux" "pub_keys" "notes" ".gitignore")
+	ignore_list=(".git" "install.sh" "dotupdate.sh" "archlinux" "pub_keys" "notes" ".gitignore" "qutebrowser_config.py")
 	ignore_flag=0
 	for x in "${ignore_list[@]}" ; do
 		[[ "$x" == "$file" ]] && ignore_flag=1 ;
@@ -56,44 +83,40 @@ for file in $files ; do
 	# If we are processing .config call the script recursive using $HOME/.config as home and without init scripts
 	if [ "$file" == ".config" ] ; then
 		# Do stuff
-		if [ ! -d "$homeDir/.config" ] ; then
-			mkdir "$homeDir/.config"
+		if [ ! -d "$home_dir/.config" ] ; then
+			mkdir "$home_dir/.config"
 		fi
-			"$repoDir/install.sh" "$repoDir/.config" "$homeDir/.config" 0
+			"$repo_dir/script/install.sh" "$repo_dir/.config" "$home_dir/.config" 0
 		continue
 	fi
 
-	oldIndex=0
-	# If exists move the one in OLD<n>_<filename>
-	if [ -e "$homeDir/$file" ] ; then
-		#echo "> $file exists in $HOME, move the old one"
-
-		# If OLD<n>_<filename> exists move it to OLD<n++>_<filename>
-		while [ -e "$homeDir/OLD${oldIndex}_$file" ] ; do
-			oldIndex=$((oldIndex + 1))
-		done
-
-		mv "$homeDir/$file" "$homeDir/OLD${oldIndex}_$file"
-	fi
+	do_move_old "${file}" "${home_dir}"
 
 	# Create symlink from the repo to the home
-	ln -sv "$repoDir/$file" "$homeDir/$file"
+	ln -sv "$repo_dir/$file" "$home_dir/$file"
 done
 
 # Instal Plug-Vim
-if [ "$initScript" == 1 ] ; then
+if [ "$init_script" == 1 ] ; then
 	echo "Installing VIM-PLUG"
-	mkdir -p "${homeDir}/.vim/autoload/"
-	curl -fLo "${homeDir}/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	mkdir -p "${home_dir}/.vim/autoload/"
+	curl -fLo "${home_dir}/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	vim  +PlugInstall +qa
 fi
 
 # Install tmux plugin manager automatically and run the installer
-if [ "$initScript" == 1 ] ; then
-	git clone https://github.com/tmux-plugins/tpm "$homeDir/.tmux/plugins/tpm"
-	tmux source "${homeDir}/.tmux.conf"
-	"${homeDir}/.tmux/plugins/tpm/bin/install_plugins"
+if [ "$init_script" == 1 ] ; then
+	git clone https://github.com/tmux-plugins/tpm "$home_dir/.tmux/plugins/tpm"
+	tmux source "${home_dir}/.tmux.conf"
+	"${home_dir}/.tmux/plugins/tpm/bin/install_plugins"
 fi
 
+# Install qutebrowser configuration
+echo "INSTALL QUTEBROWSER CONFIGURATION"
+qute_config="${home_dir}/.config/qutebrowser"
+mkdir -p "${qute_config}"
+do_move_old "config.py" "${qute_config}"
+ln -sv "${repo_dir}/qutebrowser_config.py" "${qute_config}/config.py"
+
 # Profit the dotfile repo :D
-echo "PROFIT NOW D:"
+echo "PROFIT D:"

@@ -19,6 +19,7 @@ mkdir ${HOME}/.local/share/qutebrowser
 whitelist ${DOWNLOADS}
 whitelist ${HOME}/.cache/qutebrowser
 whitelist ${HOME}/.config/qutebrowser
+whitelist ${HOME}/.config/qutebrowser/config.py
 whitelist ${HOME}/.local/share/qutebrowser
 whitelist ~/.vimrc
 whitelist ~/.vim
