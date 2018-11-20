@@ -27,8 +27,8 @@ set $ws0 >> 0
 floating_modifier Mod1
 
 # start a terminal
-bindsym Mod1+Return exec st
-bindsym Mod1+Shift+Return exec st -n 'ttttt' -e sh -c 'TERM=xterm-256color source ~/shell/tmux && tx'
+bindsym Mod1+Return exec xst
+bindsym Mod1+Shift+Return exec xst -n 'ttttt' -e sh -c 'TERM=xterm-256color source ~/shell/tmux && tx'
 
 # kill focused window
 # bindsym Mod1+Shift+q kill
@@ -251,6 +251,8 @@ bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12
 assign [class="Firefox"] $brow
 assign [class="qutebrowser"] $brow
 assign [class="Thunderbird"] $mail
+assign [class="Astroid"] $mail
+assign [class="Keybase"] $mail
 assign [class="pavucontrol"] $weec
 assign [instance="weechat"] $weec
 assign [window_role="buddy_list"] $weec
@@ -266,7 +268,7 @@ for_window [class="Spotify"] move to workspace $weec
 focus_follows_mouse no
 
 # Workspace start tabbed
-workspace_layout tabbed
+workspace_layout default
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -286,7 +288,7 @@ exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATE
 exec dunst&
 exec unclutter&
 # Guess what?? Weeeeechat :D
-exec st -n "weechat" -e weechat&
+exec xst -n "weechat" -e weechat&
 exec feh --bg-center $HOME/Desktop/arch_wp.png
 
 # These floating windows are not started using the float_config.sh  script.
