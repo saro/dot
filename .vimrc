@@ -20,6 +20,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/gv.vim'
 Plug 'milad14000/vim_p4'
+Plug 'adborden/vim-notmuch-address'
 
 call plug#end()
 
@@ -51,6 +52,8 @@ set sidescrolloff=4
 set complete=.,w,b,u,t
 set cm=blowfish2
 let g:grep_params=' '
+let g:build_command='make'
+let g:rebuild_command='make'
 " let g:grep_params='--exclude=tags --exclude=cscope.out --exclude-dir=build'
 
 " *** Search Option ***
@@ -100,29 +103,29 @@ set viminfo+=n~/tmp/viminfo
 
 
 " *** Key Mapping *** "
-nmap <C-v> "+gp
-nmap <C-a> <ESC>ggVG"+y
-imap <C-v> <ESC><C-V>i
-vmap <C-c> "+y
-
-inoremap <C-S> <Esc>:w<CR>a
-nnoremap <C-S> <Esc>:w<CR>
 cnoreabbrev W w
 
 nnoremap  ; :
 vnoremap  ; :
 
 " *** Leader Mapping *** "
+vnoremap <leader>y "+y
+nnoremap <leader>p "+gp
+nnoremap <leader>P "+gP
+nnoremap <leader>a mkggVG"+y'k
+
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gp :copen<CR><C-w>p:Gpush<CR>
-nnoremap <Leader>gc :Git checkout -b 
+nnoremap <Leader>go :Git checkout -b 
+nnoremap <Leader>gc :Gcommit --amend -a
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 nnoremap <Leader>gD <C-w>h<C-w>c
 
-nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+nnoremap <leader>S :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+nnoremap <leader>s :w<CR>
 nnoremap <leader>z 1z=<CR>
 
 nnoremap <leader>h <C-w>h
@@ -130,14 +133,15 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>u <C-w>p
+nnoremap <leader>v :vs<CR>
 nnoremap <leader>w :vertical resize 125<CR>
 
 nnoremap <leader>n :call GrepAsync('"\b<cword>\b"')<CR>
-nnoremap <leader>N :call GrepSync('"\b<cword>\b"')<CR>
+nnoremap <leader>N :call GrepAsync('"<cword>"')<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap <leader>as :AsyncStop<CR>
-nnoremap <leader>am :AsyncRun -program=make<CR>
-nnoremap <leader>ac :AsyncRun! shellcheck -f gcc %<CR>
+nnoremap <leader>b :call BuildAsync()<CR>
+nnoremap <leader>B :call ReBuildAsync()<CR>
 
 nnoremap <leader>t :Tagbar<CR>
 nnoremap <leader>e :Lex<CR>
@@ -150,7 +154,6 @@ nnoremap <leader>cr :CCTreeTraceReverse<CR><CR>
 nnoremap <leader>] <C-]>
 nnoremap <leader>[ <C-t>
 
-nnoremap <leader>b :buffers<CR>:buffer<Space>
 nnoremap <leader># :b #<CR>
 nnoremap <leader>d :BD<CR>
 
@@ -209,19 +212,30 @@ vnoremap <leader>R "hy:%s/<C-r>h//g<left><left>
 map <F1> <nop>
 map <F2> <nop>
 
-" map <F3> <Esc>:Lex<CR>
-
 " *** Alias *** "
-" ca tn tabnew
-" ca gg AsyncRun! grep -Inri --exclude=tags --exclude=cscope.out --exclude-dir=Obj
-" ca mm Mark
-" ca sudo w !sudo tee > /dev/null %
-" ca ss AsyncStop
-" ca src source ~/.vimrc
+ca sss source ~/.vimrc
 
 " *** Custom function ***
+function! BuildAsync ()
+	let @/ = "error"
+	if exists("b:build_command")
+		exec 'AsyncRun  '.b:build_command
+	else
+		exec 'AsyncRun  '.g:build_command
+	endif
+endfunction
+
+function! ReBuildAsync ()
+	let @/ = "error"
+	if exists("b:rebuild_command")
+		exec 'AsyncRun  '.b:rebuild_command
+	else
+		exec 'AsyncRun  '.g:rebuild_command
+	endif
+endfunction
+
 function! GrepAsync (str)
-	exec 'AsyncRun! grep -Irni --exclude=tags --exclude=cscope.out '.g:grep_params.' '.a:str.' .'
+	exec 'AsyncRun! grep -Irni --exclude=tags --exclude=cscope.out --exclude-dir=.git '.g:grep_params.' '.a:str.' .'
 	copen
 endfunction
 command! -nargs=1 G call GrepAsync(<f-args>)
@@ -229,9 +243,10 @@ command! -nargs=1 G call GrepAsync(<f-args>)
 " *** Spelling Settings *** "
 set spl=en
 
-" *** GUI specific settings *** "
 if has('gui_running')
+    " *** GUI specific settings *** "
 else
+    " *** TERM specific settings *** "
 	colorscheme jelleybeans
 	set nolist
 endif
@@ -323,6 +338,9 @@ let g:lightline = {
 " *** AsyncRun configuration ***
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " let g:asyncrun_trim = 1
+let g:asyncrun_open=10
+let g:asyncrun_save=1
+" let g:asyncrun_exit="exec 'silent !notify-send VIM-MAKE:'.g:asyncrun_status.''"
 
 " *** Configuration for Gutentags ***
 " let gutentags_generate_on_missing=0
@@ -408,6 +426,9 @@ function! RemoveMaxLength(id)
 endfunction
 
 " *** FILE TYPES SETTINGS ***
+" *** BASH/SH ***
+autocmd FileType bash,sh let b:build_command="shellcheck -f gcc %"
+
 " *** MARKDOWN ***
 autocmd FileType markdown setlocal expandtab
 autocmd FileType markdown setlocal tw=0
@@ -417,16 +438,19 @@ let g:markdown_syntax_conceal = 0
 " *** C ***
 autocmd FileType c setlocal tw=80
 autocmd FileType c call matchadd("ErrorMsg", '\s\+$')
+autocmd FileType c setlocal tabstop=8
+autocmd FileType c setlocal shiftwidth=8
+autocmd FileType c setlocal softtabstop=8
 let g:maxlength_c_enable=0
 let g:maxlength_c_id=0
-autocmd FileType c call SetMaxLength(g:maxlength_c_enable, 80, "g:maxlength_c_id")
+" autocmd FileType c call SetMaxLength(g:maxlength_c_enable, 81, "g:maxlength_c_id")
 
 " *** C++ ***
 autocmd FileType cpp setlocal tw=120
 autocmd FileType cpp call matchadd("ErrorMsg", '\s\+$')
 let g:maxlength_cpp_enable=0
 let g:maxlenght_cpp_id=0
-autocmd FileType cpp call SetMaxLength(g:maxlength_cpp_enable, 120, "g:maxlength_cpp_id")
+" autocmd FileType cpp call SetMaxLength(g:maxlength_cpp_enable, 121, "g:maxlength_cpp_id")
 
 " *** HTML ***
 autocmd FileType html setlocal tw=0
