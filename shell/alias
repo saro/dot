@@ -1,6 +1,7 @@
 # vim: ft=zsh
 
 # *** General Aliases ***
+# LS
 alias l='ls --color=auto'
 alias ls='ls --color=auto'
 alias ll='ls -lh'
@@ -8,6 +9,7 @@ alias lla='ls -lah'
 alias la='ls -ah'
 alias lt='ls -lha /tmp'
 
+# GREP
 alias g='grep --color=auto'
 alias gi='grep -i'
 alias grep='grep --color=auto'
@@ -24,16 +26,19 @@ alias sudo='sudo '
 
 alias dmesgt='dmesg | tail'
 
+# PING
 alias pgg='ping -c1 www.google.it'
 alias pg8='ping -c1 8.8.8.8'
-alias pgw='ping saro.space'
+alias pgw='ping errante.me'
 alias p='ping '
 
 alias w1='watch -n1 '
 
+# CLEAR
 alias cl='clear'
 alias clera='clear'
 alias cls='clear'
+
 alias rz='. ~/.zshrc'
 alias rb='. ~/.bashrc'
 
@@ -45,8 +50,10 @@ alias jc='journalctl '
 alias gv='gvim '
 alias v='vim '
 
+alias vf='vifm '
+alias svf='sudo vifm '
+
 alias pca='yay '
-alias c='cd '
 alias ee='exit'
 
 alias gpg='gpg'
@@ -55,13 +62,7 @@ alias pss='pass -c '
 
 alias css='cscope -bqR'
 
-# *** Directories aliases ***
-alias dwn='~/downloads/'
-alias doc='~/documenti/'
-alias vbx='~/vbox/'
-
-# *** Profitap Aliases ***
-alias pf='~/profitap/pf/'
+alias pls='pulsemixer'
 
 # *** sudo aliases ***
 if [ $UID -eq 0 ]; then
