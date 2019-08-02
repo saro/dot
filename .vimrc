@@ -27,9 +27,9 @@ call plug#end()
 " *** Configuration Editor *** "
 set encoding=utf-8
 set number
+set nomodeline
 syntax on
 set selectmode=mouse
-" set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
 set guifont=Share\ Tech\ Mono\ 10
 colorscheme jelleybeans
 set cursorline
@@ -112,7 +112,7 @@ vnoremap  ; :
 vnoremap <leader>y "+y
 nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
-nnoremap <leader>a mkggVG"+y'k
+nnoremap <leader>a :%y+<CR>
 
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
@@ -135,6 +135,7 @@ nnoremap <leader>l <C-w>l
 nnoremap <leader>u <C-w>p
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>w :vertical resize 125<CR>
+nnoremap <leader>W <C-w>=
 
 nnoremap <leader>n :call GrepAsync('"\b<cword>\b"')<CR>
 nnoremap <leader>N :call GrepAsync('"<cword>"')<CR>
@@ -413,48 +414,32 @@ let g:netrw_winsize = -25
 let g:netrw_browse_split = 4
 let g:netrw_bufsettings = 'noma nomod nobl nonu nowrap ro'
 
-" *** Handcrafted functions ***
-function! SetMaxLength(enable, length, id)
-	if a:enable == 1
-		" exec 'match ErrorMsg /.\%>10v\+/'
-		exec "let " . a:id . " = matchadd('ErrorMsg', '.\\%>" . a:length . "v')"
-	endif
-endfunction
-
-function! RemoveMaxLength(id)
-	exec "call matchdelete(" . a:id .")"
-endfunction
-
 " *** FILE TYPES SETTINGS ***
 " *** BASH/SH ***
 autocmd FileType bash,sh let b:build_command="shellcheck -f gcc %"
 
 " *** MARKDOWN ***
 autocmd FileType markdown setlocal expandtab
-autocmd FileType markdown setlocal tw=0
+autocmd FileType markdown setlocal tw=100
 let g:markdown_fenced_languages = ['c', 'bash=sh']
 let g:markdown_syntax_conceal = 0
 
 " *** C ***
 autocmd FileType c setlocal tw=80
-autocmd FileType c call matchadd("ErrorMsg", '\s\+$')
 autocmd FileType c setlocal tabstop=8
 autocmd FileType c setlocal shiftwidth=8
 autocmd FileType c setlocal softtabstop=8
-let g:maxlength_c_enable=0
-let g:maxlength_c_id=0
-" autocmd FileType c call SetMaxLength(g:maxlength_c_enable, 81, "g:maxlength_c_id")
 
 " *** C++ ***
 autocmd FileType cpp setlocal tw=120
-autocmd FileType cpp call matchadd("ErrorMsg", '\s\+$')
-let g:maxlength_cpp_enable=0
-let g:maxlenght_cpp_id=0
-" autocmd FileType cpp call SetMaxLength(g:maxlength_cpp_enable, 121, "g:maxlength_cpp_id")
+autocmd FileType cpp setlocal tabstop=4
+autocmd FileType cpp setlocal shiftwidth=4
+autocmd FileType cpp setlocal softtabstop=4
 
 " *** HTML ***
 autocmd FileType html setlocal tw=0
 autocmd FileType html setlocal cursorcolumn
+autocmd FileType html setlocal expandtab
 
 " *** VIM FILES ***
 autocmd FileType vim setlocal fileformat=unix
@@ -500,3 +485,7 @@ endif
 
 " *** Set cursor color ***
 highlight Cursor guifg=white guibg=#BC6A00
+
+" *** Better buftabs ***
+highlight TabLineSel guifg=white guibg=#BC6A00 gui=bold cterm=bold
+highlight TabLine guifg=black guibg=#B0B8C0 gui=none cterm=none
