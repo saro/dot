@@ -16,9 +16,11 @@ gg() {
 }
 
 unalias ggv 2> /dev/null
+unalias vgg 2> /dev/null
 vgg() {
-	gvim -c "silent grep! -Inri \"$1\" * " -c 'copen 30' -c 'nm <leader>Q :qa<CR>'
+	vim -c "silent grep! -Inri \"$1\" * " -c 'copen 15' -c 'nm <leader>Q :qa<CR>'
 }
+alias ggv='vgg'
 
 unalias fn 2> /dev/null
 fn() {
@@ -44,4 +46,9 @@ ssk() {
 unalias sskd 2> /dev/null
 sskd() {
 	ssh $@ -D 6666 -t -Y " su -c 'source ~/shell/tmux && cd && tx'"
+}
+
+unalias jcd 2> /dev/null
+jcd() {
+	journalctl --since "$1 00:00:00" --until "$1 23:00:00"
 }

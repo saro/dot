@@ -56,13 +56,14 @@ alias svf='sudo vifm '
 alias pca='yay '
 alias ee='exit'
 
-alias gpg='gpg'
 alias tb='tomb'
 alias pss='pass -c '
 
 alias css='cscope -bqR'
 
 alias pls='pulsemixer'
+
+alias redunst='killall dunst; nohup dunst& ; notify-send "DUNST READY"'
 
 # *** sudo aliases ***
 if [ $UID -eq 0 ]; then
@@ -126,6 +127,7 @@ alias gl='git log --oneline --decorate'
 alias gll="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 alias gco='git checkout '
+alias gcb='git checkout -b '
 
 alias gcl='git clone --recursive'
 
