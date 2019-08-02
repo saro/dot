@@ -1,6 +1,9 @@
 [user]
 	name = Rosario Contarino
+	signingkey = 20BF194DF8D483EB45418C38DDB62220CE3D2EAC
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 [push]
 	default = current
+[gpg]
+	program = gpg2
