@@ -1,7 +1,7 @@
 [global]
     #font = Monospace 8
     #font = Droid Sans Mono 16
-	font = Share Tech Mono 14
+	font = Share Tech Mono 12
 
     # allow a small subset of html markup:
     # <b>bold</b>
