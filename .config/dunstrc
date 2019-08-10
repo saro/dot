@@ -198,9 +198,12 @@
 #    format = ""
 
 [ignore the_shade]
-# This notification will not be displayed
    summary = "*the_shade14*"
     format = ""
+
+[keybase]
+	appname = Keybase
+	format = "bk:<b>%s</b>"
 
 #[signed_on]
 #    appname = Pidgin
