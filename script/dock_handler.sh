@@ -59,16 +59,15 @@ do_restart_i3() {
 }
 
 do_docked_conf() {
+	do_reset_outputs
+
 	if [[ $(lsusb|grep Lenovo|awk '{print $6}'|head -n1 |cut -f2 -d:) == "1013" ]]; then
 		# Basic dock HOME
-		local res="1920x1080"
+		outputs[DP2]="--mode 1920x1080 --pos 0x0 --rotate normal"
 	else
 		# Ultra dock OFFICE
-		local res="2560x1440"
+		outputs[DP2-2]="--mode 2560x1440 --pos 0x0 --rotate normal"
 	fi
-
-	do_reset_outputs
-	outputs[DP2]="--mode ${res} --pos 0x0 --rotate normal"
 }
 
 do_undocker_conf() {
