@@ -15,7 +15,7 @@ c.content.xss_auditing = True
 c.completion.height = '35%'
 c.completion.quick = True
 c.completion.timestamp_format = '%Y-%m-%d'
-c.completion.web_history.max_items = 1000
+c.completion.web_history.max_items = 5000
 c.completion.use_best_match = True
 c.downloads.location.prompt = True
 c.downloads.open_dispatcher = None
@@ -143,3 +143,4 @@ config.bind('<Ctrl+l>', 'tab-next', mode='insert')
 config.bind('<Ctrl+p>', 'insert-text {clipboard}', mode='insert')
 config.bind('<Ctrl+i>', 'leave-mode', mode='passthrough')
 config.bind('<Escape>', 'leave-mode', mode='passthrough')
+config.load_autoconfig()
