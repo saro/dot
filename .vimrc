@@ -114,15 +114,14 @@ nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 nnoremap <leader>a :%y+<CR>
 
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :15Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gd :Gdiffsplit<CR>
 nnoremap <Leader>gp :copen<CR><C-w>p:Gpush<CR>
 nnoremap <Leader>go :Git checkout -b 
 nnoremap <Leader>gc :Gcommit --amend -a
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
-nnoremap <Leader>gD <C-w>h<C-w>c
 
 nnoremap <leader>S :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 nnoremap <leader>s :w<CR>
@@ -240,6 +239,7 @@ function! GrepAsync (str)
 	copen
 endfunction
 command! -nargs=1 G call GrepAsync(<f-args>)
+autocmd! User Fugitive command! -buffer -nargs=1 G call GrepAsync(<f-args>)
 
 " *** Spelling Settings *** "
 set spl=en
@@ -268,6 +268,11 @@ autocmd BufEnter CCTree-View nnoremap <buffer> - :CCTreeRecurseDepthMinus<CR>
 " *** Fugitive Configuration *** "
 set diffopt+=vertical
 command! GdiffInTab tabedit %|Gdiff
+autocmd FileType fugitive nnoremap <buffer> <C-l> <nop>
+autocmd FileType fugitive nnoremap <buffer> <C-h> <nop>
+autocmd FileType fugitive nnoremap <buffer> K 10k
+autocmd FileType fugitive nnoremap <buffer> J 10j
+autocmd FileType fugitive if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd FileType gitcommit nnoremap <buffer> <C-l> <nop>
 autocmd FileType gitcommit nnoremap <buffer> <C-h> <nop>
 autocmd FileType gitcommit if expand('%:t') == 'index' | setlocal nobl | endif
@@ -280,7 +285,9 @@ autocmd BufEnter COMMIT_EDITMSG setlocal spell
 let g:gitgutter_map_keys = 0
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
-
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 " *** TagBar configuration *** "
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
