@@ -54,7 +54,6 @@ set cm=blowfish2
 let g:grep_params=' '
 let g:build_command='make'
 let g:rebuild_command='make'
-" let g:grep_params='--exclude=tags --exclude=cscope.out --exclude-dir=build'
 
 " *** Search Option ***
 set smartcase
@@ -123,6 +122,9 @@ nnoremap <Leader>go :Git checkout -b
 nnoremap <Leader>gc :Gcommit --amend -a
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
 
+nnoremap <Leader>c :Commentary<CR>
+vnoremap <Leader>c :Commentary<CR>
+
 nnoremap <leader>S :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 nnoremap <leader>s :w<CR>
 nnoremap <leader>z 1z=<CR>
@@ -146,10 +148,6 @@ nnoremap <leader>B :call ReBuildAsync()<CR>
 nnoremap <leader>t :Tagbar<CR>
 nnoremap <leader>e :Lex<CR>
 nnoremap <leader>E :Lex %:p:h<CR>
-
-nnoremap <leader>cc :CCTreeWindowToggle<CR>
-nnoremap <leader>cf :CCTreeTraceForward<CR><CR>
-nnoremap <leader>cr :CCTreeTraceReverse<CR><CR>
 
 nnoremap <leader>] <C-]>
 nnoremap <leader>[ <C-t>
@@ -317,6 +315,8 @@ autocmd FileType help nnoremap <buffer> <C-l> <nop>
 autocmd FileType help nnoremap <buffer> <C-h> <nop>
 
 " *** Configuration for polyglot *** "
+let g:csv_no_conceal = 1
+
 " let g:polyglot_disabled = ['typescript']
 " autocmd FileType typescript let current_compiler="saro"
 
@@ -408,10 +408,6 @@ let g:buftabline_separators=1
 " *** netrw ***
 autocmd FileType netrw nnoremap <buffer> <C-l> <nop>
 autocmd FileType netrw nnoremap <buffer> <C-h> <nop>
-autocmd FileType netrw unmap <buffer> qL
-autocmd FileType netrw unmap <buffer> qF
-autocmd FileType netrw unmap <buffer> qf
-autocmd FileType netrw unmap <buffer> qb
 autocmd FileType netrw nnoremap <buffer> q :q!<CR><C-l>
 autocmd FileType netrw nnoremap <buffer> <leader>e :q!<CR><C-l>
 let g:netrw_altv=1
