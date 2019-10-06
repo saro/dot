@@ -1,0 +1,63 @@
+def_key "+"
+	volume_up
+
+def_key "="
+	volume_up
+
+def_key "j"
+	scroll_down
+def_key "k"
+	scroll_up
+
+def_key "space"
+  add_item_to_playlist
+
+def_key "J"
+	push_characters "jjjjjjjjjj"
+def_key "K"
+	push_characters "kkkkkkkkkk"
+
+def_key "ctrl-l"
+	next_screen
+
+def_key "ctrl-h"
+	previous_screen
+
+def_key "ctrl-k"
+	page_up
+def_key "ctrl-j"
+	page_down
+
+def_key "h"
+	previous_column
+def_key "l"
+	next_column
+
+def_key "g"
+	move_home
+
+def_key "G"
+	move_end
+
+def_key "."
+	show_lyrics
+
+def_key "n"
+	next_found_item
+def_key "N"
+	previous_found_item
+
+def_key "d"
+	delete_playlist_items
+
+def_key "D"
+	delete_browser_items
+
+def_key "D"
+	delete_stored_playlist
+
+def_key "Q"
+	quit
+
+def_key "q"
+	dummy
