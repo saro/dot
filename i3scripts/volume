@@ -52,7 +52,7 @@ volume() {
 
 format() {
   perl_filter='if (/.*\[(\d+)%\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
-  perl_filter+='{CORE::say $4 eq "off" ? "000\nMUTE\n#FFAE00\n" : sprintf("%03.0f", $1); exit}'
+  perl_filter+='{CORE::say $4 eq "off" ? "000\nMUTE\n#FFAE00\n#00000\n#000000" : sprintf("%03.0f", $1); exit}'
   perl -ne "$perl_filter"
 }
 
