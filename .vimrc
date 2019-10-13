@@ -113,7 +113,7 @@ nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 nnoremap <leader>a :%y+<CR>
 
-nnoremap <Leader>gs :15Gstatus<CR>
+nnoremap <Leader>gs :10Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
@@ -270,6 +270,7 @@ autocmd FileType fugitive nnoremap <buffer> <C-l> <nop>
 autocmd FileType fugitive nnoremap <buffer> <C-h> <nop>
 autocmd FileType fugitive nnoremap <buffer> K 10k
 autocmd FileType fugitive nnoremap <buffer> J 10j
+autocmd FileType fugitive nnoremap <buffer> q <C-W>q
 autocmd FileType fugitive if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd FileType gitcommit nnoremap <buffer> <C-l> <nop>
 autocmd FileType gitcommit nnoremap <buffer> <C-h> <nop>
@@ -281,8 +282,8 @@ autocmd BufEnter COMMIT_EDITMSG setlocal spell
 " let g:gitgutter_async = 1
 " let g:gitgutter_realtime = 1
 let g:gitgutter_map_keys = 0
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
@@ -316,6 +317,7 @@ autocmd FileType help nnoremap <buffer> <C-h> <nop>
 
 " *** Configuration for polyglot *** "
 let g:csv_no_conceal = 1
+let g:no_csv_maps = 1
 
 " let g:polyglot_disabled = ['typescript']
 " autocmd FileType typescript let current_compiler="saro"
@@ -404,6 +406,8 @@ let g:buftabline_numbers=1
 " Activate separators
 let g:buftabline_separators=1
 
+" *** CLAN_COMPLETE ***
+" let g:clang_library_path='/usr/lib/'
 
 " *** netrw ***
 autocmd FileType netrw nnoremap <buffer> <C-l> <nop>
