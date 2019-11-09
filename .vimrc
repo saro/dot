@@ -233,7 +233,7 @@ function! ReBuildAsync ()
 endfunction
 
 function! GrepAsync (str)
-	exec 'AsyncRun! grep -Irni --exclude=tags --exclude=cscope.out --exclude-dir=.git '.g:grep_params.' '.a:str.' .'
+	exec 'AsyncRun! -program=grep --exclude=tags --exclude=cscope.out --exclude-dir=.git -R -I -i '.g:grep_params.' '.a:str.' .'
 	copen
 endfunction
 command! -nargs=1 G call GrepAsync(<f-args>)
@@ -268,6 +268,8 @@ set diffopt+=vertical
 command! GdiffInTab tabedit %|Gdiff
 autocmd FileType fugitive nnoremap <buffer> <C-l> <nop>
 autocmd FileType fugitive nnoremap <buffer> <C-h> <nop>
+autocmd FileType fugitive vnoremap <buffer> K 10k
+autocmd FileType fugitive vnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> K 10k
 autocmd FileType fugitive nnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> q <C-W>q
