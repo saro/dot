@@ -52,3 +52,8 @@ unalias jcd 2> /dev/null
 jcd() {
 	journalctl --since "$1 00:00:00" --until "$1 23:00:00"
 }
+
+unalias vv 2> /dev/null
+vv() {
+	vim -c 'nmap q :q!<CR>' - 
+}
