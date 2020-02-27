@@ -113,7 +113,7 @@ nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 nnoremap <leader>a :%y+<CR>
 
-nnoremap <Leader>gs :10Gstatus<CR>
+nnoremap <Leader>gs :15Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
@@ -138,8 +138,8 @@ nnoremap <leader>v :vs<CR>
 nnoremap <leader>w :vertical resize 125<CR>
 nnoremap <leader>W <C-w>=
 
-nnoremap <leader>n :call GrepAsync('"\b<cword>\b"')<CR>
-nnoremap <leader>N :call GrepAsync('"<cword>"')<CR>
+nnoremap <leader>n :G "\b<cword>\b"<CR>
+nnoremap <leader>N :G "<cword>"<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap <leader>as :AsyncStop<CR>
 nnoremap <leader>b :call BuildAsync()<CR>
@@ -233,7 +233,7 @@ function! ReBuildAsync ()
 endfunction
 
 function! GrepAsync (str)
-	exec 'AsyncRun! -program=grep --exclude=tags --exclude=cscope.out --exclude-dir=.git -R -I -i '.g:grep_params.' '.a:str.' .'
+	exec 'AsyncRun! -program=grep --exclude=tags --exclude=cscope.out --exclude-dir=.git --exclude-dir=build -R -I -i '.g:grep_params.' '.a:str.' .'
 	copen
 endfunction
 command! -nargs=1 G call GrepAsync(<f-args>)
@@ -272,10 +272,13 @@ autocmd FileType fugitive vnoremap <buffer> K 10k
 autocmd FileType fugitive vnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> K 10k
 autocmd FileType fugitive nnoremap <buffer> J 10j
+autocmd FileType fugitive set winfixheight
+autocmd FileType fugitive nnoremap <buffer> cc :15Gcommit<CR><C-w>p<C-w>q<C-w>p
 autocmd FileType fugitive nnoremap <buffer> q <C-W>q
 autocmd FileType fugitive if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd FileType gitcommit nnoremap <buffer> <C-l> <nop>
 autocmd FileType gitcommit nnoremap <buffer> <C-h> <nop>
+autocmd FileType gitcommit set winfixheight
 autocmd FileType gitcommit if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd BufEnter COMMIT_EDITMSG setlocal spell
 
