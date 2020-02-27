@@ -1,0 +1,92 @@
+[options]
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = Share Tech Mono 10
+scrollback_lines = 10000
+search_wrap = true
+#icon_name = terminal
+#geometry = 640x480
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+#browser = xdg-open
+
+# set size hints for the window
+#size_hints = false
+
+# Hide links that are no longer valid in url select overlay mode
+filter_unmatched_urls = true
+
+# emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+[colors]
+cursor = #bc6a00
+cursor_foreground = #ffffff
+foreground = #ffffff
+background = #000000
+
+# 20% background transparency (requires a compositor)
+#background = rgba(63, 63, 63, 0.8)
+
+# if unset, will reverse foreground and background
+#highlight = #2f2f2f
+
+# colors from color0 to color254 can be set
+# color0 = #3f3f3f
+# color1 = #705050
+# color2 = #60b48a
+# color3 = #dfaf8f
+# color4 = #506070
+# color5 = #dc8cc3
+# color6 = #8cd0d3
+# color7 = #dcdccc
+# color8 = #709080
+# color9 = #dca3a3
+# color10 = #c3bf9f
+# color11 = #f0dfaf
+# color12 = #94bff3
+# color13 = #ec93d3
+# color14 = #93e0e3
+# color15 = #ffffff
+
+# color0=#263238
+# color8=#37474f
+# color1=#ff9800
+# color9=#ffa74d
+# color2=#8bc34a
+# color10=#9ccc65
+# color3=#ffc107
+# color11=#ffa000
+# color4=#03a9f4
+# color12=#81d4fa
+# color5=#e91e63
+# color13=#ad1457
+# color6=#009688
+# color14=#26a69a
+# color7=#cfd8dc
+# color15=#eceff1
+
+[hints]
+font = Share Tech Mono 12
+foreground = #000000
+background = #ffc440
+active_foreground = #000000
+active_background = #a7c440
+padding = 3
+#border = #3f3f3f
+#border_width = 0.5
+roundness = 0
+
+# vim: ft=dosini cms=#%s

@@ -27,8 +27,8 @@ set $ws0 >> 0
 floating_modifier Mod1
 
 # start a terminal
-bindsym Mod1+Return exec xst
-bindsym Mod1+Shift+Return exec xst -n 'ttttt' -e sh -c 'TERM=xterm-256color source ~/shell/tmux && tx'
+bindsym Mod1+Return exec termite
+bindsym Mod1+Shift+Return exec termite --name 'ttttt' -e "/bin/bash -c 'source ~/shell/tmux && tx'"
 
 # kill focused window
 # bindsym Mod1+Shift+q kill
@@ -100,19 +100,19 @@ bindsym Mod1+Shift+minus move scratchpad
 bindsym Mod1+minus scratchpad show
 
 # switch to workspace
-bindsym Mod1+q workspace $brow; [window_role="conversation"] move to scratchpad
-bindsym Mod1+w workspace $weec; [window_role="conversation"] move to scratchpad
-bindsym Mod1+e workspace $mail; [window_role="conversation"] move to scratchpad
-bindsym Mod1+1 workspace $ws1; [window_role="conversation"] move to scratchpad
-bindsym Mod1+2 workspace $ws2; [window_role="conversation"] move to scratchpad
-bindsym Mod1+3 workspace $ws3; [window_role="conversation"] move to scratchpad
-bindsym Mod1+4 workspace $ws4; [window_role="conversation"] move to scratchpad
-bindsym Mod1+5 workspace $ws5; [window_role="conversation"] move to scratchpad
-# bindsym Mod1+6 workspace $ws6; [window_role="conversation"] move to scratchpad
-# bindsym Mod1+7 workspace $ws7; [window_role="conversation"] move to scratchpad
-# bindsym Mod1+8 workspace $ws8; [window_role="conversation"] move to scratchpad
-bindsym Mod1+9 workspace $ws9; [window_role="conversation"] move to scratchpad
-bindsym Mod1+0 workspace $ws0; [window_role="conversation"] move to scratchpad
+bindsym Mod1+q workspace $brow; [instance="ttttt"] move to scratchpad
+bindsym Mod1+w workspace $weec; [instance="ttttt"] move to scratchpad
+bindsym Mod1+e workspace $mail; [instance="ttttt"] move to scratchpad
+bindsym Mod1+1 workspace $ws1; [instance="ttttt"] move to scratchpad
+bindsym Mod1+2 workspace $ws2; [instance="ttttt"] move to scratchpad
+bindsym Mod1+3 workspace $ws3; [instance="ttttt"] move to scratchpad
+bindsym Mod1+4 workspace $ws4; [instance="ttttt"] move to scratchpad
+bindsym Mod1+5 workspace $ws5; [instance="ttttt"] move to scratchpad
+# bindsym Mod1+6 workspace $ws6; [instance="ttttt"] move to scratchpad
+# bindsym Mod1+7 workspace $ws7; [instance="ttttt"] move to scratchpad
+# bindsym Mod1+8 workspace $ws8; [instance="ttttt"] move to scratchpad
+bindsym Mod1+9 workspace $ws9; [instance="ttttt"] move to scratchpad
+bindsym Mod1+0 workspace $ws0; [instance="ttttt"] move to scratchpad
 
 # move focused container to workspace
 bindsym Mod1+Shift+q move container to workspace $brow
@@ -239,7 +239,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Bind former CTRL ??
-bindsym Mod1+space exec $HOME/script/middle_button.sh
+# bindsym Mod1+space exec $HOME/script/middle_button.sh
 
 # Bind passmenu
 bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
@@ -285,7 +285,7 @@ exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATE
 exec dunst&
 exec unclutter&
 # Guess what?? Weeeeechat :D
-exec xst -n "weechat" -e weechat&
+exec termite --name "weechat" -e weechat&
 exec feh --bg-center $HOME/Desktop/btw.png
 
 # These floating windows are not started using the float_config.sh  script.
