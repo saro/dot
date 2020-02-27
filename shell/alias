@@ -97,8 +97,9 @@ alias btload="sudo modprobe bluetooth && sudo modprobe btusb && sudo systemctl s
 alias btc="bluetoothctl"
 alias btoff="echo -e 'power off\nquit'|bluetoothctl"
 alias bton="echo -e 'power on\nquit'|bluetoothctl"
-alias btjabra="echo -e 'power on\ndisconnect\nconnect 1C:48:F9:9D:BE:04\nquit'|bluetoothctl"
-alias btlogi="echo -e 'power on\ndisconnect\nconnect 88:C6:26:6F:50:09\nquit'|bluetoothctl"
+alias btj="echo -e 'power on\ndisconnect\nconnect 1C:48:F9:9D:BE:04\nquit'|bluetoothctl"
+alias bts="echo -e 'power on\ndisconnect\nconnect 38:18:4C:11:D1:5A\nquit'|bluetoothctl"
+alias btl="echo -e 'power on\ndisconnect\nconnect 88:C6:26:6F:50:09\nquit'|bluetoothctl"
 
 # *** Spotify ***
 alias spn="~/script/sp next"
@@ -147,3 +148,4 @@ alias gS='git status'
 
 alias gt='git tag '
 alias gtrel='git tag "r$(date +"%Y%m%d%H%M")"'
+alias gtrp='git tag "r$(date +"%Y%m%d%H%M")" && git push --tags'
