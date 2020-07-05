@@ -7,20 +7,18 @@ Plug 'spf13/vim-colors'
 Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'majutsushi/tagbar'
+Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
-Plug 'hari-rangarajan/CCTree'
+Plug 'majutsushi/tagbar'
 Plug 'saro/MarkKarkat'
 Plug 'ap/vim-buftabline'
 Plug 'qpkorr/vim-bufkill'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/gv.vim'
 Plug 'milad14000/vim_p4'
-Plug 'adborden/vim-notmuch-address'
+Plug 'skywind3000/asyncrun.vim'
 
 call plug#end()
 
@@ -52,8 +50,6 @@ set sidescrolloff=4
 set complete=.,w,b,u,t
 set cm=blowfish2
 let g:grep_params=' '
-let g:build_command='make'
-let g:rebuild_command='make'
 
 " *** Search Option ***
 set smartcase
@@ -113,7 +109,7 @@ nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 nnoremap <leader>a :%y+<CR>
 
-nnoremap <Leader>gs :15Gstatus<CR>
+nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
@@ -138,9 +134,9 @@ nnoremap <leader>v :vs<CR>
 nnoremap <leader>w :vertical resize 125<CR>
 nnoremap <leader>W <C-w>=
 
-nnoremap <leader>n :G "\b<cword>\b"<CR>
-nnoremap <leader>N :G "<cword>"<CR>
-nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
+nnoremap <leader>n :call GrepAsync("\"\\<<cword>\\>\"")<CR>
+nnoremap <leader>N :call GrepAsync("\"<cword>\"")<CR>
+nnoremap <leader>o :call asyncrun#quickfix_toggle(10)<CR>
 nnoremap <leader>as :AsyncStop<CR>
 nnoremap <leader>b :call BuildAsync()<CR>
 nnoremap <leader>B :call ReBuildAsync()<CR>
@@ -213,9 +209,12 @@ map <F2> <nop>
 " *** Alias *** "
 ca sss source ~/.vimrc
 
+" Assume CMAKE
+let g:build_command="mkdir -p build/ && cd build && cmake ../ && make -j4"
+let g:rebuild_command="rm -rf build/* 2>/dev/null; mkdir -p build/ && cd build && cmake ../ && make -j4"
+
 " *** Custom function ***
 function! BuildAsync ()
-	let @/ = "error"
 	if exists("b:build_command")
 		exec 'AsyncRun  '.b:build_command
 	else
@@ -224,7 +223,6 @@ function! BuildAsync ()
 endfunction
 
 function! ReBuildAsync ()
-	let @/ = "error"
 	if exists("b:rebuild_command")
 		exec 'AsyncRun  '.b:rebuild_command
 	else
@@ -236,8 +234,7 @@ function! GrepAsync (str)
 	exec 'AsyncRun! -program=grep --exclude=tags --exclude=cscope.out --exclude-dir=.git --exclude-dir=build -R -I -i '.g:grep_params.' '.a:str.' .'
 	copen
 endfunction
-command! -nargs=1 G call GrepAsync(<f-args>)
-autocmd! User Fugitive command! -buffer -nargs=1 G call GrepAsync(<f-args>)
+command! -nargs=1 Gr call GrepAsync(<f-args>)
 
 " *** Spelling Settings *** "
 set spl=en
@@ -264,6 +261,15 @@ autocmd BufEnter CCTree-View nnoremap <buffer> - :CCTreeRecurseDepthMinus<CR>
 
 
 " *** Fugitive Configuration *** "
+function! s:close_gstatus()
+	for l:winnr in range(1, winnr('$'))
+		if !empty(getwinvar(l:winnr, 'fugitive_status'))
+			execute l:winnr.'close'
+		endif
+	endfor
+endfunction
+command! GstatusClose call s:close_gstatus()
+
 set diffopt+=vertical
 command! GdiffInTab tabedit %|Gdiff
 autocmd FileType fugitive nnoremap <buffer> <C-l> <nop>
@@ -272,8 +278,7 @@ autocmd FileType fugitive vnoremap <buffer> K 10k
 autocmd FileType fugitive vnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> K 10k
 autocmd FileType fugitive nnoremap <buffer> J 10j
-autocmd FileType fugitive set winfixheight
-autocmd FileType fugitive nnoremap <buffer> cc :15Gcommit<CR><C-w>p<C-w>q<C-w>p
+autocmd FileType fugitive nnoremap <buffer> cc :GstatusClose<CR>:Gcommit<CR>
 autocmd FileType fugitive nnoremap <buffer> q <C-W>q
 autocmd FileType fugitive if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd FileType gitcommit nnoremap <buffer> <C-l> <nop>
@@ -281,7 +286,6 @@ autocmd FileType gitcommit nnoremap <buffer> <C-h> <nop>
 autocmd FileType gitcommit set winfixheight
 autocmd FileType gitcommit if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd BufEnter COMMIT_EDITMSG setlocal spell
-
 
 " *** GitGutter Configuration ***
 " let g:gitgutter_async = 1
@@ -310,7 +314,7 @@ autocmd FileType qf nnoremap <buffer> q :q<CR><C-l>
 autocmd FileType qf setlocal nobl
 autocmd FileType qf nnoremap <buffer> <C-l> <nop>
 autocmd FileType qf nnoremap <buffer> <C-h> <nop>
-autocmd FileType qf nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
+" autocmd FileType qf nnoremap <leader>o :call asyncrun#quickfix_toggle(8)<CR>
 
 
 " *** Help file *** "
@@ -333,46 +337,49 @@ set laststatus=2
 let g:lightline = {
 			\ 'active': {
 			\   'left': [ [ 'mode', 'paste' ],
-			\             [ 'filename', 'readonly', 'modified' ],
-			\             [ 'fugitive', 'async' ] ]
+			\             [ 'filename', 'readonly', 'modified' , 'fugitive' ],
+			\             [ 'async', 'tags' ] ]
 			\ },
 			\ 'component': {
-			\   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
+			\   'readonly': '%{&filetype=="help"?"":&readonly?"RO":""}',
 			\   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-			\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+			\   'fugitive': '%{exists("*fugitive#head")?"[".fugitive#head()."]":""}',
+			\   'tags'    : '%{exists("*gutentags#statusline")?gutentags#statusline():""}',
 			\   'async'   : '%{g:asyncrun_status=="running"?"ASYNC":""}'
 			\ },
 			\ 'component_visible_condition': {
 			\   'readonly': '(&filetype!="help"&& &readonly)',
 			\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
 			\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+			\   'tags'    : '(exists("*gutentags#statusline") && ""!=gutentags#statusline())',
 			\   'async'   : '(g:asyncrun_status=="running")'
 			\ },
 			\ }
 
 " *** AsyncRun configuration ***
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-" let g:asyncrun_trim = 1
 let g:asyncrun_open=10
 let g:asyncrun_save=1
-" let g:asyncrun_exit="exec 'silent !notify-send VIM-MAKE:'.g:asyncrun_status.''"
+
+" Force copen at the end of the run to fix bug in VIM quickfix error format
+" parsing
+augroup local-asyncrun
+	au!
+	au User AsyncRunStop call AfterAsyncBuild()
+augroup END
+
+function! AfterAsyncBuild()
+	copen
+	normal G
+	if (g:asyncrun_status == 'success')
+		exe "normal \<c-w>p"
+	elseif (g:asyncrun_status == 'failure')
+		let @/ = "error"
+	endif
+endfunction
 
 " *** Configuration for Gutentags ***
 " let gutentags_generate_on_missing=0
 " let gutentags_auto_set_tags=0
-" set statusline+=%{gutentags#statusline()}
-let g:gutentags_enabled_user_func = 'CheckEnabledDirs'
-let g:gutentags_create_tags = 0
-
-function! CheckEnabledDirs(file)
-	" Set this value to 1 to enable the tags creation "
-	if g:gutentags_create_tags == 1
-		return 1
-	endif
-
-	return 0
-endfunction
-
 
 " *** Mark plugin configuration ***
 let g:mwDefaultHighlightingPalette = 'extended'
@@ -410,9 +417,6 @@ let g:buftabline_indicators=1
 let g:buftabline_numbers=1
 " Activate separators
 let g:buftabline_separators=1
-
-" *** CLAN_COMPLETE ***
-" let g:clang_library_path='/usr/lib/'
 
 " *** netrw ***
 autocmd FileType netrw nnoremap <buffer> <C-l> <nop>
