@@ -31,8 +31,7 @@ bindsym Mod1+Return exec termite
 bindsym Mod1+Shift+Return exec termite --name 'ttttt' -e "/bin/bash -c 'source ~/shell/tmux && tx'"
 
 # kill focused window
-# bindsym Mod1+Shift+q kill
-bindsym Mod1+F4 kill
+bindsym Mod1+Shift+u kill
 
 # start dmenu in Saro's flavour
 bindsym Ctrl+space exec $HOME/script/dmenu_saro
@@ -71,7 +70,7 @@ bindsym Mod1+Shift+Right move right
 # bindsym Mod1+v split Q
 
 # enter fullscreen mode for the focused container
-bindsym Mod1+Shift+f fullscreen toggle
+bindsym Mod1+Shift+f floating toggle; floating toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym Mod1+s layout stacking
@@ -182,11 +181,12 @@ mode "move" {
 }
 
 # Display Settings
-set $mode_display Display (d) docked, (t) together, (u) undocked, (l) duplicate, (e) external
+set $mode_display Display (d) docked, (u) undocked, (h) hdmi_double
 
 mode "$mode_display" {
     bindsym d exec --no-startup-id $HOME/script/dock_handler.sh docked, mode "default"
     bindsym u exec --no-startup-id $HOME/script/dock_handler.sh undocked, mode "default"
+    bindsym h exec --no-startup-id $HOME/script/dock_handler.sh hdmi, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -228,8 +228,8 @@ bindsym XF86AudioMute exec "amixer sset Master toggle; pkill -RTMIN+10 i3blocks"
 # Lock Screen
 bindsym Ctrl+Mod1+l exec loginctl lock-session
 
-# Touchpad bind for touchpad
-bindsym XF86Tools exec $HOME/script/touch_toggle.sh
+# Screenshot on X270 F9
+bindsym XF86Tools exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Backlight for Syrio
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
@@ -238,15 +238,13 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 # ScreenShot
 bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
 
-# Bind former CTRL ??
-# bindsym Mod1+space exec $HOME/script/middle_button.sh
-
 # Bind passmenu
 bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
 
 # Assigning applications
 assign [class="Firefox"] $brow
 assign [class="qutebrowser"] $brow
+assign [instance="zoom"] $brow
 assign [class="Thunderbird"] $mail
 assign [class="Astroid"] $mail
 assign [class="Keybase"] $mail
@@ -278,18 +276,10 @@ bar {
 }
 
 # Autostart
-
 # Add support for multi_key or better... I have seen symbols that you humans...
 exec xmodmap $HOME/.Xmodmap
 exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATESTARTUPTTY | gpg-connect-agent)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
 exec dunst&
 exec unclutter&
-# Guess what?? Weeeeechat :D
 exec termite --name "weechat" -e weechat&
 exec feh --bg-center $HOME/Desktop/btw.png
-
-# These floating windows are not started using the float_config.sh  script.
-# Pidgin...
-# exec pidgin
-# Tatan tatata... Sarah Connor
-# exec terminator -c ttttt
