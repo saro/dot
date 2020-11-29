@@ -50,7 +50,7 @@ do_xrand() {
 		cmd="${cmd} --output ${output} ${outputs[$output]}"
 	done
 
-	xrandr --dpi 120
+	# xrandr --dpi 120
 	eval "${cmd}"
 }
 
@@ -64,19 +64,31 @@ do_docked_conf() {
 	if [[ $(lsusb|grep Lenovo|awk '{print $6}'|head -n1 |cut -f2 -d:) == "1013" ]]; then
 		# Basic dock HOME
 		outputs[DP2]="--mode 1920x1080 --pos 0x0 --rotate normal"
+	elif [[ $(lsusb|grep Lenovo|awk '{print $6}'|head -n1 |cut -f2 -d:) == "1010" ]]; then
+		# Super dock OFFICE
+		outputs[DP2-1]="--mode 2560x1440 --pos 0x0 --rotate normal"
 	else
 		# Ultra dock OFFICE
 		outputs[DP2-2]="--mode 2560x1440 --pos 0x0 --rotate normal"
 	fi
+
+	# Disable DPMS when docked
+	xset -dpms
 }
 
 do_undocker_conf() {
 	do_reset_outputs
 	outputs[eDP1]="--mode 1920x1080 --pos 0x0 --rotate normal"
+
+	# Enable DPMS when undocked
+	xset +dpms
 }
 
 do_external_hdmi() {
-	echo "NOT READY"
+	do_reset_outputs
+
+	outputs[eDP1]="--mode 1920x1080 --pos 0x0 --rotate normal"
+	outputs[HDMI2]="--mode 1920x1080 --pos 0x0 --rotate normal"
 }
 
 config="${1}"

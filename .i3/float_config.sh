@@ -12,7 +12,7 @@ cat <<< "
 # Set floating terminal (width = 100%; height 60%)
 for_window [instance="ttttt"] move to scratchpad
 bindcode 133 [instance="ttttt"] scratchpad show
-for_window [instance="ttttt"] move position 0 30
+for_window [instance="ttttt"] move position 0 24
 for_window [instance="ttttt"] resize set ${DISPLAY_W} $((${DISPLAY_H} * 60 / 100))
 for_window [instance="ttttt"] scratchpad show
 exec ${TERMINAL} --name 'ttttt' -e \"/bin/bash -c 'source ~/shell/tmux && tx'\"
