@@ -19,6 +19,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/gv.vim'
 Plug 'milad14000/vim_p4'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'adborden/vim-notmuch-address'
+Plug 'rhysd/vim-grammarous'
 
 call plug#end()
 
@@ -109,7 +111,7 @@ nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 nnoremap <leader>a :%y+<CR>
 
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Gstatus<CR>:resize 20<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
@@ -279,8 +281,10 @@ autocmd FileType fugitive vnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> K 10k
 autocmd FileType fugitive nnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> cc :GstatusClose<CR>:Gcommit<CR>
+autocmd FileType fugitive nnoremap <buffer> ca :GstatusClose<CR>:Gcommit --amend<CR>
 autocmd FileType fugitive nnoremap <buffer> q <C-W>q
 autocmd FileType fugitive if expand('%:t') == 'index' | setlocal nobl | endif
+autocmd FileType gitcommit wincmd K
 autocmd FileType gitcommit nnoremap <buffer> <C-l> <nop>
 autocmd FileType gitcommit nnoremap <buffer> <C-h> <nop>
 autocmd FileType gitcommit set winfixheight
@@ -433,6 +437,10 @@ let g:netrw_bufsettings = 'noma nomod nobl nonu nowrap ro'
 " *** FILE TYPES SETTINGS ***
 " *** BASH/SH ***
 autocmd FileType bash,sh let b:build_command="shellcheck -f gcc %"
+
+" *** EMAIL ***
+autocmd FileType mail nnoremap <buffer> <leader>b :GrammarousCheck<CR>
+autocmd FileType mail nnoremap <buffer> <leader>B :GrammarousReset<CR>
 
 " *** MARKDOWN ***
 autocmd FileType markdown setlocal expandtab
