@@ -118,10 +118,9 @@
 [plugins]
 [profiles]
   [[default]]
-    background_image = None
     cursor_color = "#bc6a00"
     cursor_color_fg = False
-    font = Droid Sans Mono Slashed for Powerline 11
+    font = Share Tech Mono 10
     foreground_color = "#ffffff"
     scrollback_infinite = True
     show_titlebar = False

@@ -102,11 +102,11 @@ alias bts="echo -e 'power on\ndisconnect\nconnect 38:18:4C:11:D1:5A\nquit'|bluet
 alias btl="echo -e 'power on\ndisconnect\nconnect 88:C6:26:6F:50:09\nquit'|bluetoothctl"
 
 # *** Spotify ***
-alias spn="~/script/sp next"
-alias spp="~/script/sp prev"
-alias sps="~/script/sp play"
-alias spc="~/script/sp current"
-alias sp="~/script/sp"
+alias spn="playerctl next"
+alias spp="playerctl previous"
+alias sps="playerctl play-pause"
+alias spc="playerctl metadata"
+alias sp="playerctl"
 
 # Git Aliases
 alias ga='git add'
@@ -125,7 +125,7 @@ alias gca='git commit -v -a'
 alias gca!='git commit -v -a --amend'
 
 alias gl='git log --oneline --decorate'
-alias gll="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gll="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 alias gco='git checkout '
 alias gcb='git checkout -b '
@@ -146,6 +146,7 @@ alias gsb='git status -sb'
 alias gs='git status -s'
 alias gS='git status'
 
+alias dater='echo "r$(date +"%Y%m%d%H%M")"'
 alias gt='git tag '
 alias gtrel='git tag "r$(date +"%Y%m%d%H%M")"'
 alias gtrp='git tag "r$(date +"%Y%m%d%H%M")" && git push --tags'

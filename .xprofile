@@ -1,9 +1,9 @@
 # load Xresources
 xrdb -all ${HOME}/.Xresources
 
-export STEAM_RUNTIME=0
-xrandr --dpi 120
-export GDK_DPI_SCALE=1.25
+export STEAM_RUNTIME=1
+# xrandr --dpi 120
+# export GDK_DPI_SCALE=1.25
 
 echo UPDATESTARTUPTTY | gpg-connect-agent
 export SSH_AUTH_SOCK=/run/user/$UID/gnupg/S.gpg-agent.ssh
