@@ -18,7 +18,7 @@ INTERFACE="${BLOCK_INSTANCE:-eth0}"
 
 state="$(cat /sys/class/net/$INTERFACE/operstate)"
 
-if [ "$state" != "up" ]; then
+if [ "$state" != "up" ] && [ "$state" != "unknown" ]; then
 	echo ""
 	echo ""
 	echo "#FF0000"
