@@ -22,7 +22,8 @@ c.content.autoplay = False
 c.content.cache.size = None
 c.content.cookies.accept = 'all'
 c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
-c.content.host_blocking.lists = ['https://www.malwaredomainlist.com/hostslist/hosts.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext']
+c.content.blocking.method = 'adblock'
+#c.content.host_blocking.lists = ['https://www.malwaredomainlist.com/hostslist/hosts.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext']
 c.content.javascript.enabled = False
 c.content.plugins = False
 c.content.private_browsing = False
@@ -37,7 +38,7 @@ c.downloads.location.prompt = True
 c.downloads.open_dispatcher = None
 c.downloads.position = 'bottom'
 c.downloads.remove_finished = -1
-c.editor.command = ['gvim', '-c set tw=100', '-c set spell', '-c set ft=markdown', '-f', '{}']
+c.editor.command = ['nvim-qt', '--nofork', '{}', '--', '-c set tw=70', '-c set spell', '-c set ft=markdown']
 c.editor.encoding = 'utf-8'
 c.hints.chars = 'asfghjklbcnx'
 c.hints.dictionary = '/usr/share/dict/words'
@@ -70,7 +71,7 @@ c.tabs.indicator.padding = {'bottom': 5, 'left': 0, 'right': 4, 'top': 5}
 c.tabs.pinned.shrink = True
 c.url.auto_search = 'dns'
 c.url.default_page = 'about:blank'
-c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'sp': 'https://startpage.com/do/asearch?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'ei': 'http://www.wordreference.com/enit/{}', 'ie': 'http://www.wordreference.com/iten/{}', 'm': 'https://www.google.com/maps?q={}', 'o': 'https://lexico.com/definition/{}'}
+c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'sh': 'https://www.shodan.io/host/{}', 'wa': 'https://wiki.archlinux.org/?search={}', 'g': 'https://www.google.com/search?hl=en&q={}', 'sp': 'https://startpage.com/do/asearch?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'ei': 'http://www.wordreference.com/enit/{}', 'ie': 'http://www.wordreference.com/iten/{}', 'm': 'https://www.google.com/maps?q={}', 'o': 'https://lexico.com/definition/{}'}
 c.window.title_format = '{private}//qutebrowser - {perc}{current_title}{title_sep}'
 c.zoom.default = '100%'
 c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%', '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
@@ -108,6 +109,7 @@ config.bind('<Ctrl+l>', 'tab-next')
 config.bind('<Shift+Space>', 'run-with-count 25 scroll up')
 config.bind('<Space>', 'run-with-count 25 scroll down')
 config.bind('b', 'set-cmd-text -s :buffer')
+config.bind('B', 'set-cmd-text :buffer 0/')
 config.bind('C', 'devtools')
 # config.bind('F', None)
 config.bind('Fd', 'hint all download')
@@ -124,15 +126,13 @@ config.bind('sh', 'open -t qute://history')
 config.bind('sq', 'open -t qute://bookmarks')
 config.bind('ss', 'open -t qute://settings')
 config.bind('st', 'config-cycle tabs.show always never')
-config.bind('sc', 'spawn gvim .config/qutebrowser/config.py')
+config.bind('sc', 'spawn nvim-qt .config/qutebrowser/config.py')
 config.bind('sC', 'config-source ;; message-info "READY!"')
 config.bind('T', 'set-cmd-text -s :open -t')
 config.bind('V', 'spawn --userscript view_in_mpv')
-config.unbind('B')
+# config.unbind('B')
 config.bind('sJ', 'set --pattern *://{url:host}/* content.javascript.enabled false ;; reload ;; message-info "JS OFF"')
 config.bind('sj', 'set --pattern *://{url:host}/* content.javascript.enabled true ;; reload ;; message-info "JS ON"')
-config.bind('sk', 'set --pattern *://{url:host}/* content.ssl_strict false ;; reload ;; message-info "ACCEPT SSL CERT"')
-config.bind('sK', 'set --pattern *://{url:host}/* content.ssl_strict true ;; reload ;; message-info "FORGET SSL CERT"')
 config.bind('f', 'hint')
 config.bind('g#', 'tab-focus last')
 config.bind('gg', 'scroll top')
