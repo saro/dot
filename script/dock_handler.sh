@@ -6,14 +6,14 @@ set -x
 
 declare -A outputs=( \
 	[VIRTUAL1]="--off"
-	[eDP1]="--mode 1920x1080 --pos 0x0 --rotate normal"
-	[DP1]="--off"
-	[DP2]="--off"
-	[DP2-1]="--off"
-	[DP2-2]="--off"
-	[DP2-3]="--off"
-	[HDMI1]="--off"
-	[HDMI2]="--off"
+	[eDP-1]="--mode 1920x1080 --pos 0x0 --rotate normal"
+	[DP-1]="--off"
+	[DP-2]="--off"
+	[DP-2-1]="--off"
+	[DP-2-2]="--off"
+	[DP-2-3]="--off"
+	[HDMI-1]="--off"
+	[HDMI-2]="--off"
 )
 
 declare -A configs=( \
@@ -24,14 +24,14 @@ declare -A configs=( \
 
 do_reset_outputs() {
 	outputs[VIRTUAL1]="--off"
-	outputs[eDP1]="--off"
-	outputs[DP1]="--off"
-	outputs[DP2]="--off"
-	outputs[DP2-1]="--off"
-	outputs[DP2-2]="--off"
-	outputs[DP2-3]="--off"
-	outputs[HDMI1]="--off"
-	outputs[HDMI2]="--off"
+	outputs[eDP-1]="--off"
+	outputs[DP-1]="--off"
+	outputs[DP-2]="--off"
+	outputs[DP-2-1]="--off"
+	outputs[DP-2-2]="--off"
+	outputs[DP-2-3]="--off"
+	outputs[HDMI-1]="--off"
+	outputs[HDMI-2]="--off"
 }
 
 do_show_usage() {
@@ -63,13 +63,13 @@ do_docked_conf() {
 
 	if [[ $(lsusb|grep Lenovo|awk '{print $6}'|head -n1 |cut -f2 -d:) == "1013" ]]; then
 		# Basic dock HOME
-		outputs[DP2]="--mode 1920x1080 --pos 0x0 --rotate normal"
+		outputs[DP-2]="--mode 1920x1080 --pos 0x0 --rotate normal"
 	elif [[ $(lsusb|grep Lenovo|awk '{print $6}'|head -n1 |cut -f2 -d:) == "1010" ]]; then
 		# Super dock OFFICE
-		outputs[DP2-1]="--mode 2560x1440 --pos 0x0 --rotate normal"
+		outputs[DP-2-1]="--mode 2560x1440 --pos 0x0 --rotate normal"
 	else
 		# Ultra dock OFFICE
-		outputs[DP2-2]="--mode 2560x1440 --pos 0x0 --rotate normal"
+		outputs[DP-2-2]="--mode 2560x1440 --pos 0x0 --rotate normal"
 	fi
 
 	# Disable DPMS when docked
@@ -78,7 +78,7 @@ do_docked_conf() {
 
 do_undocker_conf() {
 	do_reset_outputs
-	outputs[eDP1]="--mode 1920x1080 --pos 0x0 --rotate normal"
+	outputs[eDP-1]="--mode 1920x1080 --pos 0x0 --rotate normal"
 
 	# Enable DPMS when undocked
 	xset +dpms
@@ -87,8 +87,8 @@ do_undocker_conf() {
 do_external_hdmi() {
 	do_reset_outputs
 
-	outputs[eDP1]="--mode 1920x1080 --pos 0x0 --rotate normal"
-	outputs[HDMI2]="--mode 1920x1080 --pos 0x0 --rotate normal"
+	outputs[eDP-1]="--mode 1920x1080 --pos 0x0 --rotate normal"
+	outputs[HDMI-2]="--mode 1920x1080 --pos 0x0 --rotate normal"
 }
 
 config="${1}"
