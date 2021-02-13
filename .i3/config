@@ -220,6 +220,9 @@ bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioNext exec mpc next
 
+# Additional funcitons
+bindsym Mod1+Shift+8 exec bash -c 'flameshot& flameshot gui'
+
 # Volume Keys
 bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+; pkill -RTMIN+10 i3blocks"
 bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-; pkill -RTMIN+10 i3blocks"
