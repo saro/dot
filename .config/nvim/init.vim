@@ -1,6 +1,6 @@
 " New vim-plug based configuration
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " *** Bundles to use *** "
 Plug 'spf13/vim-colors'
@@ -21,17 +21,23 @@ Plug 'milad14000/vim_p4'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'adborden/vim-notmuch-address'
 Plug 'rhysd/vim-grammarous'
+Plug 'equalsraf/neovim-gui-shim'
 
 call plug#end()
 
 " Import shared conf between vimrc and neovim
 source ~/.vimrc_common
 
-" *** Configuration Editor *** "
-set guifont=Share\ Tech\ Mono\ 10
-set cm=blowfish2
+set mouse=a
 
 " *** Directory configuration *** "
-silent ! mkdir -p ~/tmp/vim/
-set dir=~/tmp/vim/
-set viminfo+=n~/tmp/vim/viminfo
+silent ! mkdir -p ~/tmp/nv/
+set dir=~/tmp/nv/
+set viminfo+=n~/tmp/nv/viminfo
+
+" *** Set cursor color ***
+set guicursor=n-v:block-blinkon0-Cursor
+set guicursor=o:block-blinkwait700-blinkoff400-blinkon250-Cursor
+set guicursor=r-cr:hor20-blinkon0-Cursor
+set guicursor+=i-c-ci:blinkon0-ver25-Cursor
+

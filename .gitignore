@@ -1,3 +1,7 @@
 antigen.zsh
 .weechat/logs/*
 shell/local
+.config/nvim/plugged/
+.config/nvim/.netrwhist
+.config/ncspot/credentials.toml
+script/tg
