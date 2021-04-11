@@ -27,8 +27,8 @@ set $ws0 >> 0
 floating_modifier Mod1
 
 # start a terminal
-bindsym Mod1+Return exec termite
-bindsym Mod1+Shift+Return exec termite --name 'ttttt' -e "/bin/bash -c 'source ~/shell/tmux && tx'"
+bindsym Mod1+Return exec urxvt
+bindsym Mod1+Shift+Return exec urxvt -name 'ttttt' -e /bin/bash -c 'source ~/shell/tmux && tx'
 
 # kill focused window
 bindsym Mod1+Shift+u kill
@@ -214,6 +214,8 @@ bindsym XF86Explorer mode "$mode_system"
 bindsym Ctrl+F12 mode "$mode_system"
 bindsym Ctrl+F11 mode "$mode_system"
 bindsym F7 mode "$mode_display"
+bindsym Ctrl+7 mode "$mode_display"
+bindsym Ctrl+0 mode "$mode_system"
 
 # Multimedia Keys
 bindsym XF86AudioPlay exec mpc toggle
@@ -284,5 +286,5 @@ exec xmodmap $HOME/.Xmodmap
 exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATESTARTUPTTY | gpg-connect-agent)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
 exec dunst&
 exec unclutter&
-exec termite --name "weechat" -e weechat&
+exec urxvt -name "weechat" -e weechat&
 exec feh --bg-center $HOME/Desktop/btw.png

@@ -6,7 +6,7 @@
 DISPLAY_W=`xrandr|grep current|awk {'print $8'}`
 DISPLAY_H=`xrandr|grep current|awk {'print $10'}|cut -d, -f1`
 
-TERMINAL="termite"
+TERMINAL="urxvt"
 
 cat <<< "
 # Set floating terminal (width = 100%; height 60%)
@@ -15,7 +15,7 @@ bindcode 133 [instance="ttttt"] scratchpad show
 for_window [instance="ttttt"] move position 0 24
 for_window [instance="ttttt"] resize set ${DISPLAY_W} $((${DISPLAY_H} * 60 / 100))
 for_window [instance="ttttt"] scratchpad show
-exec ${TERMINAL} --name 'ttttt' -e \"/bin/bash -c 'source ~/shell/tmux && tx'\"
+exec ${TERMINAL} -name 'ttttt' -e \"/bin/bash -c 'source ~/shell/tmux && tx'\"
 
 # Add Pulsemixer floating window (width = 100%; height 40%; pos_x = 0%; pos_y = 50%)
 # for_window [instance="pulsemixer"] move to scratchpad

@@ -2,7 +2,7 @@
 st.termname:     st-256color
 st.shell:        /bin/zsh
 ! st.font:         Droid Sans Mono Slashed for Powerline:pixelsize=16:antialias=true:autohint=true;
-st.font:         Share Tech Mono:pixelsize=16:antialias=true:autohint=true;
+st.font:         Share Tech Mono:pixelsize=12:antialias=true:autohint=true;
 st.borderpx:     5
 
 ! Available cursor values: 2 4 6 7 = █ _ | ☃ ( 1 3 5 are blinking versions)
@@ -69,3 +69,47 @@ st.color14: #00cdcd
 !! LightGrey + White
 st.color7:  #d3d7cf
 st.color15: #ffffff
+
+!! urxvt
+URxvt.perl-ext: url-select
+URxvt.perl-ext-common:
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+URxvt.font: xft:Share Tech Mono:size=10,xft:Symbola
+URxvt.color0:  #000000
+URxvt.color8:  #555753
+!! DarkRed + Red
+URxvt.color1:  #cc0000
+URxvt.color9:  #ff6565
+!! DarkGreen + Green
+URxvt.color2:  #4e9a06
+URxvt.color10: #92f429
+!! DarkYellow + Yellow
+URxvt.color3:  #c4a000
+URxvt.color11: #eab93d
+!! DarkBlue + Blue
+URxvt.color4:  #3465a4
+URxvt.color12: #3465a4
+!! DarkMagenta + Magenta
+URxvt.color5:  #75507b
+URxvt.color13: #ce5c00
+!!DarkCyan + Cyan (both not tango)
+URxvt.color6:  #06989a
+URxvt.color14: #00cdcd
+!! LightGrey + White
+URxvt.color7:  #d3d7cf
+URxvt.color15: #ffffff
+URxvt.foreground: #ffffff
+URxvt.background: #000000
+URxvt.cursorColor: #bc6a00
+URxvt.cursorColor2: #ffffff
+URxvt.scrollBar: false

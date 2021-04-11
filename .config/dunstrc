@@ -139,7 +139,7 @@
     #close = ctrl+F3
 
     # close all notifications
-    close_all = ctrl+F3
+    close_all = ctrl+3
 
     # redisplay last message(s)
     # On the US keyboard layout 'grave' is normally above TAB and left of '1'.
