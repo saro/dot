@@ -12,7 +12,7 @@ psg() {
 
 unalias gg 2> /dev/null
 gg() {
-	grep "$1" * -Inri --exclude=cscope.out --exclude=tags --exclude-dir=build 
+	rg -i -g '!cscope.out' -g '!tags' -g '!build' "${1}"
 }
 
 unalias ggv 2> /dev/null

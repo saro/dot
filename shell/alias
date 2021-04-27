@@ -47,6 +47,7 @@ alias gvp="gvim -c 'set nomod nolist nonu noma' -c 'nm q <Esc>:q<CR>' -c 'colors
 
 alias jc='journalctl '
 
+alias nv='nvim-qt '
 alias gv='gvim '
 alias v='vim '
 
