@@ -86,6 +86,8 @@ nnoremap <Leader>gp :copen<CR><C-w>p:Gpush<CR>
 nnoremap <Leader>go :Git checkout -b 
 nnoremap <Leader>gc :Gcommit --amend -a
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
+nnoremap <Leader>gi :vnew<CR>:term glab ci status --live<CR><C-W>H:vertical resize 80<CR>
+nnoremap <Leader>gt :new<CR>:term glab ci trace<CR><C-W>J:resize20<CR>
 
 nnoremap <Leader>c :Commentary<CR>
 vnoremap <Leader>c :Commentary<CR>
@@ -175,6 +177,9 @@ vnoremap <leader>R "hy:%s/<C-r>h//g<left><left>
 map <F1> <nop>
 map <F2> <nop>
 
+" *** Terminal keys ***
+:tnoremap <C-b> <C-\><C-n>
+
 " Assume CMAKE
 let g:build_command="mkdir -p build/ && cd build && cmake ../ && make -j4"
 let g:rebuild_command="rm -rf build/* 2>/dev/null; mkdir -p build/ && cd build && cmake ../ && make -j4"
@@ -204,11 +209,6 @@ command! -nargs=1 Gr call GrepAsync(<f-args>)
 
 " *** Spelling Settings *** "
 set spl=en
-
-"*** Create After file ***
-silent ! mkdir -p ~/.vim/after/plugin
-silent ! echo '" ***THIS IS AUTOMATICALLY GENERATED IN VIMRC ***' > ~/.vim/after/plugin/after.vim
-" silent ! echo '" ***THIS IS AUTOMATICALLY GENERATED IN VIMRC ***' > ~/.vim/after/syntax/after.vim
 
 " *** CCTree configuration *** "
 let g:CCTreeRecursiveDepth = 1
@@ -288,12 +288,8 @@ autocmd FileType help nnoremap <buffer> <C-h> <nop>
 " *** Configuration for polyglot *** "
 let g:csv_no_conceal = 1
 let g:no_csv_maps = 1
-
-" silent ! echo 'setlocal comments=\| commentstring=\|\ %s' >> ~/.vim/after/syntax/after.vim
-
 " let g:polyglot_disabled = ['typescript']
 " autocmd FileType typescript let current_compiler="saro"
-
 
 " *** Configurations for ligthline ***
 set laststatus=2
@@ -357,17 +353,8 @@ xmap <C-A-F12>g <Plug>MarkRegex
 nmap <C-A-F12>h <Plug>MarkClear
 
 
-" *** BuffKill unmap undesired keys combination ***
-silent ! echo 'unmap <leader>ba' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>bundo' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>\!bw' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>bw' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>\!bd' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>bd' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>\!bun' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>bun' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>bf' >> ~/.vim/after/plugin/after.vim
-silent ! echo 'unmap <leader>bb' >> ~/.vim/after/plugin/after.vim
+" *** BuffKill skip mapping ***
+let g:BufKillCreateMappings=0
 
 
 " *** vim-commentary ***
@@ -406,6 +393,9 @@ let g:netrw_bufsettings = 'noma nomod nobl nonu nowrap ro'
 " *** FILE TYPES SETTINGS ***
 " *** BASH/SH ***
 autocmd FileType bash,sh let b:build_command="shellcheck -f gcc %"
+
+" *** Gitlab CI  ***
+autocmd FileType yaml let b:build_command="glab ci lint"
 
 " *** EMAIL ***
 autocmd FileType mail nnoremap <buffer> <leader>b :GrammarousCheck<CR>

@@ -28,6 +28,7 @@ call plug#end()
 " Import shared conf between vimrc and neovim
 source ~/.vimrc_common
 
+" *** Gui option ***
 set mouse=a
 
 " *** Directory configuration *** "
@@ -35,7 +36,11 @@ silent ! mkdir -p ~/tmp/nv/
 set dir=~/tmp/nv/
 set viminfo+=n~/tmp/nv/viminfo
 
+" *** Alias *** "
+ca sss source ~/.config/nvim/init.vim
+
 " *** Set cursor color ***
+highlight Cursor guifg=white guibg=#BC6A00
 set guicursor=n-v:block-blinkon0-Cursor
 set guicursor=o:block-blinkwait700-blinkoff400-blinkon250-Cursor
 set guicursor=r-cr:hor20-blinkon0-Cursor
