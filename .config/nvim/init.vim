@@ -41,8 +41,8 @@ ca sss source ~/.config/nvim/init.vim
 
 " *** Set cursor color ***
 highlight Cursor guifg=white guibg=#BC6A00
-set guicursor=n-v:block-blinkon0-Cursor
 set guicursor=o:block-blinkwait700-blinkoff400-blinkon250-Cursor
-set guicursor=r-cr:hor20-blinkon0-Cursor
+set guicursor+=r-cr:hor20-blinkon0-Cursor
+set guicursor+=n-v:block-blinkon0-Cursor
 set guicursor+=i-c-ci:blinkon0-ver25-Cursor
 
