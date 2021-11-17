@@ -11,7 +11,7 @@ set selectmode=mouse
 colorscheme jelleybeans
 set cursorline
 set background=dark
-set exrc
+set secure exrc
 set nowrap
 set linebreak
 set history=1000
@@ -78,15 +78,16 @@ nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 nnoremap <leader>a :%y+<CR>
 
-nnoremap <Leader>gs :Gstatus<CR>:resize 20<CR>
+nnoremap <Leader>gs :Git<CR>:resize 20<CR>
 nnoremap <Leader>gl :GV<CR>
-nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gL :GV!<CR>
+nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
-nnoremap <Leader>gp :copen<CR><C-w>p:Gpush<CR>
+nnoremap <Leader>gp :copen<CR><C-w>p:AsyncRun git push<CR>
 nnoremap <Leader>go :Git checkout -b 
-nnoremap <Leader>gc :Gcommit --amend -a
+nnoremap <Leader>gc :Git commit --amend -a
 nnoremap <Leader>gr :GitGutterUndoHunk<CR>
-nnoremap <Leader>gi :vnew<CR>:term glab ci status --live<CR><C-W>H:vertical resize 80<CR>
+nnoremap <Leader>gi :vnew<CR>:term glab ci status --compact --live<CR><C-W>K:resize30<CR>
 nnoremap <Leader>gt :new<CR>:term glab ci trace<CR><C-W>J:resize20<CR>
 
 nnoremap <Leader>c :Commentary<CR>
@@ -237,8 +238,8 @@ autocmd FileType fugitive vnoremap <buffer> K 10k
 autocmd FileType fugitive vnoremap <buffer> J 10j
 autocmd FileType fugitive nnoremap <buffer> K 10k
 autocmd FileType fugitive nnoremap <buffer> J 10j
-autocmd FileType fugitive nnoremap <buffer> cc :GstatusClose<CR>:Gcommit<CR>
-autocmd FileType fugitive nnoremap <buffer> ca :GstatusClose<CR>:Gcommit --amend<CR>
+autocmd FileType fugitive nnoremap <buffer> cc :GstatusClose<CR>:Git commit<CR>
+autocmd FileType fugitive nnoremap <buffer> ca :GstatusClose<CR>:Git commit --amend<CR>
 autocmd FileType fugitive nnoremap <buffer> q <C-W>q
 autocmd FileType fugitive if expand('%:t') == 'index' | setlocal nobl | endif
 autocmd FileType gitcommit wincmd K
