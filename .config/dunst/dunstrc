@@ -61,7 +61,9 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-10-30"
+    # geometry = "500x5-10-30"
+	origin = bottom-right
+	#offset = 0x200
 
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
@@ -139,11 +141,11 @@
     #close = ctrl+F3
 
     # close all notifications
-    close_all = ctrl+3
+    #close_all = ctrl+3
 
     # redisplay last message(s)
     # On the US keyboard layout 'grave' is normally above TAB and left of '1'.
-    history = ctrl+shift+F3
+    #history = ctrl+shift+F3
 
     # context menu
     #context = ctrl+shift+period
