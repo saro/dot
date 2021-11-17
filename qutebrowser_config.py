@@ -21,7 +21,7 @@ c.auto_save.session = True
 c.content.autoplay = False
 c.content.cache.size = None
 c.content.cookies.accept = 'all'
-c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
+# c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
 c.content.blocking.method = 'adblock'
 #c.content.host_blocking.lists = ['https://www.malwaredomainlist.com/hostslist/hosts.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext']
 c.content.javascript.enabled = False
@@ -71,7 +71,7 @@ c.tabs.indicator.padding = {'bottom': 5, 'left': 0, 'right': 4, 'top': 5}
 c.tabs.pinned.shrink = True
 c.url.auto_search = 'dns'
 c.url.default_page = 'about:blank'
-c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'sh': 'https://www.shodan.io/host/{}', 'wa': 'https://wiki.archlinux.org/?search={}', 'g': 'https://www.google.com/search?hl=en&q={}', 'sp': 'https://startpage.com/do/asearch?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'ei': 'http://www.wordreference.com/enit/{}', 'ie': 'http://www.wordreference.com/iten/{}', 'm': 'https://www.google.com/maps?q={}', 'o': 'https://lexico.com/definition/{}'}
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?hl=en&q={}', 'sh': 'https://www.shodan.io/host/{}', 'wa': 'https://wiki.archlinux.org/?search={}', 'g': 'https://www.google.com/search?hl=en&q={}', 'sp': 'https://startpage.com/do/asearch?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'ei': 'http://www.wordreference.com/enit/{}', 'ie': 'http://www.wordreference.com/iten/{}', 'm': 'https://www.google.com/maps?q={}', 'o': 'https://lexico.com/definition/{}'}
 c.window.title_format = '{private}//qutebrowser - {perc}{current_title}{title_sep}'
 c.zoom.default = '100%'
 c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%', '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
@@ -133,6 +133,8 @@ config.bind('V', 'spawn --userscript view_in_mpv')
 # config.unbind('B')
 config.bind('sJ', 'set --pattern *://{url:host}/* content.javascript.enabled false ;; reload ;; message-info "JS OFF"')
 config.bind('sj', 'set --pattern *://{url:host}/* content.javascript.enabled true ;; reload ;; message-info "JS ON"')
+config.bind('sB', 'set --pattern *://{url:host}/* content.blocking.enabled false ;; reload ;; message-info "ADBLOCK OFF"')
+config.bind('sb', 'set --pattern *://{url:host}/* content.blocking.enabled true ;; reload ;; message-info "ADBLOCK ON"')
 config.bind('f', 'hint')
 config.bind('g#', 'tab-focus last')
 config.bind('gg', 'scroll top')
