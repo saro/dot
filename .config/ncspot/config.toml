@@ -1,0 +1,47 @@
+notify = true
+album_column = false
+
+[keybindings]
+"=" = "volup"
+"+" = "volup 10"
+"_" = "voldown 10"
+"1" = "focus library"
+"2" = "focus queue"
+"3" = "focus search"
+"Shift+h" = "back"
+"Ctrl+j" = "move down 50"
+"Ctrl+k" = "move up 50"
+"Shift+j" = "move down 10"
+"Shift+k" = "move up 10"
+" " = "playpause"
+";" = "focus cmdline"
+"Q" = "quit"
+"q" = "back"
+"Esc" = "back"
+"G" = "move bottom"
+"g" = "move top"
+"c" = "voldown"
+"Shift+c" = "clear"
+
+[theme]
+background = "black"
+primary = "light white"
+secondary = "#BC6A00"
+title = "#BC6A00"
+playing = "green"
+playing_selected = "red"
+playing_bg = "black"
+highlight = "black"
+highlight_bg = "#BC6A00"
+error = "light white"
+error_bg = "red"
+statusbar = "black"
+statusbar_progress = "green"
+statusbar_bg = "green"
+cmdline = "light white"
+cmdline_bg = "black"
+searchbar = "light white"
+
+[saved_state]
+volume = 80
+shuffle = true
