@@ -1,4 +1,4 @@
-# vim: ft=zsh
+# vim: ft=bash
 # *** FUNCTIONS ***
 unalias ct 2> /dev/null
 ct() {
@@ -8,6 +8,10 @@ ct() {
 unalias psg 2> /dev/null
 psg() {
 	ps ax|grep -v "\<grep\>"|grep -i -E $1
+}
+
+function ppsg() {
+	pgrep "$@" | xargs --no-run-if-empty ps ugfp;
 }
 
 unalias gg 2> /dev/null
@@ -56,4 +60,50 @@ jcd() {
 unalias vv 2> /dev/null
 vv() {
 	vim -c 'nmap q :q!<CR>' - 
+}
+
+unalias gtp 2> /dev/null
+gtp() {
+	local tttt="r$(date +"%Y%m%d%H%M")"
+	git tag "${tttt}" && git push --tags && \
+		echo -n "${tttt}" | xclip -selection clipboard && \
+		notify-send "TAG: ${tttt} READY!"
+}
+
+unalias gttp 2> /dev/null
+gttp() {
+	local tttt="tmp$(date +"%Y%m%d%H%M")"
+	git tag "${tttt}" && git push --tags && \
+		echo -n "${tttt}" | xclip -selection clipboard && \
+		notify-send "TAG: ${tttt} READY!"
+}
+
+unalias dotupdate 2> /dev/null
+dotupdate() {
+	echo -n "Check connection...."
+		if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
+			echo "connected"
+			echo
+		else
+			echo "no connection. Exit"
+			return 1
+		fi
+
+	# Update
+	## Obtain dotfile folder
+	local full_path=$(ls -l ~/.vimrc|awk '{print $11}')
+	local just_path=${full_path%%/.vimrc}
+
+	echo "dotfile path: ${just_path}"
+	cd "${just_path}" || return 1
+	git pull --rebase
+
+	# Reload configuration vim
+	vim +PlugUpgrade +PlugUpdate +qa
+
+	# Update tmux plugins
+	~/.tmux/plugins/tpm/bin/update_plugins
+
+	# Profit
+	echo "Profit!! :D"
 }
