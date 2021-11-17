@@ -7,10 +7,12 @@ colors
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=10000
+HISTFILESIZE=1000000000
+HISTSIZE=1000000000
 SAVEHIST=1000
 
-setopt hist_ignore_all_dups
+setopt HIST_IGNORE_ALL_DUPS
+setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_SPACE
 
 # *** Source shell files ***
