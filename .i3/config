@@ -33,8 +33,16 @@ bindsym Mod1+Shift+Return exec urxvt -name 'ttttt' -e /bin/bash -c 'source ~/she
 # kill focused window
 bindsym Mod1+Shift+u kill
 
+# CTRL keybindings
 # start dmenu in Saro's flavour
 bindsym Ctrl+space exec $HOME/script/dmenu_saro
+# Lock Screen
+bindsym Ctrl+Mod1+l exec loginctl lock-session
+bindsym Ctrl+3 exec dunstctl close-all
+bindsym Ctrl+7 mode "$mode_display"
+bindsym Ctrl+0 mode "$mode_system"
+# Bind passmenu
+bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
 
 # change focus
 bindsym Mod1+$left focus left
@@ -211,11 +219,6 @@ mode "$mode_system" {
 bindsym Mod1+r mode "resize"
 bindsym XF86PowerOff mode "$mode_system"
 bindsym XF86Explorer mode "$mode_system"
-bindsym Ctrl+F12 mode "$mode_system"
-bindsym Ctrl+F11 mode "$mode_system"
-bindsym F7 mode "$mode_display"
-bindsym Ctrl+7 mode "$mode_display"
-bindsym Ctrl+0 mode "$mode_system"
 
 # Multimedia Keys
 bindsym XF86AudioPlay exec mpc toggle
@@ -230,9 +233,6 @@ bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+; pkill -RTMIN+10 i3blo
 bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-; pkill -RTMIN+10 i3blocks"
 bindsym XF86AudioMute exec "amixer sset Master toggle; pkill -RTMIN+10 i3blocks"
 
-# Lock Screen
-bindsym Ctrl+Mod1+l exec loginctl lock-session
-
 # Screenshot on X270 F9
 bindsym XF86Tools exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
 
@@ -242,9 +242,6 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 # ScreenShot
 bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
-
-# Bind passmenu
-bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
 
 # Assigning applications
 assign [class="Firefox"] $brow
