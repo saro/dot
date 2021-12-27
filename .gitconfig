@@ -11,3 +11,4 @@
 	rebase = false
 [core]
 	excludesfile = /home/saro/.gitignore_global
+	commentchar = |
