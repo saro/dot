@@ -357,6 +357,8 @@ nmap <C-A-F12>h <Plug>MarkClear
 " *** BuffKill skip mapping ***
 let g:BufKillCreateMappings=0
 
+" Setup P4 vim
+let g:p4_version = 14
 
 " *** vim-commentary ***
 autocmd FileType cmake setlocal commentstring=#\ %s
@@ -367,11 +369,11 @@ let g:buftabline_indicators=1
 " Activate numbers
 let g:buftabline_numbers=1
 " Activate separators
-let g:buftabline_separators=1
+let g:buftabline_separators=0
 
 " *** netrw ***
-autocmd FileType netrw nnoremap <buffer> <C-l> <nop>
-autocmd FileType netrw nnoremap <buffer> <C-h> <nop>
+" autocmd FileType netrw nnoremap <buffer> <C-l> <nop>
+" autocmd FileType netrw nnoremap <buffer> <C-h> <nop>
 autocmd FileType netrw nnoremap <buffer> q :q!<CR><C-l>
 autocmd FileType netrw nnoremap <buffer> q :q!<CR><C-l>
 autocmd FileType netrw nnoremap <buffer> q :q!<CR><C-l>

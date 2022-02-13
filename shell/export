@@ -3,6 +3,10 @@
 # *** Settings Exported ***
 export LC_COLLATE=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR="vim"
+if [[ -x /usr/bin/nvim ]]; then
+	export EDITOR="nvim"
+else
+	export EDITOR="vim"
+fi
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nm q <Esc>:q<CR>' - \""
 export GPG_TTY=$(tty)

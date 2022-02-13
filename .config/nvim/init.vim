@@ -11,7 +11,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'saro/MarkKarkat'
-Plug 'ap/vim-buftabline'
 Plug 'qpkorr/vim-bufkill'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'itchyny/lightline.vim'
@@ -20,8 +19,8 @@ Plug 'junegunn/gv.vim'
 Plug 'milad14000/vim_p4'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'adborden/vim-notmuch-address'
-Plug 'rhysd/vim-grammarous'
 Plug 'equalsraf/neovim-gui-shim'
+Plug 'ojroques/nvim-bufbar'
 
 call plug#end()
 
@@ -46,3 +45,10 @@ set guicursor+=r-cr:hor20-blinkon0-Cursor
 set guicursor+=n-v:block-blinkon0-Cursor
 set guicursor+=i-c-ci:blinkon0-ver25-Cursor
 
+lua require('bufbar').setup {show_bufname = 'all', theme = 'nordic'}
+autocmd VimEnter * call s:setup_bufbar()
+function! s:setup_bufbar() abort
+lua<<EOF
+require('bufbar').setup {show_bufname = 'all', theme = 'nordic'}
+EOF
+endfunction

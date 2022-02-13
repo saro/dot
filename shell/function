@@ -31,12 +31,6 @@ fn() {
 	echo "`pwd`/`ls $1`"
 }
 
-unalias tg 2> /dev/null
-tg() {
-	ctags -R * &
-	cscope -bqR &
-}
-
 unalias sk 2> /dev/null
 sk() {
 	ssh $@ -t -Y "source ~/shell/tmux && tx"
@@ -59,7 +53,9 @@ jcd() {
 
 unalias vv 2> /dev/null
 vv() {
-	vim -c 'nmap q :q!<CR>' - 
+	if ! nvim -c 'nmap q :q!<CR>' -  ; then
+		vim -c 'nmap q :q!<CR>' - 
+	fi
 }
 
 unalias gtp 2> /dev/null

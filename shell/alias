@@ -49,7 +49,12 @@ alias jc='journalctl '
 
 alias nv='nvim-qt '
 alias gv='gvim '
-alias v='vim '
+
+if [[ -x /usr/bin/nvim ]]; then
+	alias v='nvim '
+else
+	alias v='vim'
+fi
 
 alias vf='vifm '
 alias svf='sudo vifm '
