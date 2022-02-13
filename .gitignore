@@ -4,4 +4,6 @@ shell/local
 .config/nvim/plugged/
 .config/nvim/.netrwhist
 .config/ncspot/credentials.toml
+.config/ncspot/userstate.cbor
+.config/nvim-qt/window-geometry.conf
 script/tg

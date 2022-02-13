@@ -5,5 +5,5 @@ cat ${HOME}/.i3/config \
     /tmp/conf_flo > /tmp/i3conf
 
 i3-msg "restart"
-feh --bg-center $HOME/Desktop/btw.png
+feh --bg-scale $HOME/Desktop/btw.png
 

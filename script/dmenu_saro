@@ -14,30 +14,30 @@ if [[ ! -e ${history_file} ]] ; then
 fi
 
 
-if [[ "/home/saro/.gtk-bookmarks" -nt $cache || ! -e /tmp/dmenu_cache  || \
+if [[ "/home/saro/.config/gtk-3.0/bookmarks" -nt $cache || ! -e /tmp/dmenu_cache  || \
 	"/usr/share/applications" -nt $cache || "$HOME/.local/share/applications" -nt $cache ]]; then
 
 	# Reset cache file
 	echo "" > $cache
-	grep -v '^ *#' < "${HOME}/.gtk-bookmarks" | while IFS= read -r i; do
+	grep -v '^ *#' < "/home/saro/.config/gtk-3.0/bookmarks" | while IFS= read -r i; do
 		echo "${i##*/}_dir" >> $cache
 	done;
 
 	for i in ~/.local/share/applications/*.desktop; do
-		basename "$i" .desktop >> $cache
+		grep "Name=" "$i" | head -n1 | sed 's/Name=//' >> $cache
 	done
 
 	for i in /usr/share/applications/*.desktop; do
-		basename "$i" .desktop >> $cache
+		grep "Name=" "$i" | head -n1 | sed 's/Name=//' >> $cache
 	done
 
 	for i in /usr/local/share/applications/*.desktop; do
-		basename "$i" .desktop >> $cache
+		grep "Name=" "$i" | head -n1 | sed 's/Name=//' >> $cache
 	done
 fi
 
 cat "${history_file}" > $running
-cat $cache >> $running
+sed '/^$/d' $cache >> $running
 
 result=$(dmenu -b -i "$@" -fn 'Share Tech Mono-12'< $running)
 
@@ -48,17 +48,12 @@ if [[ $result != "" ]] ; then
 	itsdir=".*_dir$"
 	if [[ $result =~ $itsdir ]] ; then
 		# echo " DIR: $(cat ~/.gtk-bookmarks| awk {'print $1'}|grep ".*/${result%_dir}$"| head -n1)"
-		thunar "$(awk '{print $1}' ~/.gtk-bookmarks |grep ".*/${result%_dir}$"| head -n1)"
+		thunar "$(awk '{print $1}' /home/saro/.config/gtk-3.0/bookmarks |grep ".*/${result%_dir}$"| head -n1)"
 	else
-		if [[ -e  ~/.local/share/applications/${result}.desktop ]]; then
-			desktopfile="$HOME/.local/share/applications/${result}.desktop"
-		elif [[ -e  /usr/share/applications/${result}.desktop ]]; then
-			desktopfile="/usr/share/applications/${result}.desktop"
-		elif [[ -e  /usr/local/share/applications/${result}.desktop ]]; then
-			desktopfile="/usr/local/share/applications/${result}.desktop"
-		else
-			err=1
-		fi
+		desktopfile=$(grep -l "Name=${result}" ~/.local/share/applications/*.desktop)
+		[[ -z ${desktopfile} ]] && desktopfile=$(grep -l "Name=${result}" /usr/share/applications/*.desktop)
+		[[ -z ${desktopfile} ]] && desktopfile=$(grep -l "Name=${result}" /usr/local/share/applications/*.desktop)
+		[[ -z ${desktopfile} ]] && err=1
 
 		if [[ $err != "1" ]]; then
 			ex=$(grep "Exec=" "$desktopfile"|sed 's/^.*Exec=//'|head -n1|sed 's/%.*//')

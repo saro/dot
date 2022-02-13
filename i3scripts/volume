@@ -47,7 +47,13 @@ capability() { # Return "Capture" if the device is a capture device
 }
 
 volume() {
-  amixer -D $MIXER get $SCONTROL $(capability)
+  # amixer -D $MIXER get $SCONTROL $(capability)
+  local vol=$(pulsemixer --get-volume | awk {'print $1'})
+  local mute=$(pulsemixer --get-mute)
+  local output=$vol
+
+  [[ $mute == 1 ]] && output="MUTE"
+  echo $output
 }
 
 format() {
@@ -59,9 +65,10 @@ format() {
 #------------------------------------------------------------------------
 
 case $BLOCK_BUTTON in
-  3) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
-  4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
-  5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
+  3) pulsemixer --toggle-mute ;;
+  4) pulsemixer --change-volume +5 ;;
+  5) pulsemixer --change-volume -5 ;;
 esac
 
-volume | format
+# volume | format
+volume

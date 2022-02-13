@@ -29,6 +29,7 @@ fi
 
 ipaddr="$(ip addr show $INTERFACE | perl -n -e'/inet (.+)\// && print $1')"
 ipaddr="${ipaddr:-0.0.0.0}"
+gw=$(ip route |grep "via.*${INTERFACE}"|sed 's/.*via \(.*\) dev.*/\1/')
 
 # full text
 # echo -n "$ipaddr"

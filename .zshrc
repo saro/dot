@@ -135,7 +135,7 @@ export KEYTIMEOUT=20
 # Prompt function
 function zle-line-init zle-keymap-select {
 	VIM_PROMPT="%{$fg_bold[yellow]%}[% NOR]% %{$reset_color%} "
-	NOR_PROMPT="%{$fg_bold[grey]%}[% INS]% %{$reset_color%} "
+	NOR_PROMPT="%{$fg_bold[blue]%}[% INS]% %{$reset_color%} "
 	RESULT_VIM_PROMPT="${${KEYMAP/vicmd/${VIM_PROMPT}}/(main|viins)/${NOR_PROMPT}}"
 	zle reset-prompt
 }
