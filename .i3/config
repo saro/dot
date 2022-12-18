@@ -44,6 +44,7 @@ bindsym Ctrl+7 mode "$mode_display"
 bindsym Ctrl+0 mode "$mode_system"
 # Bind passmenu
 bindsym Ctrl+o exec xclip -i /dev/null && passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
+bindsym Ctrl+i exec xclip -i /dev/null && source /home/saro/shell/local_bw && dmenu_bw
 
 # change focus
 bindsym Mod1+$left focus left
@@ -190,14 +191,15 @@ mode "move" {
 }
 
 # Display Settings
-set $mode_display Display (D) docked_work, (d) docker_home, (u) undocked, (h) hdmi_double, (c) combi
+set $mode_display Display (w) docked_work, (d) docker_home, (u) undocked, (h) hdmi_double, (c) combi, (m) Meeting Room
 
 mode "$mode_display" {
-    bindsym Shift+d exec --no-startup-id $HOME/script/dock_handler.sh do_dp3_qhd, mode "default"
+    bindsym w exec --no-startup-id $HOME/script/dock_handler.sh do_dp3_qhd, mode "default"
     bindsym d exec --no-startup-id $HOME/script/dock_handler.sh do_hdmi_qhd, mode "default"
     bindsym u exec --no-startup-id $HOME/script/dock_handler.sh do_undocker_conf, mode "default"
     bindsym h exec --no-startup-id $HOME/script/dock_handler.sh do_external_hdmi, mode "default"
-    bindsym c exec --no-startup-id $HOME/script/dock_handler.sh do_top_hdmi_qhd_bottom_edp, mode "default"
+	bindsym c exec --no-startup-id $HOME/script/dock_handler.sh do_top_hdmi_qhd_bottom_edp, mode "default"
+    bindsym m exec --no-startup-id $HOME/script/dock_handler.sh do_top_dp3_qhd_bottom_edp, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -259,6 +261,7 @@ assign [window_role="buddy_list"] $weec
 for_window [class="Spotify"] move to workspace $weec
 for_window [title="^zoom$"] floating enable
 no_focus  [title="^zoom$"]
+for_window [title="Zoom - Licensed Account"] floating disable
 
 # They can see us...
 # See float_config.sh for ttttt terminal settings
@@ -285,10 +288,11 @@ bar {
 # Autostart
 # Add support for multi_key or better... I have seen symbols that you humans...
 exec xmodmap $HOME/.Xmodmap
-exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATESTARTUPTTY | gpg-connect-agent)& (for d in $(pgrep dmenu); do kill -9 $d; done)& i3lock -n -c 000000'&
+exec xss-lock --ignore-sleep -- /home/saro/script/lock-screen
 exec dunst&
 exec unclutter&
 exec nm-applet&
 exec alacritty --class "weechat" -e weechat&
 exec xcompmgr -c -l0 -t0 -r0 -o.00&
+exec blueman-applet&
 exec feh --bg-scale $HOME/Desktop/btw.png

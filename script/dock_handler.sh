@@ -10,6 +10,9 @@ declare -A outputs=( \
 	[DP1]="--off"
 	[DP2]="--off"
 	[DP3]="--off"
+	[DP3-1]="--off"
+	[DP3-2]="--off"
+	[DP3-9]="--off"
 	[DP4]="--off"
 	[HDMI1]="--off"
 	[HDMI2]="--off"
@@ -30,6 +33,9 @@ do_reset_outputs() {
 	outputs[DP1]="--off"
 	outputs[DP2]="--off"
 	outputs[DP3]="--off"
+	outputs[DP3-1]="--off"
+	outputs[DP3-2]="--off"
+	outputs[DP3-9]="--off"
 	outputs[DP4]="--off"
 	outputs[HDMI1]="--off"
 	outputs[HDMI2]="--off"
@@ -80,12 +86,12 @@ do_docked_conf() {
 
 do_undocker_conf() {
 	do_reset_outputs
-	outputs[eDP1]="--mode 3840x2400 --pos 0x0 --scale 0.8x0.8"
+	outputs[eDP1]="--mode 3840x2400 --pos 0x0 --scale 1x1"
 
 	xrandr --dpi 180
 
 	# Enable DPMS when undocked
-	xset +dpms
+	# xset +dpms
 	
 }
 
@@ -99,7 +105,7 @@ do_external_hdmi() {
 do_hdmi_qhd() {
 	do_reset_outputs
 	# outputs[HDMI1]="--mode 2560x1440 --pos 0x0 --scale 1.9x1.9 --rotate normal"
-	outputs[HDMI1]="--mode 2560x1440 --pos 0x0 --rotate normal"
+	outputs[DP3-2]="--mode 2560x1440 --pos 0x0 --rotate normal"
 
 	xrandr --dpi 92
 	xset -dpms
@@ -109,11 +115,17 @@ do_hdmi_qhd() {
 do_dp3_qhd() {
 	do_reset_outputs
 	# outputs[HDMI1]="--mode 2560x1440 --pos 0x0 --scale 1.9x1.9 --rotate normal"
-	outputs[DP3-1]="--mode 2560x1440 --pos 0x0 --rotate normal"
+	outputs[DP3-9]="--mode 2560x1440 --pos 0x0 --rotate normal"
 
 	xrandr --dpi 92
 	xset -dpms
 	xset s off
+}
+
+do_top_dp3_qhd_bottom_edp() {
+	do_reset_outputs
+	outputs[DP3-9]="--mode 2560x1440 --pos 0x0 --scale 1x1 --rotate normal --primary"
+	outputs[eDP1]="--mode 3840x2400 --pos 0x0 --scale 0.5x0.5  --pos 0x2592 --rotate normal"
 }
 
 do_top_hdmi_qhd_bottom_edp() {

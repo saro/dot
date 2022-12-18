@@ -2,15 +2,16 @@
 xrdb -all ${HOME}/.Xresources
 
 #export STEAM_RUNTIME=1
-xrandr --dpi 180
-export GDK_DPI_SCALE=1.80
+# xrandr --dpi 180
+# export GDK_DPI_SCALE=1.80
 
-#echo UPDATESTARTUPTTY | gpg-connect-agent
+echo UPDATESTARTUPTTY | gpg-connect-agent
 export SSH_AUTH_SOCK=/run/user/$UID/gnupg/S.gpg-agent.ssh
 
 ${HOME}/.i3/float_config.sh
 cat ${HOME}/.i3/config \
     /tmp/conf_flo > /tmp/i3conf
 
-dbus-launch --exit-with-session i3 -c /tmp/i3conf
-i3 -c /tmp/i3conf
+# dbus-launch --exit-with-session i3 -c /tmp/i3conf
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+exec i3 -c /tmp/i3conf
