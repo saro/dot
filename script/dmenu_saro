@@ -39,7 +39,7 @@ fi
 cat "${history_file}" > $running
 sed '/^$/d' $cache >> $running
 
-result=$(dmenu -b -i "$@" -fn 'Share Tech Mono-12'< $running)
+result=$(dmenu-wl -b -i "$@" -fn 'Share Tech Mono-12'< $running)
 
 err=0
 desktopfile=""

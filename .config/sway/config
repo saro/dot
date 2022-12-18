@@ -1,0 +1,299 @@
+# SARO's i3wm config.
+#
+# i3 config file (v4)
+
+# font pango:Droid Sans Mono Slashed for Powerline 11
+font pango:Share Tech Mono 11
+
+# DIRECTIONS
+set $up k
+set $down j
+set $left h
+set $right l
+
+# Set workspace names and icons
+set $brow Q 
+set $mail E 
+set $weec W 
+set $ws1 > 1
+set $ws2 > 2
+set $ws3 > 3
+set $ws4 > 4
+set $ws5 > 5
+set $ws9 >> 9
+set $ws0 >> 0
+
+# use Mouse+Mod1 to drag floating windows to their wanted position
+floating_modifier Mod1
+floating_minimum_size 100 x 100
+
+# start a terminal
+bindsym Mod1+Return exec alacritty
+bindsym Mod1+Shift+Return exec alacritty --class 'ttttt' -e /bin/bash -c 'source ~/shell/tmux && tx'
+
+# kill focused window
+bindsym Mod1+Shift+u kill
+
+# CTRL keybindings
+# start dmenu in Saro's flavour
+bindsym Ctrl+space exec $HOME/script/dmenu_saro
+# Lock Screen
+bindsym Ctrl+Mod1+l exec loginctl lock-session
+bindsym Ctrl+3 exec dunstctl close-all
+bindsym Ctrl+7 mode "$mode_display"
+bindsym Ctrl+0 mode "$mode_system"
+
+# Bind passmenu
+bindsym Ctrl+o exec passmenu -b -i -fn 'Share Tech Mono-12' && notify-send 'PASS COPIED'
+bindsym Ctrl+i exec source /home/saro/shell/local_bw && dmenu_bw
+
+# change focus
+bindsym Mod1+$left focus left
+bindsym Mod1+$down focus down
+bindsym Mod1+$up focus up
+bindsym Mod1+$right focus right
+
+bindsym Mod1+Tab focus right
+bindsym Mod1+Shift+Tab focus left
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Left focus left
+bindsym Mod1+Down focus down
+bindsym Mod1+Up focus up
+bindsym Mod1+Right focus right
+
+# move focused window
+bindsym Mod1+Shift+$left move left
+bindsym Mod1+Shift+$down move down
+bindsym Mod1+Shift+$up move up
+bindsym Mod1+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Shift+Left move left
+bindsym Mod1+Shift+Down move down
+bindsym Mod1+Shift+Up move up
+bindsym Mod1+Shift+Right move right
+
+# TODO: split in horizontal orientation
+# bindsym Mod1+h split S
+
+# TODO: split in vertical orientation
+# bindsym Mod1+v split Q
+
+# enter fullscreen mode for the focused container
+bindsym Mod1+Shift+f floating toggle; floating toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym Mod1+s layout stacking
+bindsym Mod1+f layout tabbed
+bindsym Mod1+c layout splith
+bindsym Mod1+Shift+c layout splitv
+
+# toggle tiling / floating
+bindsym Mod1+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# bindsym Mod1+space focus mode_toggle
+bindsym Mod1+b focus mode_toggle
+
+# TODO: focus the parent container
+# bindsym Mod1+A focus parent
+
+# TODO: focus the child container
+# bindsym Mod1+D focus child
+
+# move the currently focused window to the scratchpad
+bindsym Mod1+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod1+minus scratchpad show
+
+# switch to workspace
+bindsym Mod1+q workspace $brow; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+w workspace $weec; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+e workspace $mail; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+1 workspace $ws1; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+2 workspace $ws2; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+3 workspace $ws3; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+4 workspace $ws4; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+5 workspace $ws5; [app_id="ttttt"] move to scratchpad
+# bindsym Mod1+6 workspace $ws6; [app_id="ttttt"] move to scratchpad
+# bindsym Mod1+7 workspace $ws7; [app_id="ttttt"] move to scratchpad
+# bindsym Mod1+8 workspace $ws8; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+9 workspace $ws9; [app_id="ttttt"] move to scratchpad
+bindsym Mod1+0 workspace $ws0; [app_id="ttttt"] move to scratchpad
+
+# move focused container to workspace
+bindsym Mod1+Shift+q move container to workspace $brow
+bindsym Mod1+Shift+w move container to workspace $weec
+bindsym Mod1+Shift+e move container to workspace $mail
+bindsym Mod1+Shift+1 move container to workspace $ws1
+bindsym Mod1+Shift+2 move container to workspace $ws2
+bindsym Mod1+Shift+3 move container to workspace $ws3
+bindsym Mod1+Shift+4 move container to workspace $ws4
+bindsym Mod1+Shift+5 move container to workspace $ws5
+# bindsym Mod1+Shift+6 move container to workspace $ws6
+# bindsym Mod1+Shift+7 move container to workspace $ws7
+# bindsym Mod1+Shift+8 move container to workspace $ws8
+bindsym Mod1+Shift+9 move container to workspace $ws9
+bindsym Mod1+Shift+0 move container to workspace $ws0
+
+# Restart i3 with the floating parts set for the correct resolution
+bindsym Mod1+Shift+r reload
+
+# resize window (you can also use the mouse for that)
+bindsym Mod1+r mode " >>> resize <<< "
+mode " >>> resize <<< " {
+	bindsym $left       resize shrink width 10 px or 10 ppt
+	bindsym $down       resize grow height 10 px or 10 ppt
+	bindsym $up         resize shrink height 10 px or 10 ppt
+	bindsym $right      resize grow width 10 px or 10 ppt
+
+# Speedup resize
+	bindsym Shift+$left       resize shrink width 70 px or 70 ppt
+	bindsym Shift+$down       resize grow height 70 px or 70 ppt
+	bindsym Shift+$up         resize shrink height 70 px or 70 ppt
+	bindsym Shift+$right      resize grow width 70 px or 70 ppt
+
+# same bindings, but for the arrow keys
+	bindsym Left        resize shrink width 10 px or 10 ppt
+	bindsym Down        resize grow height 10 px or 10 ppt
+	bindsym Up          resize shrink height 10 px or 10 ppt
+	bindsym Right       resize grow width 10 px or 10 ppt
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# Move that window
+bindsym Mod1+m mode "move"
+mode "move" {
+    bindsym Mod1+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym $left      move left
+    bindsym $down      move down
+    bindsym $up        move up
+    bindsym $right     move right
+
+    bindsym Shift+$left      move left 70 px
+    bindsym Shift+$down      move down 70 px
+    bindsym Shift+$up        move up 70 px
+    bindsym Shift+$right     move right 70 px
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Display Settings
+set $mode_display Display (h) home, (w) work, (u) undocked
+
+mode "$mode_display" {
+    bindsym u output * disable, output eDP-1 enable, mode "default"
+    bindsym h output * disable, output "Philips Consumer Electronics Company PHL 272B8Q UK02019002231" enable mode 2560x1440@59Hz, mode "default"
+    bindsym w output * disable, output "Philips Consumer Electronics Company PHL 272B8Q UK02024014412" enable mode 2560x1440@59Hz, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Exit Menu
+set $mode_system System (l) lock, (e) logout, (x) suspend, (r) reboot, (s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id loginctl lock-session, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym x exec --no-startup-id loginctl lock-session && systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym XF86PowerOff mode "$mode_system"
+bindsym XF86Explorer mode "$mode_system"
+
+# Multimedia Keys
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+
+# Additional funcitons
+bindsym Mod1+Shift+8 exec bash -c 'flameshot gui'
+
+# Volume Keys
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+; pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-; pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioMute exec "amixer sset Master toggle; pkill -RTMIN+10 i3blocks"
+
+# Screenshot on X270 F9
+bindsym XF86Tools exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
+
+# Backlight for Syrio
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+
+# ScreenShot
+bindsym XF86Search exec scrot $HOME/screens/`date +%Y-%m-%d_%H:%M:%S`.png
+
+# Assigning applications
+assign [app_id="Firefox"] $brow
+assign [instance="qutebrowser"] $brow
+assign [instance="zoom"] $brow
+assign [app_id="astroid"] $mail
+assign [app_id="weechat"] $weec
+for_window [instance="spotify"] move to workspace $weec
+for_window [title="^zoom$"] floating enable
+no_focus  [title="^zoom$"]
+for_window [title="Zoom - Licensed Account"] floating disable
+
+for_window [app_id="ttttt"] move to scratchpad, resize set 1500 700, move position 0 0
+bindcode 133 [app_id="ttttt"] resize set 1500 700, move position 0 0, scratchpad show
+
+# Disable focus following mouse movement
+focus_follows_mouse no
+
+# Workspace start tabbed
+workspace_layout default
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	position top
+	status_command i3blocks
+	colors {
+		separator #1f70aa
+	}
+}
+
+# Change CAPS to CTRL
+input "type:keyboard" {
+    xkb_options ctrl:nocaps,compose:ralt
+}
+
+# Hide cursor when not active
+# seat * hide_cursor 8000
+
+# Autostart
+exec systemctl --user import-environment WAYSOCK DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+exec xss-lock --ignore-sleep -- /bin/bash -c '(killall -9 gpg-agent; echo UPDATESTARTUPTTY | gpg-connect-agent)& (for d in $(pgrep dmenu); do kill -9 $d; done)& swaylock -f -c 000000'&
+
+exec dunst&
+exec alacritty --class 'ttttt' -e /bin/bash -c 'source ~/shell/tmux && tx'&
+# exec nm-applet&
+exec alacritty --class "weechat" -e weechat&
+
+exec blueman-applet&

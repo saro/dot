@@ -19,6 +19,7 @@ Plug 'junegunn/gv.vim'
 Plug 'milad14000/vim_p4'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'adborden/vim-notmuch-address'
+Plug 'felipec/notmuch-vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'ojroques/nvim-bufbar'
 

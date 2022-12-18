@@ -8,5 +8,5 @@ if [[ -x /usr/bin/nvim ]]; then
 else
 	export EDITOR="vim"
 fi
-export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nm q <Esc>:q<CR>' - \""
+export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist nonu noma' -c 'nm q <Esc>:q<CR>' - \""
 export GPG_TTY=$(tty)
