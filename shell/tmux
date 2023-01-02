@@ -29,7 +29,7 @@ tx() {
 		if [[ $? != "0" ]]; then
 			tmux attach -t t${RND_TERM} 2> /dev/null
 			if [[ $? != "0" ]]; then
-				tmux new -s t${RND_TERM} -t ${USER}@${HOST}
+				tmux new -s t${RND_TERM} -t ${USER}@tx
 			fi
 		fi
 	fi
