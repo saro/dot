@@ -1,4 +1,3 @@
-# vim: ft=bash
 # *** FUNCTIONS ***
 unalias ct 2> /dev/null
 ct() {
@@ -61,16 +60,25 @@ vv() {
 unalias gtp 2> /dev/null
 gtp() {
 	local tttt="r$(date +"%Y%m%d%H%M")"
-	git tag "${tttt}" && git push --tags && \
-		echo -n "${tttt}" | xclip -selection clipboard && \
-		notify-send "TAG: ${tttt} READY!"
+	local origin="${1}"
+	[[ -z "${1}" ]] && origin="origin"
+	git-tag-push "${tttt}" "${origin}"
 }
 
 unalias gttp 2> /dev/null
 gttp() {
 	local tttt="tmp$(date +"%Y%m%d%H%M")"
-	git tag "${tttt}" && git push --tags && \
-		echo -n "${tttt}" | xclip -selection clipboard && \
+	local origin="${1}"
+	[[ -z "${1}" ]] && origin="origin"
+	git-tag-push "${tttt}" "${origin}"
+}
+
+unalias git-tag-push 2> /dev/null
+git-tag-push() {
+	local tttt="${1}"
+	local origin="${2}"
+	git tag "${tttt}" && git push --tags "${origin}" && \
+		echo -n "${tttt}" | wl-copy && \
 		notify-send "TAG: ${tttt} READY!"
 }
 
