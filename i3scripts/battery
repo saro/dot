@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/bin/bash
 #
 # Copyright 2014 Pierre Mavro <deimos@deimos.fr>
 # Copyright 2014 Vivien Didelot <vivien@didelot.org>
@@ -11,78 +11,89 @@
 #
 # The color will gradually change for a percentage below 85%, and the urgency
 # (exit code 33) is set if there is less that 5% remaining.
+#
 
-use strict;
-use warnings;
-use utf8;
+acpi_battery=$(acpi -b | grep "Battery ${BLOCK_INSTANCE}" | head -n1)
 
-my $acpi;
-my $status;
-my $percent;
-my $full_text;
-my $batt_icon;
-my $short_text;
-my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
+percent=$(echo "$acpi_battery" | cut -d ',' -f 2 | sed -e 's/ //g')
+time_left=$(echo "$acpi_battery" | cut -d ',' -f 3 | sed -e 's/ //g')
+full_text=$(echo "$acpi_battery" | cut -d ',' -f 4 | sed -e 's/ //g')
+batt_icon=$(echo "$acpi_battery" | cut -d ',' -f 5 | sed -e 's/ //g')
+short_text=$(echo "$acpi_battery" | cut -d ',' -f 6 | sed -e 's/ //g')
 
-# read the first line of the "acpi" command output
-open (ACPI, "acpi -b | grep 'Battery $bat_number' |") or die;
-$acpi = <ACPI>;
-close(ACPI);
+echo " $percent"
 
-# fail on unexpected output
-if ($acpi !~ /: (\w+), (\d+)%/) {
-	die "$acpi\n";
-}
+# use strict;
+# use warnings;
+# use utf8;
 
-$status = $1;
-$percent = $2;
-$full_text = "$percent%";
+# my $acpi;
+# my $status;
+# my $percent;
+# my $full_text;
+# my $batt_icon;
+# my $short_text;
+# my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
 
-if ($status eq 'Discharging') {
-	$full_text .= '';
-} elsif ($status eq 'Charging') {
-	$full_text .= ' ';
-}
+# # read the first line of the "acpi" command output
+# open (ACPI, "acpi -b | grep 'Battery $bat_number' | head -n1") or die;
+# $acpi = <ACPI>;
+# close(ACPI);
 
-$short_text = $full_text;
+# # fail on unexpected output
+# if ($acpi !~ /: (\w+), (\d+)%/) {
+# 	die "$acpi\n";
+# }
 
-if ($acpi =~ /(\d\d:\d\d):/) {
-	$full_text .= " ($1)";
-}
+# $status = $1;
+# $percent = $2;
+# $full_text = "$percent%";
 
-# Set icon according to percentage
-if ($percent < 7) {
-	$batt_icon = "";
-} elsif ($percent < 25) {
-	$batt_icon = "";
-} elsif ($percent < 45) {
-	$batt_icon = "";
-} elsif ($percent < 65) {
-	$batt_icon = "";
-} else {
-	$batt_icon = "";
-}
+# if ($status eq 'Discharging') {
+# 	$full_text .= '';
+# } elsif ($status eq 'Charging') {
+# 	$full_text .= ' ';
+# }
 
-# print text
-print "$batt_icon $full_text\n";
-print "$short_text\n";
+# $short_text = $full_text;
 
-# consider color and urgent flag only on discharge
-if ($status eq 'Discharging') {
+# if ($acpi =~ /(\d\d:\d\d):/) {
+# 	$full_text .= " ($1)";
+# }
 
-	if ($percent < 20) {
-		print "#FF0000\n";
-	} elsif ($percent < 40) {
-		print "#FFAE00\n";
-	} elsif ($percent < 60) {
-		print "#FFF600\n";
-	} elsif ($percent < 85) {
-		print "#A8FF00\n";
-	}
+# # Set icon according to percentage
+# if ($percent < 7) {
+# 	$batt_icon = "";
+# } elsif ($percent < 25) {
+# 	$batt_icon = "";
+# } elsif ($percent < 45) {
+# 	$batt_icon = "";
+# } elsif ($percent < 65) {
+# 	$batt_icon = "";
+# } else {
+# 	$batt_icon = "";
+# }
 
-	if ($percent < 5) {
-		exit(33);
-	}
-}
+# # print text
+# print "$batt_icon $full_text\n";
+# print "$short_text\n";
 
-exit(0);
+# # consider color and urgent flag only on discharge
+# if ($status eq 'Discharging') {
+
+# 	if ($percent < 20) {
+# 		print "#FF0000\n";
+# 	} elsif ($percent < 40) {
+# 		print "#FFAE00\n";
+# 	} elsif ($percent < 60) {
+# 		print "#FFF600\n";
+# 	} elsif ($percent < 85) {
+# 		print "#A8FF00\n";
+# 	}
+
+# 	if ($percent < 5) {
+# 		exit(33);
+# 	}
+# }
+
+# exit(0);

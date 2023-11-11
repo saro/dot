@@ -16,7 +16,7 @@
 
 INTERFACE="${BLOCK_INSTANCE:-eth0}"
 
-state="$(cat /sys/class/net/$INTERFACE/operstate)"
+state="$(cat /sys/class/net/$INTERFACE/operstate 2> /dev/null)"
 
 if [ "$state" != "up" ] && [ "$state" != "unknown" ]; then
 	echo ""
