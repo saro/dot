@@ -121,7 +121,7 @@ nnoremap <leader>] <C-]>
 nnoremap <leader>[ <C-t>
 
 nnoremap <leader># :b #<CR>
-nnoremap <leader>d :BD<CR>
+nnoremap <leader>d :<C-U>bprevious <bar> bdelete #<CR>
 
 nnoremap <leader>x :q<CR>
 nnoremap <leader>Y :set hlsearch! hlsearch?<CR>
@@ -159,6 +159,7 @@ cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
+cnoremap <C-v> <c-r>+
 
 " *** Buffer change ***"
 imap <C-h> <Esc>:bprevious!<CR>
@@ -399,6 +400,9 @@ autocmd FileType bash,sh let b:build_command="shellcheck -f gcc %"
 
 " *** Gitlab CI  ***
 autocmd FileType yaml let b:build_command="glab ci lint"
+
+" *** JSON ***
+autocmd FileType json let b:build_command="cat % | jq empty && echo GOOD JSON"
 
 " *** EMAIL ***
 autocmd FileType mail nnoremap <buffer> <leader>b :GrammarousCheck<CR>
