@@ -15,10 +15,8 @@ function color_hostname {
 	fi
 }
 
-PROMPT='${RESULT_VIM_PROMPT}%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[$(color_hostname)]%}%m%{$reset_color%}: %{%F{yellow}%}%~%{$reset_color%} $(git_prompt_info)
+PROMPT='%{$fg[green]%}[%*]%{$reset_color%} ${RESULT_VIM_PROMPT}%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[$(color_hostname)]%}%m%{$reset_color%}: %{%F{yellow}%}%~%{$reset_color%} $(git_prompt_info)
 %{$reset_color%}%(?,%{%F{green}%},%{%F{red}%})$(prompt_char) %{$reset_color%}%{%F{15}%}'
-
-RPROMPT='%{$fg[green]%}[%*]%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_PREFIX="["
