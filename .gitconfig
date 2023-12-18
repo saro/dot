@@ -1,6 +1,6 @@
 [user]
 	name = Rosario Contarino
-	signingkey = 0040720565DA9EF5DFB38DE07BAEC61DEA1F1448
+	signingkey = BDCA466BF6E8C55099DB4106893A56BDEB294F06
 [sendemail]
 	smtpserver = /usr/bin/msmtp
 [push]
