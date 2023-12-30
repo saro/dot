@@ -20,18 +20,13 @@ unalias tx 2> /dev/null
 tx() {
 	which tmux > /dev/null
 	if [[ $? == "0" ]]; then
-		# Clean unsed terminal sessions
+		# Clean unused terminal sessions
 		for ss in `tmux ls|grep "^t[0-9]\+:"|grep -v attached|cut -d: -f1`; do
 			tmux kill-session -t "$ss";
 		done
 
 		tmux new -s ${USER}@tx -d 2> /dev/null
-		if [[ $? != "0" ]]; then
-			tmux attach -t t${RND_TERM} 2> /dev/null
-			if [[ $? != "0" ]]; then
-				tmux new -s t${RND_TERM} -t ${USER}@tx
-			fi
-		fi
+		tmux new -s t${RND_TERM} -t ${USER}@tx
 	fi
 }
 
