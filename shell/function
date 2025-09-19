@@ -15,7 +15,11 @@ function ppsg() {
 
 unalias gg 2> /dev/null
 gg() {
-	rg -i -g '!cscope.out' -g '!tags' -g '!build' "${1}"
+	if command -v rg &> /dev/null; then
+		rg -i -g '!cscope.out' -g '!tags' -g '!build' "${1}"
+	else
+		grep -ri --exclude='cscope.out' --exclude='tags' --exclude-dir='build' "${1}" .
+	fi
 }
 
 unalias ggv 2> /dev/null
