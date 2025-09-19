@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+is_dunst_up() {
+	local dunst_status=$(dunstctl is-paused)
+	if [ "$dunst_status" = "false" ]; then
+		echo ""
+	else
+		echo ""
+		echo ""
+		echo "#FF0000"
+	fi
+}
+
+case $BLOCK_BUTTON in
+  3) dunstctl set-paused toggle ;;
+esac
+
+is_dunst_up

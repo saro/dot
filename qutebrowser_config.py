@@ -16,12 +16,11 @@ interceptor.register(filter_yt)
 c.aliases = {'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
 c.session.lazy_restore = False
 c.backend = 'webengine'
-c.qt.force_software_rendering = 'qt-quick'
+# c.qt.force_software_rendering = 'qt-quick'
 c.auto_save.session = True
 c.content.autoplay = False
 c.content.cache.size = None
 c.content.cookies.accept = 'all'
-# c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
 c.content.blocking.method = 'adblock'
 #c.content.host_blocking.lists = ['https://www.malwaredomainlist.com/hostslist/hosts.txt', 'http://someonewhocares.org/hosts/hosts', 'http://winhelp2002.mvps.org/hosts.zip', 'http://malwaredomains.lehigh.edu/files/justdomains.zip', 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext']
 c.content.javascript.enabled = False
@@ -69,7 +68,7 @@ c.tabs.min_width = -1
 c.tabs.indicator.width = 5
 c.tabs.indicator.padding = {'bottom': 5, 'left': 0, 'right': 4, 'top': 5}
 c.tabs.pinned.shrink = True
-c.url.auto_search = 'dns'
+c.url.auto_search = 'naive'
 c.url.default_page = 'about:blank'
 c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?hl=en&q={}', 'sh': 'https://www.shodan.io/host/{}', 'wa': 'https://wiki.archlinux.org/?search={}', 'g': 'https://www.google.com/search?hl=en&q={}', 'sp': 'https://startpage.com/do/asearch?q={}', 'ddg': 'https://duckduckgo.com/?q={}', 'ei': 'http://www.wordreference.com/enit/{}', 'ie': 'http://www.wordreference.com/iten/{}', 'm': 'https://www.google.com/maps?q={}', 'o': 'https://lexico.com/definition/{}'}
 c.window.title_format = '{private}//qutebrowser - {perc}{current_title}{title_sep}'
@@ -85,6 +84,8 @@ c.colors.tabs.pinned.odd.bg = 'grey'
 c.colors.tabs.pinned.even.bg = 'grey'
 c.colors.tabs.pinned.selected.even.fg = 'white'
 c.colors.tabs.pinned.selected.even.bg = 'black'
+c.colors.tabs.selected.even.fg = 'white'
+c.colors.tabs.selected.odd.fg = 'white'
 c.fonts.completion.entry = '11pt share tech mono'
 c.fonts.completion.category = '11pt share tech mono'
 c.fonts.debug_console = '11pt share tech mono'
@@ -135,6 +136,8 @@ config.bind('sJ', 'set --pattern *://{url:host}/* content.javascript.enabled fal
 config.bind('sj', 'set --pattern *://{url:host}/* content.javascript.enabled true ;; reload ;; message-info "JS ON"')
 config.bind('sB', 'set --pattern *://{url:host}/* content.blocking.enabled false ;; reload ;; message-info "ADBLOCK OFF"')
 config.bind('sb', 'set --pattern *://{url:host}/* content.blocking.enabled true ;; reload ;; message-info "ADBLOCK ON"')
+config.bind('su', 'set content.headers.user_agent "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}" ;; reload ;; message-info "USER_AGENT: DEFAULT"')
+config.bind('sU', 'set content.headers.user_agent bot ;; reload ;; message-info "USER_AGENT: BOT"')
 config.bind('f', 'hint')
 config.bind('g#', 'tab-focus last')
 config.bind('gg', 'scroll top')
@@ -158,3 +161,5 @@ config.bind('<Ctrl+l>', 'rl-forward-char', mode='command')
 config.bind('<Ctrl+h>', 'tab-prev', mode='insert')
 config.bind('<Ctrl+l>', 'tab-next', mode='insert')
 config.bind('<Ctrl+p>', 'insert-text {clipboard}', mode='insert')
+config.bind('<Ctrl+k>', 'fake-key <Ctrl+k>;; mode-enter insert', mode='normal')
+config.bind('<Escape>', 'fake-key <Escape>', mode='normal')

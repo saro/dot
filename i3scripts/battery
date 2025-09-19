@@ -21,6 +21,16 @@ full_text=$(echo "$acpi_battery" | cut -d ',' -f 4 | sed -e 's/ //g')
 batt_icon=$(echo "$acpi_battery" | cut -d ',' -f 5 | sed -e 's/ //g')
 short_text=$(echo "$acpi_battery" | cut -d ',' -f 6 | sed -e 's/ //g')
 
+if [[ ${percent} < 10 ]]; then
+	if [[ ! -e /tmp/warning_battery ]]; then
+		notify-send -u critical "BATTERY!"
+		zenity --error --text "BATTERY!!"
+		touch /tmp/warning_battery
+	fi
+else
+	[[ -e /tmp/warning_battery ]] && rm /tmp/warning_battery
+fi
+
 echo " $percent"
 
 # use strict;

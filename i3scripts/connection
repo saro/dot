@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ping -c 2 saro.contarino.me &> /dev/null ; then
+	ping -c 2 saro.contarino.me | grep time= |head -n1 | sed 's/^.*time=//'
+	echo ""
+	echo "#00FF00"
+else
+	echo "X"
+	echo ""
+	echo "#FF0000"
+fi

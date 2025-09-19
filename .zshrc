@@ -9,11 +9,13 @@ colors
 HISTFILE=~/.histfile
 HISTFILESIZE=1000000000
 HISTSIZE=1000000000
-SAVEHIST=1000
-
+SAVEHIST=100000
+setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_SPACE
+
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 # *** Source shell files ***
 source ~/shell/alias

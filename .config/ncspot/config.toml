@@ -1,5 +1,6 @@
 notify = true
 album_column = false
+command_key = ';'
 
 [keybindings]
 "=" = "volup"
@@ -29,7 +30,7 @@ primary = "light white"
 secondary = "#BC6A00"
 title = "#BC6A00"
 playing = "green"
-playing_selected = "red"
+playing_selected = "black"
 playing_bg = "black"
 highlight = "black"
 highlight_bg = "#BC6A00"

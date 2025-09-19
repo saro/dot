@@ -99,18 +99,12 @@ else
 fi
 
 # *** BT alias ***
-alias btload="sudo modprobe bluetooth && sudo modprobe btusb && sudo systemctl start bluetooth.service"
 alias btc="bluetoothctl"
-alias btoff="echo -e 'power off\nquit'|bluetoothctl"
-alias bton="echo -e 'power on\nquit'|bluetoothctl"
-alias btj="echo -e 'power on\ndisconnect\nconnect 1C:48:F9:9D:BE:04\nquit'|bluetoothctl"
-alias bts="echo -e 'power on\ndisconnect\nconnect 38:18:4C:11:D1:5A\nquit'|bluetoothctl"
-alias btl="echo -e 'power on\ndisconnect\nconnect 88:C6:26:6F:50:09\nquit'|bluetoothctl"
 
 # *** Spotify ***
-alias spn="playerctl next"
-alias spp="playerctl previous"
-alias sps="playerctl play-pause"
+alias spn="playerctl next && pkill -RTMIN+10 i3blocks"
+alias spp="playerctl previous && pkill -RTMIN+10 i3blocks"
+alias sps="playerctl play-pause && pkill -RTMIN+10 i3blocks"
 alias spc="playerctl metadata"
 alias sp="playerctl"
 
