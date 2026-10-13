@@ -35,6 +35,16 @@ do_move_old()
 	fi
 }
 
+has_cmd() { command -v "$1" > /dev/null; }
+
+# Dotfiles that are linked only if the corresponding program is installed
+declare -A required_cmd=(
+	[".vimrc"]="vim"
+	[".vimrc_common"]="vim"
+	[".tmux.conf"]="tmux"
+	[".zshrc"]="zsh"
+)
+
 # Set repository folder from argument
 if [[ -n "$1" ]]; then
 	repo_dir=$1
@@ -76,6 +86,9 @@ for file in $files ; do
 	if [[ ${ignore_flag} == 1 ]] ; then
 		echo "   ....SKIP"
 		continue
+	elif [[ -n "${required_cmd[$file]}" ]] && ! has_cmd "${required_cmd[$file]}" ; then
+		echo "   ....SKIP (${required_cmd[$file]} not installed)"
+		continue
 	else
 		echo "   ....OK"
 	fi
@@ -96,19 +109,38 @@ for file in $files ; do
 	ln -sv "$repo_dir/$file" "$home_dir/$file"
 done
 
-# Instal Plug-Vim
+# Instal Plug-Vim (only if vim is available)
 if [ "$init_script" == 1 ] ; then
-	echo "Installing VIM-PLUG"
-	mkdir -p "${home_dir}/.vim/autoload/"
-	curl -fLo "${home_dir}/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim  +PlugInstall +qa
+	if has_cmd vim ; then
+		echo "Installing VIM-PLUG"
+		mkdir -p "${home_dir}/.vim/autoload/"
+		curl -fLo "${home_dir}/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		vim  +PlugInstall +qa
+	else
+		warn "vim not found, skipping VIM-PLUG"
+	fi
 fi
 
-# Install tmux plugin manager automatically and run the installer
+# Install Plug-Vim for Neovim (only if nvim is available)
 if [ "$init_script" == 1 ] ; then
-	git clone https://github.com/tmux-plugins/tpm "$home_dir/.tmux/plugins/tpm"
-	tmux source "${home_dir}/.tmux.conf"
-	"${home_dir}/.tmux/plugins/tpm/bin/install_plugins"
+	if has_cmd nvim ; then
+		echo "Installing VIM-PLUG for NEOVIM"
+		curl -fLo "${home_dir}/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		nvim --headless +PlugInstall +qa
+	else
+		warn "nvim not found, skipping VIM-PLUG for NEOVIM"
+	fi
+fi
+
+# Install tmux plugin manager automatically and run the installer (only if tmux is available)
+if [ "$init_script" == 1 ] ; then
+	if has_cmd tmux ; then
+		git clone https://github.com/tmux-plugins/tpm "$home_dir/.tmux/plugins/tpm"
+		tmux source "${home_dir}/.tmux.conf"
+		"${home_dir}/.tmux/plugins/tpm/bin/install_plugins"
+	else
+		warn "tmux not found, skipping TPM"
+	fi
 fi
 
 # Install qutebrowser configuration
