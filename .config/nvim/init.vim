@@ -16,9 +16,7 @@ Plug 'adborden/vim-notmuch-address'
 Plug 'felipec/notmuch-vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'romgrk/barbar.nvim'
-Plug 'github/copilot.vim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim'
 Plug 'coder/claudecode.nvim'
 
 call plug#end()
@@ -120,7 +118,7 @@ vnoremap  ; :
 vnoremap <leader>y "+y
 nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
-nnoremap <leader>a :%y+<CR>
+nnoremap <leader>Y :%y+<CR>
 
 nnoremap <Leader>gs :Git<CR>:resize 20<CR>
 nnoremap <Leader>gl :GV<CR>
@@ -152,9 +150,15 @@ nnoremap <leader>n :call GrepAsync("\"\\<<cword>\\>\"")<CR>
 nnoremap <leader>N :call GrepAsync("\"<cword>\"")<CR>
 nnoremap <leader>o :call asyncrun#quickfix_toggle(10)<CR>
 nnoremap <leader>as :AsyncStop<CR>
-nnoremap <leader>ai :Copilot enable<CR>
-nnoremap <leader>aI :Copilot disable<CR>
-nnoremap <leader>ac :CopilotChatOpen<CR>
+
+nnoremap <leader>cc :ClaudeCode<CR><C-\><C-n><C-w>J:resize 30<CR>i
+nnoremap <leader>cr :ClaudeCode --resume<CR><C-\><C-n><C-w>J:resize 30<CR>i
+nnoremap <leader>cf :ClaudeCodeFocus<CR>
+nnoremap <leader>ca :ClaudeCodeDiffAccept<CR>
+nnoremap <leader>cd :ClaudeCodeDiffDeny<CR>
+nnoremap <leader>cq :ClaudeCodeClose<CR>
+vnoremap <leader>c :ClaudeCodeSend<CR><C-\><C-n><C-w>J:resize 30<CR>i
+
 nnoremap <leader>b :call BuildAsync()<CR>
 nnoremap <leader>B :call ReBuildAsync()<CR>
 
@@ -328,7 +332,7 @@ let g:asyncrun_open=10
 let g:asyncrun_save=1
 
 " *** Copilot configuration ***
-let b:copilot_enabled = v:false
+"let b:copilot_enabled = v:false
 
 
 " Force copen at the end of the run to fix bug in VIM quickfix error format
